@@ -1,4 +1,5 @@
 <script>
+import Navbar from "./components/HashTableControls/Navbar.svelte";
 import {Router, Link, Route } from "svelte-routing"
   import Linear from "./routes/HashTables/Linear.svelte"
   import DoubleHashing from "./routes/HashTables/DoubleHashing.svelte";
@@ -7,6 +8,7 @@ import {Router, Link, Route } from "svelte-routing"
 </script>
 
 <main>
+<Navbar/>
 <Router {url}>
   <div class="">
     <Route path="/hash_tables/linear" component={Linear} />
