@@ -9,9 +9,9 @@ import {Router, Link, Route } from "svelte-routing"
 
 <main>
 <Router {url}>
-<Navbar/>
+<!-- <Navbar/> -->
   <div class="">
-    <Route path="/hash_tables/linear" component={Linear} />
+    <Route path="/" component={Linear} />
     <Route path="/hash_tables/quadratic" component={Quadratic} />
     <Route path="/hash_tables/double_hashing" component={DoubleHashing} /> 
   </div>
