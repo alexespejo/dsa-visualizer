@@ -8,8 +8,8 @@ import {Router, Link, Route } from "svelte-routing"
 </script>
 
 <main>
-<Navbar/>
 <Router {url}>
+<Navbar/>
   <div class="">
     <Route path="/hash_tables/linear" component={Linear} />
     <Route path="/hash_tables/quadratic" component={Quadratic} />
