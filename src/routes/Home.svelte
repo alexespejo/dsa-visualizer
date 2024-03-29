@@ -1,5 +1,5 @@
 <script>
-import RouteLinks from "../components/NavbarDropDown/RouteLinks.svelte";
+import {Link} from "svelte-routing"
 </script>
 
 <div class="flex flex-col lg:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5">
@@ -12,7 +12,7 @@ import RouteLinks from "../components/NavbarDropDown/RouteLinks.svelte";
     <h2 class="card-title">Hash Tables</h2>
     <p>Separate Chaining, Linear, Quadratic, and Double Probing</p>
     <div class="card-actions justify-end">
-      <a href="/hash_tables/linear" class="btn btn-primary">Explore</a>
+      <Link to="/hash_tables/linear" class="btn btn-primary">Explore</Link>
     </div>
   </div>
 </div>
