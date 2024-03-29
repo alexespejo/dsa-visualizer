@@ -1,6 +1,27 @@
+export function generateRandomArray(size) {
+ if (size <= 5) {
+  console.error("Array size must be larger than 5");
+  return [];
+ }
+
+ let randomArray = [];
+
+ while (randomArray.length < size) {
+  let randomNumber = Math.floor(Math.random() * 100); // Adjust 100 to the range you desire
+
+  // Check if the number is already in the array
+  if (!randomArray.includes(randomNumber)) {
+   randomArray.push(randomNumber);
+  }
+ }
+
+ return randomArray;
+}
+
 function mod(data: number, capacity: number) {
  return data % capacity;
 }
+
 export function insertLinear(
  table: number[],
  data: number,
@@ -24,8 +45,12 @@ export function insertLinear(
   if (i >= capacity) {
    i = 0;
   }
+  if (i === cycle) {
+   return table;
+  }
   hash = mod(data + stepsize * i, capacity);
  }
+ return table;
 }
 
 export function removeLinear(
