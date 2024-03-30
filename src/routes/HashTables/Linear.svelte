@@ -16,7 +16,7 @@ function insert(){
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
 }
 function remove(){
-  hashingArray = removeLinear(hashingArray, numToInsert, capacity);
+  hashingArray = removeLinear(hashingArray, numToInsert, stepSize, capacity);
 }
 function randomizeArray(){
   capacity = 10

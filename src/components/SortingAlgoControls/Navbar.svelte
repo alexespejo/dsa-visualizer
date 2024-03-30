@@ -1,18 +1,18 @@
 <script>
 import {Router, Link, Route } from "svelte-routing"
-import HashTableRouteLinks from "./HashTableRouteLinks.svelte";
 import DropdownMenue from "../NavbarDropDown/DropdownMenue.svelte";
+import SortingAlgoRouteLinks from "./SortingAlgoRouteLinks.svelte";
 </script>
 
 <div class="navbar bg-base-100 shadow-sm border-b-2">
 
   <div class="navbar-start">
     <Link to="/">
-    <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Hash Tables</h1>
+    <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Sorting Algorithms</h1>
     </Link>
   </div>
   <div class="ml-auto sm:navbar-center">
-    <DropdownMenue><HashTableRouteLinks/></DropdownMenue>
+    <DropdownMenue><SortingAlgoRouteLinks/></DropdownMenue>
   </div>
 <div class="hidden sm:flex navbar-end">
     <a href="https://github.com/alexespejo/dsa-visualizer" class="btn  ">

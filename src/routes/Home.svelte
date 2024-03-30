@@ -24,7 +24,7 @@ import {Link} from "svelte-routing"
     <h2 class="card-title">Sorting Algorithms</h2>
     <p>Bubble, Selection, Insertion, Bucket, Radix, Merge, Quick sorts</p>
     <div class="card-actions justify-end">
-      <button class="btn btn-warning">Coming Soon<span class="loading loading-dots loading-xs"></span></button>
+      <Link to="/sorting_algorithms/bucket_sort" class="btn btn-warning">Beta</Link>
     </div>
   </div>
 </div>
