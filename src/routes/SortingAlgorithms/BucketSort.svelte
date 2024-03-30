@@ -1,101 +1,74 @@
 <script>
+import { onMount } from "svelte";
+import {generateRandomFractions} from "../../lib/sortingAlgo"
 import Navbar from "../../components/SortingAlgoControls/Navbar.svelte";
 import FormControl from "../../components/HashTableControls/FormControl.svelte";
-import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
-import {randomThreeDigitArray, generateRandomStringArray} from "../../lib/sortingAlgo"
 
-let listOfBuckets = [];
-let intOrStringArray = false;
-let itemMarked = "";
-
+let arr = [[],[],[],[],[],[],[],[],[],[]]
+let insertionOrder = [];
 function createBuckets(){
-    let bucket = [];
-    let subBuckets = []
-    if (intOrStringArray){
-        bucket = randomThreeDigitArray(); 
-        subBuckets.push([...bucket]);
-        subBuckets.push([...bucket.sort((a, b) => ((a % 10) - (b % 10)))]) 
-        subBuckets.push([...bucket.sort((a, b) => ((a % 100) - (b % 100)))]) 
-        subBuckets.push([...bucket.sort()]);
-        listOfBuckets = subBuckets
+    let res = [[],[],[],[],[],[],[],[],[],[]]
+    insertionOrder = generateRandomFractions(15);
+    let index = 0;
+    for (let i = 0; i < insertionOrder.length; i += 1){ 
+        index = Math.trunc(insertionOrder[i] * 10);
+        res[index] = [...res[index], insertionOrder[i]];
+        res[index].sort();
     }
-    else {
-        bucket = generateRandomStringArray();
-        subBuckets.push([...bucket]);
-        subBuckets.push([...bucket.sort((a, b) => a.slice(-1).localeCompare(b.slice(-1)))]) 
-        subBuckets.push([...bucket.sort((a, b) => a.charAt(1).localeCompare(b.charAt(1)))]) 
-        subBuckets.push([...bucket.sort()]); 
-        listOfBuckets = subBuckets
-    }
+    arr = res;
 }
 
-function markElement(key){
-    if (itemMarked === key) {
-        itemMarked = "";
-    }
-    else {
-        itemMarked = key;
-    }
-}
+onMount(()=>{
+    createBuckets();
+});
 </script>
 
 <Navbar/>
 <main class="p-4 sm:px-32 lg:px-40">
     <h1 class="title-heading">Bucket Sort</h1>
-  <div class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative">
-   
-    <div class="lg:absolute top-0 lg:right-0">
-    <FormControl label="Array of Integers or Strings?">
-        <div class="join">
-       <button class={`btn  join-item btn-primary ${!intOrStringArray ? 'btn-outline' : ''}`} 
-       on:click={()=>{intOrStringArray = true}}>Integer</button> 
-       <button 
-       class={`btn  join-item btn-primary ${intOrStringArray ? 'btn-outline' : ''}`}
-       on:click={()=>{intOrStringArray = false}}>String</button> 
-        </div> 
+    <div class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative">
+     <div class="lg:absolute flex space-x-2 top-0 lg:right-0 w-80 flex-wrap">
+    <FormControl label="Generate Array">
+    <button class="btn btn-success btn-outline">Randomize 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5"/>
+        <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"/>
+        </svg>
+    </button>
     </FormControl>
-     <FormControl label="Generate Array">
-     
-    <button class="btn btn-success btn-outline" on:click={() => createBuckets()}>Randomize <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5"/>
-  <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"/>
-</svg></button>
+    <FormControl label="Insert">
+     <input type="number"  class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item" />
+     <button class="btn btn-outline btn-primary w-16 join-item w-max-w-xs" on:click={() => {}}>Insert</button>
     </FormControl>
+    <FormControl label="Insert">
+     <input type="number"  class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item" />
+     <button class="btn btn-outline btn-primary w-16 join-item w-max-w-xs" on:click={() => {}}>Insert</button>
+    </FormControl>
+    </div>
+ 
+    <div class="flex flex-col w-full space-y-1 ">
+      
+        {#each arr as i, index}
+            <div class="flex flex-start ">
+             <div class="border-2 border-neutral-content font-bold text-base lg:text-xl flex items-center justify-center w-9 h-12 flex-start">{index}</div>
 
-</div>
-    <div class=" flex space-x-5 text-base">
-   {#each listOfBuckets as subBucket, index} 
-        <div class="bucket">
-             <div class="bucket-block border-base-100">
-                {#if index === 0}
-                   Original
-                {:else if index === 1}
-                  ab<span class=" text-info">c</span> 
-                {:else if index === 2}
-                  a<span class=" text-info">b</span>c 
-                {:else if index === 3}
-                 <span class=" text-info">a</span>bc
-                {/if}
+             <div class="flex items-center">
+                {#each i as j}
+                    <span class="font-bold text-xs lg:text-xl px-2">&rarr;</span>
+                    <div class="border-2 border-inherit px-2 font-bold py-0.5">{j}</div>
+                {/each}
              </div>
-          
-            {#each subBucket as item}
-               <MarkedElements mark={itemMarked === item} func={()=>markElement(item)}>
-                    {item}
-               </MarkedElements> 
-            {/each} 
-        </div>
-   {/each}
-    </div>  
-
-
-     </div> 
+            </div>
+        {/each}
+         <div class="flex flex-wrap font-bold text-xs lg:text-base py-1">Insertion Order: &#91; 
+        {#each insertionOrder as node, index}
+            <div class="font-bold pr-0.5">{node}{index !== insertionOrder.length - 1 ? ', ' : ''}</div>
+        {/each} &#93;
+       </div>
+       </div>
+    </div>
 </main>
 
 <style>
-.bucket {
-    @apply flex flex-col;
-}
-.bucket-block {
-    @apply font-bold p-3 w-20 text-center border-2 flex items-center justify-center;
-}
+
 </style>

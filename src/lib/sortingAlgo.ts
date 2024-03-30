@@ -1,4 +1,4 @@
-export function randomThreeDigitArray() {
+export function generateRandomThreeDigitArray() {
  let randomArray: number[] = [];
  let generatedNumbers = {}; // Object to keep track of generated numbers
 
@@ -8,7 +8,7 @@ export function randomThreeDigitArray() {
  }
 
  // Generate unique 3-digit numbers until the array length is 10
- while (randomArray.length < 10) {
+ while (randomArray.length < 7) {
   let randomNumber = generateRandomNumber();
   if (!generatedNumbers[randomNumber]) {
    // Check if the number is not already generated
@@ -35,7 +35,7 @@ export function generateRandomStringArray() {
  }
 
  // Generate unique 3-character strings until the array length is 10
- while (randomArray.length < 10) {
+ while (randomArray.length < 7) {
   var randomString = generateRandomString();
   if (!generatedStrings[randomString]) {
    // Check if the string is not already generated
@@ -45,4 +45,13 @@ export function generateRandomStringArray() {
  }
 
  return randomArray;
+}
+
+export function generateRandomFractions(count) {
+ var fractions = [];
+ for (var i = 0; i < count; i++) {
+  var randomFraction = Math.random().toFixed(2);
+  fractions.push(parseFloat(randomFraction));
+ }
+ return fractions;
 }

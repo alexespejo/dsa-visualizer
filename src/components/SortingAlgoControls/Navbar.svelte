@@ -12,7 +12,7 @@ import SortingAlgoRouteLinks from "./SortingAlgoRouteLinks.svelte";
     </Link>
   </div>
   <div class="ml-auto sm:navbar-center">
-    <DropdownMenue><SortingAlgoRouteLinks/></DropdownMenue>
+    <DropdownMenue label="More Algorithms"><SortingAlgoRouteLinks/></DropdownMenue>
   </div>
 <div class="hidden sm:flex navbar-end">
     <a href="https://github.com/alexespejo/dsa-visualizer" class="btn  ">

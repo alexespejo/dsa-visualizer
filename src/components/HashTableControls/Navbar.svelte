@@ -12,7 +12,7 @@ import DropdownMenue from "../NavbarDropDown/DropdownMenue.svelte";
     </Link>
   </div>
   <div class="ml-auto sm:navbar-center">
-    <DropdownMenue><HashTableRouteLinks/></DropdownMenue>
+    <DropdownMenue label="More Hashtables"><HashTableRouteLinks/></DropdownMenue>
   </div>
 <div class="hidden sm:flex navbar-end">
     <a href="https://github.com/alexespejo/dsa-visualizer" class="btn  ">

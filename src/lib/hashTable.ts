@@ -56,6 +56,7 @@ export function insertLinear(
 export function removeLinear(
  table: number[],
  search: number,
+ stepsize: number,
  capacity: number
 ) {
  let hash = search % capacity;
