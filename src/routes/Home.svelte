@@ -5,7 +5,7 @@
 <div
  class="flex flex-col lg:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
 >
- <div class="card w-72 h-96 bg-base-100 shadow-xl">
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
    </div>
   </div>
  </div>
- <div class="card w-72 h-96 bg-base-100 shadow-xl">
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@
    </div>
   </div>
  </div>
- <div class="card w-72 h-96 bg-base-100 shadow-xl">
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
    </div>
   </div>
  </div>
- <div class="card w-72 h-96 bg-base-100 shadow-xl">
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
     xmlns="http://www.w3.org/2000/svg"

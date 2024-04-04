@@ -1,6 +1,5 @@
 <script lang="ts">
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
- import Navbar from "../../components/HashTableControls/Navbar.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
 
@@ -59,9 +58,7 @@
 </script>
 
 <FunctionVisualizerLayout title="Linear Hashing">
- <div
-  class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
- >
+ <div class="hash-table-controller">
   <FormControl label="Capacity">
    <input
     type="number"
@@ -141,7 +138,7 @@
   </FormControl>
  </div>
 
- <div class="flex items-center flex-col w-full p-2">
+ <div class="flex items-center justify-center flex-col w-full">
   <div class="p-3 text-base-content font-bold">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
    !stepSize
@@ -155,7 +152,7 @@
     <div class="">{item},</div>
    {/each}
   </div>
-  <div class="flex flex-wrap space-x-0.5">
+  <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div
      class={`hash-table-item ${item === numToInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}

@@ -1,6 +1,5 @@
 <script lang="ts">
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
- import Navbar from "../../components/HashTableControls/Navbar.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import {
@@ -59,7 +58,7 @@
 </script>
 
 <FunctionVisualizerLayout title="Quadratic Hashing">
- <div class="p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2">
+ <div class="hash-table-controller">
   <FormControl label="Capacity">
    <input
     type="number"
@@ -105,7 +104,7 @@
   <div class="p-3 text-base-content font-bold">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * j&#41; % {capacity}
   </div>
-  <div class="flex flex-wrap space-x-0.5">
+  <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div class="hash-table-item">
      <div class="px-3 text-base border-b-2 border-neutral-content text-center">

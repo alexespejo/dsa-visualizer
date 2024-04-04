@@ -4,7 +4,7 @@
 </script>
 
 <Navbar />
-<main class="p-4 sm:px-32 lg:px-40">
- <h1 class="title-heading">{title}</h1>
+<main class="px-2 py-4">
+ <h1 class="title-heading lg:px-24">{title}</h1>
  <slot />
 </main>

@@ -1,3 +1,4 @@
+@import url("./styles/hashTable.styles.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,8 +7,5 @@
  @apply transition-all;
 }
 .title-heading {
- @apply text-2xl font-bold px-3 pt-2;
-}
-.hash-table-item {
- @apply border-2  font-bold text-xl flex flex-col mb-2 w-16 h-20;
+ @apply text-2xl font-bold py-4;
 }
