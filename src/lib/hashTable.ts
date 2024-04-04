@@ -1,4 +1,4 @@
-export function generateRandomArray(size) {
+function generateRandomArray(size) {
  if (size <= 5) {
   console.error("Array size must be larger than 5");
   return [];
@@ -18,64 +18,72 @@ export function generateRandomArray(size) {
  return randomArray;
 }
 
-function mod(data: number, capacity: number) {
- return data % capacity;
+function insertSeparateChaining(
+ table: number[][],
+ data: number,
+ capacity: number
+) {
+ return table;
 }
 
-export function insertLinear(
+function removeSeparateChaining(
+ table: number[][],
+ data: number,
+ capacity: number
+) {
+ return table;
+}
+
+function insertLinear(
  table: number[],
  data: number,
  stepsize: number,
  capacity: number
 ) {
- let hash = data % capacity;
- if (table[hash] === undefined) {
-  table[hash] = data;
-  return table;
- }
- let cycle = hash;
- hash = mod(data + stepsize, capacity);
- let i = 1;
- while (hash !== cycle) {
-  if (table[hash] === undefined) {
-   table[hash] = data;
-   return table;
-  }
-  i += 1;
-  if (i >= capacity) {
-   i = 0;
-  }
-  if (i === cycle) {
-   return table;
-  }
-  hash = mod(data + stepsize * i, capacity);
- }
  return table;
 }
 
-export function removeLinear(
+function removeLinear(
  table: number[],
- search: number,
+ data: number,
  stepsize: number,
  capacity: number
 ) {
- let hash = search % capacity;
- if (table[hash] === search) {
-  table[hash] = undefined;
-  return table;
- }
- let cycle = hash;
- hash = mod(search + 1, capacity);
- let i = 1;
- while (hash !== cycle) {
-  if (table[hash] === search) {
-   table[hash] = undefined;
-   return table;
-  }
-  i += 1;
-  if (i >= capacity) {
-   i = 0;
-  }
-  hash = mod(search + i, capacity);
- }
+ return table;
 }
+
+function insertQuadratic(table: number[], data: number, capacity: number) {
+ return table;
+}
+
+function removeQuadratic(table: number[], data: number, capacity: number) {
+ return table;
+}
+
+function insertDoubleHashing(
+ table: number[],
+ data: number,
+ secondFunction: number,
+ capacity: number
+) {
+ return table;
+}
+
+function removeDoubleHashing(
+ table: number[],
+ data: number,
+ secondFunction: number,
+ capacity: number
+) {
+ return table;
+}
+
+export {
+ insertLinear,
+ removeLinear,
+ generateRandomArray,
+ insertQuadratic,
+ removeQuadratic,
+ insertDoubleHashing,
+ removeDoubleHashing,
+};
