@@ -3,8 +3,11 @@
  import Navbar from "../../components/HashTableControls/Navbar.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
-
- import { insertLinear, removeLinear } from "../../lib/hashTable";
+ import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
+ import {
+  insertLinear,
+  removeLinear,
+ } from "../../lib/hashTableFunctions/linearProbing";
  let hashingArray: number[] = [
   undefined,
   undefined,

@@ -3,11 +3,11 @@
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
 
+ import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertLinear,
   removeLinear,
-  generateRandomArray,
- } from "../../lib/hashTable";
+ } from "../../lib/hashTableFunctions/linearProbing";
 
  let hashingArray: number[] = [
   undefined,

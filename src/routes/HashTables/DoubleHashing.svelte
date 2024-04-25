@@ -2,12 +2,11 @@
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
-
+ import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertDoubleHashing,
   removeDoubleHashing,
-  generateRandomArray,
- } from "../../lib/hashTable";
+ } from "../../lib/hashTableFunctions/doubleHashing";
 
  let hashingArray: number[] = [
   undefined,

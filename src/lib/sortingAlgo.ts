@@ -21,14 +21,14 @@ export function generateRandomThreeDigitArray() {
 }
 
 export function generateRandomStringArray() {
- var randomArray = [];
- var generatedStrings = {}; // Object to keep track of generated strings
+ let randomArray: string[] = [];
+ let generatedStrings = {}; // Object to keep track of generated strings
 
  // Function to generate a random 3-character string
  function generateRandomString() {
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var result = "";
-  for (var i = 0; i < 3; i++) {
+  let characters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let result: string = "";
+  for (let i = 0; i < 3; i++) {
    result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
@@ -36,7 +36,7 @@ export function generateRandomStringArray() {
 
  // Generate unique 3-character strings until the array length is 10
  while (randomArray.length < 7) {
-  var randomString = generateRandomString();
+  let randomString = generateRandomString();
   if (!generatedStrings[randomString]) {
    // Check if the string is not already generated
    generatedStrings[randomString] = true;
@@ -48,7 +48,7 @@ export function generateRandomStringArray() {
 }
 
 export function generateRandomFractions(count) {
- var fractions = [];
+ let fractions: number[] = [];
  for (var i = 0; i < count; i++) {
   var randomFraction = Math.random().toFixed(2);
   fractions.push(parseFloat(randomFraction));

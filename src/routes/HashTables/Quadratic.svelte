@@ -2,11 +2,11 @@
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertQuadratic,
   removeQuadratic,
-  generateRandomArray,
- } from "../../lib/hashTable";
+ } from "../../lib/hashTableFunctions/quardaticProbing";
 
  let hashingArray: number[] = [
   undefined,
