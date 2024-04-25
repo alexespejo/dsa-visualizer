@@ -5,6 +5,6 @@
 
 <Navbar />
 <main class="px-2 py-4">
- <h1 class="title-heading lg:px-24">{title}</h1>
+ <h1 class="title-heading lg:px-24 text-center">{title}</h1>
  <slot />
 </main>
