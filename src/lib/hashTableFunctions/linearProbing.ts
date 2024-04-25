@@ -4,6 +4,14 @@ function insertLinear(
  stepsize: number,
  capacity: number
 ) {
+ for (let i = 0; i < capacity; i++) {
+  let index = (data + i * stepsize) % capacity;
+  if (table[index] === undefined) {
+   table[index] = data;
+   return table;
+  }
+ }
+ console.log(table);
  return table;
 }
 
