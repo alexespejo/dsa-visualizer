@@ -11,13 +11,15 @@
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
- let stepSize: number = 0;
+ let stepSize: number = 1;
+ let valueInsert: number;
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 5;
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
+  valueInsert = numToInsert;
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
 
@@ -49,7 +51,7 @@
   if (capacity < hashingArray.length) {
    hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
   } else {
-   hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
+   // Extend the hashingArrayay if capacity is larger
    hashingArray = [...hashingArray, null];
   }
  }
@@ -153,7 +155,7 @@
   <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div
-     class={`hash-table-item ${item === numToInsert && numToInsert !== null ? "border-success text-success" : "border-neutral-content"}`}
+     class={`hash-table-item ${item === valueInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
     >
      <div class="px-3 text-base border-b-2 border-inherit text-center">
       {i}
