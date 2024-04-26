@@ -8,13 +8,7 @@
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
 
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
  let numToInsert: number;
  let numToDelete: number;
@@ -110,7 +104,7 @@
      <div class="px-3 text-base border-b-2 border-neutral-content text-center">
       {i}
      </div>
-     {#if item === undefined}
+     {#if item === null}
       <div class="p-3 text-center">0</div>
      {:else}
       <div class="p-3 text-center">{item}</div>

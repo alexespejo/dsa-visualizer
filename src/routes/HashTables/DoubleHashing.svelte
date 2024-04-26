@@ -8,13 +8,7 @@
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
 
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
  let secondHashFunctionK: number = 0;
  let numToInsert: number;
@@ -142,7 +136,7 @@
      <div class="px-3 text-base border-b-2 border-neutral-content text-center">
       {i}
      </div>
-     {#if item === undefined}
+     {#if item === null}
       <div class="p-3 text-center">0</div>
      {:else}
       <div class="p-3 text-center">{item}</div>
