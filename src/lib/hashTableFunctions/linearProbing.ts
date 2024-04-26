@@ -1,11 +1,11 @@
 function insertLinear(
  table: number[],
- data: number | undefined,
+ data: number | null,
  stepsize: number,
  capacity: number
 ) {
- // Since the array is preset with undefined values, we can check if the array is full so use this instead to check if the array is full
- if (!table.includes(undefined)) {
+ // Since the array is preset with null values, we can check if the array is full so use this instead to check if the array is full
+ if (!table.includes(null)) {
   return table;
  }
 
@@ -18,7 +18,7 @@ function insertLinear(
   }
 
   let index: number = (data + i * stepsize) % capacity;
-  if (table[index] === undefined) {
+  if (table[index] === null) {
    table[index] = data;
    return table;
   }
@@ -33,7 +33,7 @@ function removeLinear(table: any[], data: number) {
   return table;
  }
  // They don't have to know this is how we implemented it lol
- table[table.indexOf(data)] = undefined;
+ table[table.indexOf(data)] = null;
  return table;
 }
 
