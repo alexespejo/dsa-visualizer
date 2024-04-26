@@ -9,29 +9,29 @@
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
 
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
- let stepSize: number = 0;
+ let stepSize: number = 1;
+ let valueInsert: number;
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 5;
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
+  valueInsert = numToInsert;
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
+
  function remove() {
-  hashingArray = removeLinear(hashingArray, numToDelete, stepSize, capacity);
+  hashingArray = removeLinear(hashingArray, numToDelete);
  }
+
  function randomizeArray() {
   capacity = 10;
   let result = [];
+  result.length = capacity;
+  result.fill(null);
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
@@ -44,31 +44,38 @@
  function changeCap() {
   if (capacity < 0) {
    throw new Error("New size must be a non-negative integer");
+  } else if (capacity > 50) {
+   throw new Error("New size must be less than 50");
   }
 
   if (capacity < hashingArray.length) {
    hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
   } else {
-   hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
-   for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray[i] = 0; // You can initialize the new elements to any value you want
-   }
+   // Extend the hashingArrayay if capacity is larger
+   hashingArray = [...hashingArray, null];
   }
+ }
+
+ function clearTable() {
+  hashingArray = hashingArray.map(() => null);
+  insertionOrder = [];
  }
 </script>
 
 <FunctionVisualizerLayout title="Linear Hashing">
  <div class="hash-table-controller">
   <FormControl label="Capacity">
-   <input
-    type="number"
-    placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
-    bind:value={capacity}
-    on:change={() => changeCap()}
-   />
+   <form on:submit|preventDefault={changeCap}>
+    <input
+     type="number"
+     placeholder="Choose a Capacity"
+     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
+     min="1"
+     max="50"
+     bind:value={capacity}
+     on:change={changeCap}
+    />
+   </form>
   </FormControl>
 
   <label class="form-control flex max-w-xs font-bold">
@@ -92,12 +99,14 @@
      <div></div></span
     >
    </div>
-   <input
-    type="number"
-    placeholder="Choose a Stepsize"
-    class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
-    bind:value={stepSize}
-   />
+   <form on:submit|preventDefault={changeCap}>
+    <input
+     type="number"
+     placeholder="Choose a Stepsize"
+     class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
+     bind:value={stepSize}
+    />
+   </form>
   </label>
 
   <!-- Insert Button -->
@@ -129,10 +138,8 @@
 
   <FormControl label="Misc">
    <SpecialButtons
-    clear={() => {}}
-    randomize={() => {
-     randomizeArray();
-    }}
+    clear={clearTable}
+    randomize={randomizeArray}
     rehash={() => {}}
    />
   </FormControl>
@@ -155,12 +162,12 @@
   <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div
-     class={`hash-table-item ${item === numToInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
+     class={`hash-table-item ${item === valueInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
     >
      <div class="px-3 text-base border-b-2 border-inherit text-center">
       {i}
      </div>
-     {#if item === undefined}
+     {#if item === null}
       <div class="p-3 text-center">0</div>
      {:else}
       <div class="p-3 text-center">
