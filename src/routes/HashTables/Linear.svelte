@@ -50,9 +50,7 @@
    hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
   } else {
    hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
-   for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray[i] = 0; // You can initialize the new elements to any value you want
-   }
+   hashingArray = [...hashingArray, null];
   }
  }
 </script>
