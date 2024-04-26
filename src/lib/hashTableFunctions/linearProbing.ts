@@ -1,22 +1,28 @@
 function insertLinear(
  table: number[],
- data: number,
+ data: number | undefined,
  stepsize: number,
  capacity: number
 ) {
- let loadFactor: number = 0;
-
- if (stepsize !== 0) {
-  loadFactor = table.length / capacity;
+ if (!table.includes(undefined)) {
+  return table;
  }
+ if (table[table.length - 1] === 20) {
+  return table;
+ }
+ let i: number = 0;
+ let loopCycles: number = 0;
+ while (loopCycles < 5) {
+  if (i >= capacity) {
+   loopCycles++;
+  }
 
- for (let i = 0; i < capacity; i++) {
-  let index = (data + i * stepsize) % capacity;
-
+  let index: number = (data + i * stepsize) % capacity;
   if (table[index] === undefined) {
    table[index] = data;
    return table;
   }
+  i++;
  }
 
  return table;
@@ -28,15 +34,11 @@ function removeLinear(
  stepsize: number,
  capacity: number
 ) {
- for (let i = 0; i < table.length; i++) {
-  let index: number = (data + i * stepsize) % capacity;
-
-  if (index === i) {
-   table[index] = undefined;
-   return table;
-  }
+ if (!table.includes(data)) {
+  return table;
  }
 
+ table[table.indexOf(data)] = undefined;
  return table;
 }
 

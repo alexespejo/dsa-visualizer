@@ -18,4 +18,9 @@ function generateRandomArray(size: number) {
  return randomArray;
 }
 
-export { generateRandomArray };
+function loadFactor(table: number[], capacity: number) {
+ return (
+  table.filter((element) => element !== undefined).length / capacity > 0.75
+ );
+}
+export { generateRandomArray, loadFactor };
