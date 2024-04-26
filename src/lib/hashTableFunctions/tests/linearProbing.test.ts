@@ -1,6 +1,5 @@
 // sum.test.js
 import { expect, test } from "vitest";
-import { generateRandomArray } from "../hashTable";
 import { insertLinear, removeLinear } from "../linearProbing";
 
 function createHashTable(

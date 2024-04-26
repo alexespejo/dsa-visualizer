@@ -20,12 +20,16 @@
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
+
  function remove() {
   hashingArray = removeLinear(hashingArray, numToDelete);
  }
+
  function randomizeArray() {
   capacity = 10;
   let result = [];
+  result.length = capacity;
+  result.fill(null);
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
@@ -38,6 +42,8 @@
  function changeCap() {
   if (capacity < 0) {
    throw new Error("New size must be a non-negative integer");
+  } else if (capacity > 50) {
+   throw new Error("New size must be less than 50");
   }
 
   if (capacity < hashingArray.length) {
