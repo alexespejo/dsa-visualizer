@@ -10,21 +10,15 @@ function insertLinear(
  }
 
  let i: number = 0;
- let loopCycles: number = 0; // a loop cycle is a full iteration of the array
- while (loopCycles < 5) {
+ while (i < capacity) {
   // instead of a load factor check, we will limit the loop to 5 cycles
-  if (i >= capacity) {
-   loopCycles++;
-  }
-
   let index: number = (data + i * stepsize) % capacity;
   if (table[index] === null) {
    table[index] = data;
    return table;
   }
-  i++;
+  i += 1;
  }
-
  return table;
 }
 
