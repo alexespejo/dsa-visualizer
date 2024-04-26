@@ -55,20 +55,27 @@
    hashingArray = [...hashingArray, null];
   }
  }
+
+ function clearTable() {
+  hashingArray = hashingArray.map(() => null);
+  insertionOrder = [];
+ }
 </script>
 
 <FunctionVisualizerLayout title="Linear Hashing">
  <div class="hash-table-controller">
   <FormControl label="Capacity">
-   <input
-    type="number"
-    placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
-    bind:value={capacity}
-    on:change={() => changeCap()}
-   />
+   <form on:submit|preventDefault={changeCap}>
+    <input
+     type="number"
+     placeholder="Choose a Capacity"
+     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
+     min="1"
+     max="50"
+     bind:value={capacity}
+     on:change={changeCap}
+    />
+   </form>
   </FormControl>
 
   <label class="form-control flex max-w-xs font-bold">
@@ -92,12 +99,14 @@
      <div></div></span
     >
    </div>
-   <input
-    type="number"
-    placeholder="Choose a Stepsize"
-    class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
-    bind:value={stepSize}
-   />
+   <form on:submit|preventDefault={changeCap}>
+    <input
+     type="number"
+     placeholder="Choose a Stepsize"
+     class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
+     bind:value={stepSize}
+    />
+   </form>
   </label>
 
   <!-- Insert Button -->
@@ -129,10 +138,8 @@
 
   <FormControl label="Misc">
    <SpecialButtons
-    clear={() => {}}
-    randomize={() => {
-     randomizeArray();
-    }}
+    clear={clearTable}
+    randomize={randomizeArray}
     rehash={() => {}}
    />
   </FormControl>
