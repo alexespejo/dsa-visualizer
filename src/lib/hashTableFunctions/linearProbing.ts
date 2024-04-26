@@ -28,12 +28,7 @@ function insertLinear(
  return table;
 }
 
-function removeLinear(
- table: number[],
- data: number,
- stepsize: number,
- capacity: number
-) {
+function removeLinear(table: any[], data: number) {
  if (!table.includes(data)) {
   return table;
  }

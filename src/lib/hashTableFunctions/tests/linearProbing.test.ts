@@ -74,3 +74,55 @@ test("Insert w/step-size: 2 [2, 4, 12, 16, 17, 0, 1, 3]", () => {
   undefined,
  ]);
 });
+
+test("Remove: 2 [1,2,3,4]", () => {
+ expect(
+  removeLinear(
+   [
+    undefined,
+    1,
+    2,
+    3,
+    4,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+   ],
+   2
+  )
+ ).toStrictEqual([
+  undefined,
+  1,
+  undefined,
+  3,
+  4,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+ ]);
+});
+
+test("Remove: 30 [1, 50, 30, 20, 5, 1, 4, 6, 45, 312]", () => {
+ expect(removeLinear([1, 50, 30, 20, 5, 1, 4, 6, 45, 312], 30)).toStrictEqual([
+  1,
+  50,
+  undefined,
+  20,
+  5,
+  1,
+  4,
+  6,
+  45,
+  312,
+ ]);
+});
+
+test("Remove: 2 w/step-size: 3 [50, 2, 30, 57, 13, 25, 89, 3, 69]", () => {
+ expect(
+  removeLinear([50, 69, 2, 30, undefined, 25, 13, 57, 3, 89], 2)
+ ).toStrictEqual([50, 69, undefined, 30, undefined, 25, 13, 57, 3, 89]);
+});
