@@ -8,13 +8,7 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let stepSize: number = 0;
  let numToInsert: number;
  let capacity: number = 5;
@@ -23,7 +17,7 @@
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
  function remove() {
-  hashingArray = removeLinear(hashingArray, numToInsert, stepSize, capacity);
+  hashingArray = removeLinear(hashingArray, numToInsert);
  }
 
  function changeCap() {
@@ -99,12 +93,12 @@
    <div class="flex flex-wrap space-x-0.5">
     {#each hashingArray as item, i}
      <div
-      class={`hash-table-item ${item === numToInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
+      class={`hash-table-item ${item === numToInsert && numToInsert !== null ? "border-success text-success" : "border-neutral-content"}`}
      >
       <div class="px-3 text-base border-b-2 border-inherit text-center">
        {i}
       </div>
-      {#if item === undefined}
+      {#if item === null}
        <div class="p-3 text-center">0</div>
       {:else}
        <div class="p-3 text-center">
