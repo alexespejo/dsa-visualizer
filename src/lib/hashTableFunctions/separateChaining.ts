@@ -3,7 +3,10 @@ function insertSeparateChaining(
  data: number,
  capacity: number
 ) {
- return table;
+    let index = data % capacity;
+    table[index].push(data);
+    console.log(table);
+    return table;
 }
 
 function removeSeparateChaining(
