@@ -76,7 +76,7 @@
    </div>
   </div>
  </div>
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
+ <!-- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@
     >
    </div>
   </div>
- </div>
+ </div> -->
  <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
   <figure>
    <svg
