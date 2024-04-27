@@ -23,4 +23,13 @@ function loadFactor(table: number[], capacity: number) {
   table.filter((element) => element !== undefined).length / capacity > 0.75
  );
 }
-export { generateRandomArray, loadFactor };
+function arraysAreEqual(arr1, arr2) {
+ // Check if the arrays have the same length
+ if (arr1.length !== arr2.length) {
+  return false;
+ }
+
+ // Check if every element in arr1 is equal to the corresponding element in arr2
+ return arr1.every((value, index) => value === arr2[index]);
+}
+export { generateRandomArray, loadFactor, arraysAreEqual };
