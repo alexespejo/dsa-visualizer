@@ -173,7 +173,7 @@
   <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div
-     class={`hash-table-item ${item === valueInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
+     class={`hash-table-item ${needRehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${item === valueInsert && numToInsert !== undefined ? "border-success text-success " : "border-neutral-content"}`}
     >
      <div class="px-3 text-base border-b-2 border-inherit text-center">
       {i}
