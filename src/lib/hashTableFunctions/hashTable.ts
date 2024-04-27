@@ -23,7 +23,7 @@ function loadFactor(table: number[], capacity: number) {
   table.filter((element) => element !== undefined).length / capacity > 0.75
  );
 }
-function arraysAreEqual(arr1, arr2) {
+function arraysAreEqual(arr1: number[], arr2: number[]) {
  // Check if the arrays have the same length
  if (arr1.length !== arr2.length) {
   return false;

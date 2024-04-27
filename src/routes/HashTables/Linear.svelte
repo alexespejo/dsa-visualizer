@@ -3,7 +3,10 @@
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
- import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
+ import {
+  generateRandomArray,
+  arraysAreEqual,
+ } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertLinear,
   removeLinear,
@@ -16,14 +19,15 @@
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 5;
+
+ let tempTable: number[] = [];
  let needRehash: boolean = false;
 
  function insert() {
-  let tempTable = hashingArray;
   insertionOrder = [...insertionOrder, numToInsert];
   valueInsert = numToInsert;
+  tempTable = [...hashingArray];
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
-  needRehash = tempTable === hashingArray;
  }
 
  function remove() {
@@ -63,11 +67,13 @@
   hashingArray = hashingArray.map(() => null);
   insertionOrder = [];
  }
- afterUpdate(() => {});
+
+ afterUpdate(() => {
+  needRehash = arraysAreEqual(hashingArray, tempTable);
+ });
 </script>
 
 <FunctionVisualizerLayout title="Linear Hashing">
- {needRehash}
  <div class="hash-table-controller">
   <FormControl label="Capacity">
    <form on:submit|preventDefault={changeCap}>
