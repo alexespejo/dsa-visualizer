@@ -6,7 +6,7 @@
 
 <div class="navbar bg-base-100 shadow-sm border-b-2">
  <div class="navbar-start lg:flex-1">
-  <Link to="/" class="btn btn-ghost">
+  <Link to="/" class="btn btn-ghost mx-1">
    <svg
     xmlns="http://www.w3.org/2000/svg"
     width="32"

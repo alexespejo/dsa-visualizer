@@ -1,7 +1,7 @@
 <script>
  import { onMount } from "svelte";
+ import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import { generateRandomFractions } from "../../lib/sortingAlgo";
- import Navbar from "../../components/SortingAlgoControls/Navbar.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
 
  let arr = [[], [], [], [], [], [], [], [], [], []];
@@ -23,9 +23,7 @@
  });
 </script>
 
-<Navbar />
-<main class="p-4 sm:px-32 lg:px-40">
- <h1 class="title-heading">Bucket Sort</h1>
+<FunctionVisualizerLayout title="Bucket Sort" dataStructure="SA">
  <div
   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
  >
@@ -100,7 +98,7 @@
    </div>
   </div>
  </div>
-</main>
+</FunctionVisualizerLayout>
 
 <style>
 </style>

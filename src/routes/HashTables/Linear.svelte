@@ -1,9 +1,12 @@
 <script lang="ts">
+ import { afterUpdate } from "svelte";
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
-
- import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
+ import {
+  generateRandomArray,
+  arraysAreEqual,
+ } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertLinear,
   removeLinear,
@@ -17,14 +20,20 @@
  let numToDelete: number;
  let capacity: number = 5;
 
+ let tempTable: number[] = [];
+ let needRehash: boolean = false;
+
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   valueInsert = numToInsert;
+  tempTable = [...hashingArray];
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
+  numToInsert = undefined;
  }
 
  function remove() {
   hashingArray = removeLinear(hashingArray, numToDelete);
+  numToDelete = undefined;
  }
 
  function randomizeArray() {
@@ -60,9 +69,13 @@
   hashingArray = hashingArray.map(() => null);
   insertionOrder = [];
  }
+
+ afterUpdate(() => {
+  needRehash = arraysAreEqual(hashingArray, tempTable);
+ });
 </script>
 
-<FunctionVisualizerLayout title="Linear Hashing">
+<FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl label="Capacity">
    <form on:submit|preventDefault={changeCap}>
@@ -108,32 +121,33 @@
     />
    </form>
   </label>
-
   <!-- Insert Button -->
   <FormControl label="Insert Element">
-   <input
-    type="number"
-    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-    bind:value={numToInsert}
-   />
-   <button
-    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-    on:click={() => {
-     insert();
-    }}>Insert</button
-   >
+   <form on:submit|preventDefault={insert} class="join">
+    <input
+     type="number"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     required
+     bind:value={numToInsert}
+    />
+    <button class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     >Insert</button
+    >
+   </form>
   </FormControl>
   <!-- Delete Button -->
   <FormControl label="Delete Element">
-   <input
-    type="number"
-    class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-    bind:value={numToDelete}
-   />
-   <button
-    class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-    on:click={() => remove()}>Delete</button
-   >
+   <form on:submit|preventDefault={remove} class="join">
+    <input
+     type="number"
+     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+     required
+     bind:value={numToDelete}
+    />
+    <button class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     >Delete</button
+    >
+   </form>
   </FormControl>
 
   <FormControl label="Misc">
@@ -145,24 +159,29 @@
   </FormControl>
  </div>
 
- <div class="flex items-center justify-center flex-col w-full">
-  <div class="p-3 text-base-content font-bold">
+ <div class="flex items-center justify-center flex-col w-full space-y-5">
+  <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
    !stepSize
     ? ""
     : `* ${stepSize}`}&#41; % {capacity}
   </div>
 
-  <div class="flex font-bold space-x-2 my-2">
+  <div class="flex font-bold">
+   {insertionOrder.length}
    <span>Insertion Order:</span>
-   {#each insertionOrder as item}
-    <div class="">{item},</div>
-   {/each}
+   <ol class="flex">
+    {#each insertionOrder as item, index}
+     <li class="">
+      {item}{index === insertionOrder.length - 1 ? "" : ","}
+     </li>
+    {/each}
+   </ol>
   </div>
   <div class="hash-table-container">
    {#each hashingArray as item, i}
     <div
-     class={`hash-table-item ${item === valueInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
+     class={`hash-table-item ${needRehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${item === valueInsert ? "border-success text-success " : "border-neutral-content"}`}
     >
      <div class="px-3 text-base border-b-2 border-inherit text-center">
       {i}

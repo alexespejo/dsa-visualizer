@@ -51,7 +51,7 @@
  }
 </script>
 
-<FunctionVisualizerLayout title="Quadratic Hashing">
+<FunctionVisualizerLayout title="Quadratic Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl label="Capacity">
    <input

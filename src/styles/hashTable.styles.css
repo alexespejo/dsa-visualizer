@@ -9,3 +9,16 @@
 .hash-table-container {
  @apply flex flex-wrap space-x-0.5 justify-center lg:justify-start;
 }
+
+@keyframes colorChange {
+ 0% {
+  @apply text-red-300 border-red-300;
+ }
+ 100% {
+  @apply bg-inherit text-inherit;
+ }
+}
+
+.animate-hash-needed {
+ animation: colorChange 0.5s ease-in-out;
+}
