@@ -173,7 +173,6 @@
   </div>
 
   <div class="flex font-bold">
-   {insertionOrder.length}
    <span>Insertion Order:</span>
    <ol class="flex">
     {#each insertionOrder as item, index}
