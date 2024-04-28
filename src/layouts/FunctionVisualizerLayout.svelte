@@ -10,7 +10,7 @@
 {:else if dataStructure === "SA"}
  <SortingAlgoNavbar />
 {/if}
-<main class="px-2 py-4">
- <h1 class="title-heading lg:px-24 text-center">{title}</h1>
+<main class="px-2 py-4 xl:px-64">
+ <h1 class="title-heading lg:px-24">{title}</h1>
  <slot />
 </main>
