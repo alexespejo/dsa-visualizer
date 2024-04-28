@@ -11,7 +11,7 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -79,7 +79,7 @@
 <FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl>
-   <LabelInput>Capacity</LabelInput>
+   <Label>Capacity</Label>
    <form on:submit|preventDefault={changeCap}>
     <input
      type="number"
@@ -94,7 +94,7 @@
   </FormControl>
 
   <FormControl>
-   <LabelInput
+   <Label
     >Stepsize
     <div class="tooltip" data-tip="Step size of 0 indicates no stepsize">
      <svg
@@ -109,8 +109,8 @@
        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       ></path></svg
      >
-    </div></LabelInput
-   >
+    </div>
+   </Label>
    <form on:submit|preventDefault={changeCap}>
     <input
      type="number"
@@ -123,7 +123,7 @@
 
   <!-- Insert Button -->
   <FormControl>
-   <LabelInput>Insert Element</LabelInput>
+   <Label>Insert Element</Label>
    <form on:submit|preventDefault={insert} class="join">
     <input
      type="number"
@@ -138,7 +138,7 @@
   </FormControl>
   <!-- Delete Button -->
   <FormControl>
-   <LabelInput>Delete Element</LabelInput>
+   <Label>Delete Element</Label>
    <form on:submit|preventDefault={remove} class="join">
     <input
      type="number"
@@ -153,7 +153,7 @@
   </FormControl>
 
   <FormControl>
-   <LabelInput>Misc</LabelInput>
+   <Label>Misc</Label>
    <div class="join">
     <SpecialButtons
      clear={clearTable}
