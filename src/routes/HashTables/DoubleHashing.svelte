@@ -1,13 +1,17 @@
 <script lang="ts">
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
+ import Button from "../../components/custom/Button.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertDoubleHashing,
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
- import Label from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -76,12 +80,10 @@
   <!-- Capacity input -->
   <FormControl>
    <Label>Capacity</Label>
-   <input
-    type="number"
+   <NumberInput
+    color="info"
     placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
+    styles="w-40 join-item"
     bind:value={capacity}
     on:change={() => changeCap()}
    />
@@ -92,11 +94,10 @@
    <Label>
     {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
    >
-   <input
-    type="number"
+   <NumberInput
+    color="accent"
     placeholder="Enter Value for q"
-    class="font-bold input input-accent input-bordered w-max-w-xs w-40 join-item"
-    min="1"
+    styles=" w-40 join-item"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
@@ -104,15 +105,18 @@
   <FormControl>
    <Label>Insert Element</Label>
    <div class="join">
-    <input
-     type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+    <NumberInput
+     color="primary"
+     styles=" w-40 join-item"
      bind:value={numToInsert}
     />
-    <button
-     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => insert()}>Insert</button
+    <Button
+     color="primary"
+     styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     on:click={() => insert()}
     >
+     Insert
+    </Button>
    </div>
   </FormControl>
 
@@ -120,14 +124,15 @@
   <FormControl>
    <Label>Delete Element</Label>
    <div class="join">
-    <input
-     type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+    <NumberInput
+     color="secondary"
+     styles=" w-max-w-xs w-40 join-item"
      bind:value={numToDelete}
     />
-    <button
-     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-     on:click={() => remove()}>Delete</button
+    <Button
+     color="secondary"
+     styles="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     on:click={() => remove()}>Delete</Button
     >
    </div>
   </FormControl>
