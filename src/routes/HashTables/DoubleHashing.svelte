@@ -7,7 +7,7 @@
   insertDoubleHashing,
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
- import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -75,7 +75,7 @@
  <div class="hash-table-controller">
   <!-- Capacity input -->
   <FormControl>
-   <LabelInput>Capacity</LabelInput>
+   <Label>Capacity</Label>
    <input
     type="number"
     placeholder="Choose a Capacity"
@@ -89,8 +89,8 @@
 
   <!-- Second hash function -->
   <FormControl>
-   <LabelInput
-    >{`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</LabelInput
+   <Label>
+    {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
    >
    <input
     type="number"
@@ -102,7 +102,7 @@
   >
   <!-- Insert Button -->
   <FormControl>
-   <LabelInput>Insert Element</LabelInput>
+   <Label>Insert Element</Label>
    <div class="join">
     <input
      type="number"
@@ -118,7 +118,7 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <LabelInput>Delete Element</LabelInput>
+   <Label>Delete Element</Label>
    <div class="join">
     <input
      type="number"
@@ -133,7 +133,7 @@
   </FormControl>
 
   <FormControl>
-   <LabelInput>Misc</LabelInput>
+   <Label>Misc</Label>
    <div class="join">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>

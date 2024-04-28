@@ -11,7 +11,7 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -93,27 +93,24 @@
    </form>
   </FormControl>
 
-  <label class="form-control flex max-w-xs font-bold">
-   <div class="label">
-    <span class="label-text flex items-center justify-center"
-     >Stepsize
-     <div class="tooltip" data-tip="Step size of 0 indicates no stepsize">
-      <svg
-       xmlns="http://www.w3.org/2000/svg"
-       fill="none"
-       viewBox="0 0 24 24"
-       class="ml-1 stroke-neutral-content shrink-0 w-5 h-5"
-       ><path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-       ></path></svg
-      >
-     </div>
-     <div></div></span
-    >
-   </div>
+  <FormControl>
+   <LabelInput
+    >Stepsize
+    <div class="tooltip" data-tip="Step size of 0 indicates no stepsize">
+     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      class="ml-1 stroke-neutral-content shrink-0 w-5 h-5"
+      ><path
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       stroke-width="2"
+       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      ></path></svg
+     >
+    </div></LabelInput
+   >
    <form on:submit|preventDefault={changeCap}>
     <input
      type="number"
@@ -122,7 +119,8 @@
      bind:value={stepSize}
     />
    </form>
-  </label>
+  </FormControl>
+
   <!-- Insert Button -->
   <FormControl>
    <LabelInput>Insert Element</LabelInput>

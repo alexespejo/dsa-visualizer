@@ -7,7 +7,7 @@
   insertQuadratic,
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
- import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -56,41 +56,48 @@
  <div class="hash-table-controller">
   <FormControl>
    <LabelInput>Capacity</LabelInput>
-   <input
-    type="number"
-    placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
-    bind:value={capacity}
-    on:change={() => changeCap()}
-   /></FormControl
-  >
+   <div class="join">
+    <input
+     type="number"
+     placeholder="Choose a Capacity"
+     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
+     min="1"
+     max="50"
+     bind:value={capacity}
+     on:change={() => changeCap()}
+    />
+   </div>
+  </FormControl>
   <!-- Insert Button -->
   <FormControl>
    <LabelInput>Insert Element</LabelInput>
-   <input
-    type="number"
-    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-    bind:value={numToInsert}
-   />
-   <button
-    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-    on:click={() => insert()}>Insert</button
-   >
+   <div class="join">
+    <input
+     type="number"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     bind:value={numToInsert}
+    />
+    <button
+     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     on:click={() => insert()}>Insert</button
+    >
+   </div>
   </FormControl>
+
   <!-- Delete Button -->
   <FormControl>
    <LabelInput>Delete Element</LabelInput>
-   <input
-    type="number"
-    class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-    bind:value={numToDelete}
-   />
-   <button
-    class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-    on:click={() => remove()}>Delete</button
-   >
+   <div class="join">
+    <input
+     type="number"
+     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+     bind:value={numToDelete}
+    />
+    <button
+     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     on:click={() => remove()}>Delete</button
+    >
+   </div>
   </FormControl>
 
   <FormControl>

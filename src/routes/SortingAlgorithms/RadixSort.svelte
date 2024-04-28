@@ -7,7 +7,7 @@
   generateRandomStringArray,
  } from "../../lib/sortingAlgo";
  import { onMount } from "svelte";
- import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let listOfBuckets = [];
  let intOrStringArray = false;

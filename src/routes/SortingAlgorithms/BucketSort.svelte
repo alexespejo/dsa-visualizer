@@ -4,7 +4,7 @@
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import { generateRandomFractions } from "../../lib/sortingAlgo";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
- import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let arr = [[], [], [], [], [], [], [], [], [], []];
  let insertionOrder = [];
