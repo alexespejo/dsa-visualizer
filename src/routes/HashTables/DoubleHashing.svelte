@@ -1,7 +1,7 @@
 <script lang="ts">
  import Layout from "../../layouts/Layout.svelte";
 
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import Button from "../../components/custom/Button.svelte";
