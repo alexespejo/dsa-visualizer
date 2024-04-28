@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 
-./src/routes/ComponentPlayground.svelte
+src/routes/Playground.svelte

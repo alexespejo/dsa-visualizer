@@ -6,7 +6,7 @@
  import Quadratic from "./routes/HashTables/Quadratic.svelte";
  import BucketSort from "./routes/SortingAlgorithms/BucketSort.svelte";
  import RadixSort from "./routes/SortingAlgorithms/RadixSort.svelte";
- import ComponentPlayground from "./routes/ComponentPlayground.svelte";
+ import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
  export let url = "";
 </script>
@@ -15,7 +15,7 @@
  <Router {url}>
   <div class="">
    <Route path="/" component={Home} />
-   <Route path="/playground" component={ComponentPlayground} />
+   <Route path="/playground" component={Playground} />
    <Route path="/hash_tables/separate_chaining" component={SeparateChaining} />
    <Route path="/hash_tables/linear" component={Linear} />
    <Route path="/hash_tables/quadratic" component={Quadratic} />
