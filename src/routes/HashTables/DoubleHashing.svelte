@@ -67,7 +67,10 @@
  }
 </script>
 
-<FunctionVisualizerLayout title="Double Hashing with Second Hashing">
+<FunctionVisualizerLayout
+ title="Double Hashing with Second Hashing"
+ dataStructure="HT"
+>
  <div class="hash-table-controller">
   <!-- Capacity input -->
   <FormControl label="Capacity">

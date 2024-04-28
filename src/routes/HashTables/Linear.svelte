@@ -75,7 +75,7 @@
  });
 </script>
 
-<FunctionVisualizerLayout title="Linear Hashing">
+<FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl label="Capacity">
    <form on:submit|preventDefault={changeCap}>
