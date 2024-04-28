@@ -7,6 +7,7 @@
   insertQuadratic,
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
+ import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -53,7 +54,8 @@
 
 <FunctionVisualizerLayout title="Quadratic Hashing" dataStructure="HT">
  <div class="hash-table-controller">
-  <FormControl label="Capacity">
+  <FormControl>
+   <LabelInput>Capacity</LabelInput>
    <input
     type="number"
     placeholder="Choose a Capacity"
@@ -65,7 +67,8 @@
    /></FormControl
   >
   <!-- Insert Button -->
-  <FormControl label="Insert Element">
+  <FormControl>
+   <LabelInput>Insert Element</LabelInput>
    <input
     type="number"
     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -77,7 +80,8 @@
    >
   </FormControl>
   <!-- Delete Button -->
-  <FormControl label="Delete Element">
+  <FormControl>
+   <LabelInput>Delete Element</LabelInput>
    <input
     type="number"
     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
@@ -89,8 +93,11 @@
    >
   </FormControl>
 
-  <FormControl label="Misc">
-   <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+  <FormControl>
+   <LabelInput>Misc</LabelInput>
+   <div class="join">
+    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   </div>
   </FormControl>
  </div>
 

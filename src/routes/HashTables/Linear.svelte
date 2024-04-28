@@ -11,6 +11,7 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
+ import LabelInput from "../../components/custom/Inputs/LabelInput.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -77,7 +78,8 @@
 
 <FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
-  <FormControl label="Capacity">
+  <FormControl>
+   <LabelInput>Capacity</LabelInput>
    <form on:submit|preventDefault={changeCap}>
     <input
      type="number"
@@ -122,7 +124,8 @@
    </form>
   </label>
   <!-- Insert Button -->
-  <FormControl label="Insert Element">
+  <FormControl>
+   <LabelInput>Insert Element</LabelInput>
    <form on:submit|preventDefault={insert} class="join">
     <input
      type="number"
@@ -136,7 +139,8 @@
    </form>
   </FormControl>
   <!-- Delete Button -->
-  <FormControl label="Delete Element">
+  <FormControl>
+   <LabelInput>Delete Element</LabelInput>
    <form on:submit|preventDefault={remove} class="join">
     <input
      type="number"
@@ -150,12 +154,15 @@
    </form>
   </FormControl>
 
-  <FormControl label="Misc">
-   <SpecialButtons
-    clear={clearTable}
-    randomize={randomizeArray}
-    rehash={() => {}}
-   />
+  <FormControl>
+   <LabelInput>Misc</LabelInput>
+   <div class="join">
+    <SpecialButtons
+     clear={clearTable}
+     randomize={randomizeArray}
+     rehash={() => {}}
+    />
+   </div>
   </FormControl>
  </div>
 
