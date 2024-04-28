@@ -1,7 +1,12 @@
 <script lang="ts">
  import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
+ import Button from "../../components/custom/Button.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertDoubleHashing,
@@ -73,58 +78,70 @@
 >
  <div class="hash-table-controller">
   <!-- Capacity input -->
-  <FormControl label="Capacity">
-   <input
-    type="number"
+  <FormControl>
+   <Label>Capacity</Label>
+   <NumberInput
+    color="info"
     placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
+    styles="w-40 join-item"
     bind:value={capacity}
     on:change={() => changeCap()}
    />
   </FormControl>
 
   <!-- Second hash function -->
-  <FormControl
-   label={`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}
-  >
-   <input
-    type="number"
+  <FormControl>
+   <Label>
+    {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
+   >
+   <NumberInput
+    color="accent"
     placeholder="Enter Value for q"
-    class="font-bold input input-accent input-bordered w-max-w-xs w-40 join-item"
-    min="1"
+    styles=" w-40 join-item"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
   <!-- Insert Button -->
-  <FormControl label="Insert Element">
-   <input
-    type="number"
-    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-    bind:value={numToInsert}
-   />
-   <button
-    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-    on:click={() => insert()}>Insert</button
-   >
+  <FormControl>
+   <Label>Insert Element</Label>
+   <div class="join">
+    <NumberInput
+     color="primary"
+     styles=" w-40 join-item"
+     bind:value={numToInsert}
+    />
+    <Button
+     color="primary"
+     styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     on:click={() => insert()}
+    >
+     Insert
+    </Button>
+   </div>
   </FormControl>
 
   <!-- Delete Button -->
-  <FormControl label="Delete Element">
-   <input
-    type="number"
-    class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-    bind:value={numToDelete}
-   />
-   <button
-    class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-    on:click={() => remove()}>Delete</button
-   >
+  <FormControl>
+   <Label>Delete Element</Label>
+   <div class="join">
+    <NumberInput
+     color="secondary"
+     styles=" w-max-w-xs w-40 join-item"
+     bind:value={numToDelete}
+    />
+    <Button
+     color="secondary"
+     styles="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     on:click={() => remove()}>Delete</Button
+    >
+   </div>
   </FormControl>
 
-  <FormControl label="Misc">
-   <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+  <FormControl>
+   <Label>Misc</Label>
+   <div class="join">
+    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   </div>
   </FormControl>
  </div>
 

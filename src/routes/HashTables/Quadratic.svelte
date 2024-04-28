@@ -7,6 +7,7 @@
   insertQuadratic,
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -53,44 +54,57 @@
 
 <FunctionVisualizerLayout title="Quadratic Hashing" dataStructure="HT">
  <div class="hash-table-controller">
-  <FormControl label="Capacity">
-   <input
-    type="number"
-    placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
-    bind:value={capacity}
-    on:change={() => changeCap()}
-   /></FormControl
-  >
-  <!-- Insert Button -->
-  <FormControl label="Insert Element">
-   <input
-    type="number"
-    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-    bind:value={numToInsert}
-   />
-   <button
-    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-    on:click={() => insert()}>Insert</button
-   >
+  <FormControl>
+   <LabelInput>Capacity</LabelInput>
+   <div class="join">
+    <input
+     type="number"
+     placeholder="Choose a Capacity"
+     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
+     min="1"
+     max="50"
+     bind:value={capacity}
+     on:change={() => changeCap()}
+    />
+   </div>
   </FormControl>
-  <!-- Delete Button -->
-  <FormControl label="Delete Element">
-   <input
-    type="number"
-    class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-    bind:value={numToDelete}
-   />
-   <button
-    class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-    on:click={() => remove()}>Delete</button
-   >
+  <!-- Insert Button -->
+  <FormControl>
+   <LabelInput>Insert Element</LabelInput>
+   <div class="join">
+    <input
+     type="number"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     bind:value={numToInsert}
+    />
+    <button
+     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     on:click={() => insert()}>Insert</button
+    >
+   </div>
   </FormControl>
 
-  <FormControl label="Misc">
-   <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+  <!-- Delete Button -->
+  <FormControl>
+   <LabelInput>Delete Element</LabelInput>
+   <div class="join">
+    <input
+     type="number"
+     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+     bind:value={numToDelete}
+    />
+    <button
+     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     on:click={() => remove()}>Delete</button
+    >
+   </div>
+  </FormControl>
+
+  <FormControl>
+   <LabelInput>Misc</LabelInput>
+   <div class="join">
+    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   </div>
   </FormControl>
  </div>
 

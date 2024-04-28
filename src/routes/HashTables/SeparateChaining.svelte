@@ -3,6 +3,7 @@
  import Navbar from "../../components/HashTableControls/Navbar.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertLinear,
@@ -44,7 +45,8 @@
   <div
    class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
   >
-   <FormControl label="Capacity">
+   <FormControl>
+    <Label>Capacity</Label>
     <input
      type="number"
      placeholder="Choose a Capacity"
@@ -57,7 +59,8 @@
    </FormControl>
 
    <!-- Insert Button -->
-   <FormControl label="Insert Element">
+   <FormControl>
+    <Label>Insert Element</Label>
     <input
      type="number"
      class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -71,7 +74,8 @@
     >
    </FormControl>
    <!-- Delete Button -->
-   <FormControl label="Delete Element">
+   <Label>Delete ELement</Label>
+   <FormControl>
     <input
      type="number"
      class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
@@ -82,7 +86,8 @@
     >
    </FormControl>
 
-   <FormControl label="Misc">
+   <FormControl>
+    <Label>Misc</Label>
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </FormControl>
   </div>
