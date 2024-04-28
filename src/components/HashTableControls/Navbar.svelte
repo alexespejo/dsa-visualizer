@@ -1,7 +1,7 @@
 <script>
  import { Link } from "svelte-routing";
  import HashTableRouteLinks from "./HashTableRouteLinks.svelte";
- import DropdownMenue from "../NavbarDropDown/DropdownMenue.svelte";
+ import DropdownMenue from "../custom/DropdownMenue.svelte";
 </script>
 
 <div class="navbar bg-base-100 shadow-sm border-b-2">

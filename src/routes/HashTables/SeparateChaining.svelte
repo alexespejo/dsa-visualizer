@@ -1,7 +1,7 @@
 <script lang="ts">
  import { afterUpdate, beforeUpdate } from "svelte";
  import Navbar from "../../components/HashTableControls/Navbar.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
