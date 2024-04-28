@@ -1,5 +1,5 @@
 <script>
- import Navbar from "../../components/SortingAlgoControls/Navbar.svelte";
+ import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {
@@ -49,9 +49,7 @@
  });
 </script>
 
-<Navbar />
-<main class="p-4 sm:px-32 lg:px-40">
- <h1 class="title-heading">Radix Sort</h1>
+<FunctionVisualizerLayout title="Radix Sort" dataStructure="SA">
  <div
   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
  >
@@ -117,7 +115,7 @@
    {/each}
   </div>
  </div>
-</main>
+</FunctionVisualizerLayout>
 
 <style>
  .bucket {
