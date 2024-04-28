@@ -1,6 +1,6 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+ import Layout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import {
@@ -76,7 +76,7 @@
  });
 </script>
 
-<FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
+<Layout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl>
    <Label>Capacity</Label>
@@ -202,4 +202,4 @@
    {/each}
   </div>
  </div>
-</FunctionVisualizerLayout>
+</Layout>

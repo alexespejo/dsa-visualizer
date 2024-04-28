@@ -1,5 +1,5 @@
 <script>
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+ import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {

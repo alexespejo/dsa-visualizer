@@ -1,5 +1,5 @@
 <script lang="ts">
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+ import Layout from "../../layouts/Layout.svelte";
 
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
@@ -72,10 +72,7 @@
  }
 </script>
 
-<FunctionVisualizerLayout
- title="Double Hashing with Second Hashing"
- dataStructure="HT"
->
+<Layout title="Double Hashing with Second Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <!-- Capacity input -->
   <FormControl>
@@ -165,4 +162,4 @@
    {/each}
   </div>
  </div>
-</FunctionVisualizerLayout>
+</Layout>

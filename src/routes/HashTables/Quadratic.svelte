@@ -1,5 +1,5 @@
 <script lang="ts">
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+ import Layout from "../../layouts/Layout.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import FormControl from "../../components/HashTableControls/FormControl.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
@@ -52,7 +52,7 @@
  }
 </script>
 
-<FunctionVisualizerLayout title="Quadratic Hashing" dataStructure="HT">
+<Layout title="Quadratic Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl>
    <LabelInput>Capacity</LabelInput>
@@ -127,4 +127,4 @@
    {/each}
   </div>
  </div>
-</FunctionVisualizerLayout>
+</Layout>
