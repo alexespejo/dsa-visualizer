@@ -96,7 +96,7 @@
   <FormControl>
    <Label
     >Stepsize
-    <div class="tooltip" data-tip="Step size of 0 indicates no stepsize">
+    <div class="tooltip" data-tip="Step size of 1 indicates no stepsize">
      <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -172,14 +172,16 @@
     : `* ${stepSize}`}&#41; % {capacity}
   </div>
 
-  <div class="flex font-bold">
-   <span>Insertion Order:</span>
-   <ol class="flex">
+  <div class="flex font-bold space-x-1">
+   <span>Insertion Order: </span>
+   <ol class="flex space-x-1">
+    {"["}
     {#each insertionOrder as item, index}
      <li class="">
-      {item}{index === insertionOrder.length - 1 ? "" : ","}
+      {item}{index === insertionOrder.length - 1 ? " " : ", "}
      </li>
     {/each}
+    {"]"}
    </ol>
   </div>
   <div class="hash-table-container">
