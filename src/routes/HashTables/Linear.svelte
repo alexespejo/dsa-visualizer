@@ -10,8 +10,10 @@
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Button from "../../components/custom/Button.svelte";
 
  import {
   generateRandomArray,
@@ -91,14 +93,11 @@
   <FormControl>
    <Label>Capacity</Label>
    <form on:submit|preventDefault={changeCap}>
-    <input
-     type="number"
+    <NumberInput
      placeholder="Choose a Capacity"
-     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-     min="1"
-     max="50"
      bind:value={capacity}
      on:change={changeCap}
+     color="info"
     />
    </form>
   </FormControl>
@@ -122,10 +121,9 @@
     </div>
    </Label>
    <form on:submit|preventDefault={changeCap}>
-    <input
-     type="number"
+    <NumberInput
      placeholder="Choose a Stepsize"
-     class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
+     color="accent"
      bind:value={stepSize}
     />
    </form>
@@ -135,15 +133,13 @@
   <FormControl>
    <Label>Insert Element</Label>
    <form on:submit|preventDefault={insert} class="join">
-    <input
-     type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-     required
-     bind:value={numToInsert}
-    />
-    <button class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     >Insert</button
+    <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
+    <Button
+     color="primary"
+     styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
     >
+     Insert
+    </Button>
    </form>
   </FormControl>
 
@@ -151,15 +147,17 @@
   <FormControl>
    <Label>Delete Element</Label>
    <form on:submit|preventDefault={remove} class="join">
-    <input
-     type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-     required
+    <NumberInput
+     color="secondary"
+     styles="join-item"
      bind:value={numToDelete}
     />
-    <button class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-     >Delete</button
+    <Button
+     color="secondary"
+     styles="btn btn-outline  w-16 join-item w-max-w-xs"
     >
+     Delete
+    </Button>
    </form>
   </FormControl>
 
