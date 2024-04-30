@@ -1,6 +1,9 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
  import Layout from "../../layouts/Layout.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import {
@@ -172,35 +175,18 @@
     : `* ${stepSize}`}&#41; % {capacity}
   </div>
 
-  <div class="flex font-bold space-x-1">
-   <span>Insertion Order: </span>
-   <ol class="flex space-x-1">
-    {"["}
-    {#each insertionOrder as item, index}
-     <li class="">
-      {item}{index === insertionOrder.length - 1 ? " " : ", "}
-     </li>
-    {/each}
-    {"]"}
-   </ol>
-  </div>
-  <div class="hash-table-container">
+  <InsertionOrderDisplay {insertionOrder} />
+  <ArrayDisplay>
    {#each hashingArray as item, i}
-    <div
-     class={`hash-table-item ${needRehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${item === valueInsert ? "border-success text-success " : "border-neutral-content"}`}
-    >
-     <div class="px-3 text-base border-b-2 border-inherit text-center">
-      {i}
-     </div>
-     {#if item === null}
-      <div class="p-3 text-center">0</div>
-     {:else}
-      <div class="p-3 text-center">
-       {item}
-      </div>
-     {/if}
-    </div>
+    <ArrayElementIndexed
+     element={item}
+     index={i}
+     rehash={needRehash}
+     classList={item === valueInsert
+      ? "border-success text-success "
+      : "border-neutral-content"}
+    />
    {/each}
-  </div>
+  </ArrayDisplay>
  </div>
 </Layout>
