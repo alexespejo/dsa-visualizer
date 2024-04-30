@@ -12,6 +12,6 @@
 {/if}
 <main class="px-2 py-4 xl:px-64 relative">
  <!-- Your content here -->
- <h1 class="title-heading lg:px-24">{title}</h1>
+ <h1 class="title-heading xl:px-9 3xl:px-24">{title}</h1>
  <slot />
 </main>
