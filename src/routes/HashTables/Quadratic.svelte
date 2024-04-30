@@ -114,7 +114,7 @@
  </Controls>
 
  <Visualize>
-  <div class="p-3 text-base-content font-bold">
+  <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * j&#41; % {capacity}
   </div>
   <InsertionOrderDisplay {insertionOrder} />

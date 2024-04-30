@@ -88,7 +88,7 @@
  });
 </script>
 
-<Layout title="Linear Hashing" dataStructure="HT">
+<Layout dataStructure="HT">
  <Controls title="Linear Probing">
   <FormControl>
    <Label>Capacity</Label>
