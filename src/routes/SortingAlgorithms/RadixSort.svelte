@@ -50,7 +50,7 @@
  });
 </script>
 
-<FunctionVisualizerLayout title="Radix Sort" dataStructure="SA">
+<FunctionVisualizerLayout dataStructure="SA">
  <div
   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
  >

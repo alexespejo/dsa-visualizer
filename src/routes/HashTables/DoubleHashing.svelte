@@ -1,11 +1,15 @@
 <script lang="ts">
  import Layout from "../../layouts/Layout.svelte";
-
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import Button from "../../components/custom/Button.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
@@ -66,14 +70,14 @@
   } else {
    hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
    for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray[i] = 0; // You can initialize the new elements to any value you want
+    hashingArray = [...hashingArray, null]; // You can initialize the new elements to any value you want
    }
   }
  }
 </script>
 
-<Layout title="Double Hashing with Second Hashing" dataStructure="HT">
- <div class="hash-table-controller">
+<Layout dataStructure="HT">
+ <Controls title="Double Hashing">
   <!-- Capacity input -->
   <FormControl>
    <Label>Capacity</Label>
@@ -140,26 +144,24 @@
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>
   </FormControl>
- </div>
+ </Controls>
 
- <div class="flex items-center flex-col w-full p-2">
-  <div class="p-3 text-base-content font-bold">
+ <Visualize>
+  <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * h'&#40;k&#41;&#41;
    % {capacity}
   </div>
-  <div class="flex flex-wrap space-x-0.5 justify-center lg:justify-start">
+  <InsertionOrderDisplay {insertionOrder} />
+  <ArrayDisplay>
    {#each hashingArray as item, i}
-    <div class="hash-table-item">
-     <div class="px-3 text-base border-b-2 border-neutral-content text-center">
-      {i}
-     </div>
+    <ArrayElementIndexed index={i}>
      {#if item === null}
-      <div class="p-3 text-center">0</div>
+      <div class="p-3 text-center">X</div>
      {:else}
       <div class="p-3 text-center">{item}</div>
      {/if}
-    </div>
+    </ArrayElementIndexed>
    {/each}
-  </div>
- </div>
+  </ArrayDisplay>
+ </Visualize>
 </Layout>

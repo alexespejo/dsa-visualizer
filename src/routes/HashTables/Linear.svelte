@@ -88,8 +88,8 @@
  });
 </script>
 
-<Layout title="Linear Hashing" dataStructure="HT">
- <Controls>
+<Layout dataStructure="HT">
+ <Controls title="Linear Probing">
   <FormControl>
    <Label>Capacity</Label>
    <form on:submit|preventDefault={changeCap}>
@@ -185,13 +185,20 @@
   <ArrayDisplay>
    {#each hashingArray as item, i}
     <ArrayElementIndexed
-     element={item}
      index={i}
      rehash={needRehash}
      classList={item === valueInsert && !needRehash
       ? "border-success text-success "
       : "border-neutral-content"}
-    />
+    >
+     {#if item === null}
+      <div class="p-3 text-center">X</div>
+     {:else}
+      <div class="p-3 text-center">
+       {item}
+      </div>
+     {/if}
+    </ArrayElementIndexed>
    {/each}
   </ArrayDisplay>
  </Visualize>

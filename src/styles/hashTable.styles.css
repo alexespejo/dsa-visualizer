@@ -3,7 +3,7 @@
 }
 
 .hash-table-controller {
- @apply flex flex-col lg:items-center justify-center space-y-2 lg:flex-wrap lg:flex-row sm:space-y-0 sm:space-x-2 w-full;
+ @apply flex flex-col space-y-2 lg:flex-wrap  sm:space-y-0 w-fit;
 }
 
 .hash-table-container {
