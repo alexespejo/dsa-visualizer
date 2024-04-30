@@ -1,17 +1,29 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+
+ import Layout from "../../layouts/Layout.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Button from "../../components/custom/Button.svelte";
+
  import {
   generateRandomArray,
   arraysAreEqual,
  } from "../../lib/hashTableFunctions/hashTable";
+
  import {
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- import Label from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
@@ -76,19 +88,16 @@
  });
 </script>
 
-<FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
- <div class="hash-table-controller">
+<Layout title="Linear Hashing" dataStructure="HT">
+ <Controls>
   <FormControl>
    <Label>Capacity</Label>
    <form on:submit|preventDefault={changeCap}>
-    <input
-     type="number"
+    <NumberInput
      placeholder="Choose a Capacity"
-     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-     min="1"
-     max="50"
      bind:value={capacity}
      on:change={changeCap}
+     color="info"
     />
    </form>
   </FormControl>
@@ -96,7 +105,7 @@
   <FormControl>
    <Label
     >Stepsize
-    <div class="tooltip" data-tip="Step size of 0 indicates no stepsize">
+    <div class="tooltip" data-tip="Step size of 1 indicates no stepsize">
      <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -112,10 +121,9 @@
     </div>
    </Label>
    <form on:submit|preventDefault={changeCap}>
-    <input
-     type="number"
+    <NumberInput
      placeholder="Choose a Stepsize"
-     class="font-bold input input-bordered input-accent w-max-w-xs w-40 join-item"
+     color="accent"
      bind:value={stepSize}
     />
    </form>
@@ -125,30 +133,31 @@
   <FormControl>
    <Label>Insert Element</Label>
    <form on:submit|preventDefault={insert} class="join">
-    <input
-     type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-     required
-     bind:value={numToInsert}
-    />
-    <button class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     >Insert</button
+    <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
+    <Button
+     color="primary"
+     styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
     >
+     Insert
+    </Button>
    </form>
   </FormControl>
+
   <!-- Delete Button -->
   <FormControl>
    <Label>Delete Element</Label>
    <form on:submit|preventDefault={remove} class="join">
-    <input
-     type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-     required
+    <NumberInput
+     color="secondary"
+     styles="join-item"
      bind:value={numToDelete}
     />
-    <button class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-     >Delete</button
+    <Button
+     color="secondary"
+     styles="btn btn-outline  w-16 join-item w-max-w-xs"
     >
+     Delete
+    </Button>
    </form>
   </FormControl>
 
@@ -162,9 +171,9 @@
     />
    </div>
   </FormControl>
- </div>
+ </Controls>
 
- <div class="flex items-center justify-center flex-col w-full space-y-5">
+ <Visualize>
   <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
    !stepSize
@@ -172,34 +181,18 @@
     : `* ${stepSize}`}&#41; % {capacity}
   </div>
 
-  <div class="flex font-bold">
-   {insertionOrder.length}
-   <span>Insertion Order:</span>
-   <ol class="flex">
-    {#each insertionOrder as item, index}
-     <li class="">
-      {item}{index === insertionOrder.length - 1 ? "" : ","}
-     </li>
-    {/each}
-   </ol>
-  </div>
-  <div class="hash-table-container">
+  <InsertionOrderDisplay {insertionOrder} />
+  <ArrayDisplay>
    {#each hashingArray as item, i}
-    <div
-     class={`hash-table-item ${needRehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${item === valueInsert ? "border-success text-success " : "border-neutral-content"}`}
-    >
-     <div class="px-3 text-base border-b-2 border-inherit text-center">
-      {i}
-     </div>
-     {#if item === null}
-      <div class="p-3 text-center">0</div>
-     {:else}
-      <div class="p-3 text-center">
-       {item}
-      </div>
-     {/if}
-    </div>
+    <ArrayElementIndexed
+     element={item}
+     index={i}
+     rehash={needRehash}
+     classList={item === valueInsert && !needRehash
+      ? "border-success text-success "
+      : "border-neutral-content"}
+    />
    {/each}
-  </div>
- </div>
-</FunctionVisualizerLayout>
+  </ArrayDisplay>
+ </Visualize>
+</Layout>
