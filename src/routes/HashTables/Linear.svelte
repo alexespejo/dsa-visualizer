@@ -1,6 +1,8 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
  import Layout from "../../layouts/Layout.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
@@ -80,7 +82,7 @@
 </script>
 
 <Layout title="Linear Hashing" dataStructure="HT">
- <div class="hash-table-controller">
+ <Controls>
   <FormControl>
    <Label>Capacity</Label>
    <form on:submit|preventDefault={changeCap}>
@@ -139,6 +141,7 @@
     >
    </form>
   </FormControl>
+
   <!-- Delete Button -->
   <FormControl>
    <Label>Delete Element</Label>
@@ -165,9 +168,9 @@
     />
    </div>
   </FormControl>
- </div>
+ </Controls>
 
- <div class="flex items-center justify-center flex-col w-full space-y-5">
+ <Visualize>
   <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
    !stepSize
@@ -182,11 +185,11 @@
      element={item}
      index={i}
      rehash={needRehash}
-     classList={item === valueInsert
+     classList={item === valueInsert && !needRehash
       ? "border-success text-success "
       : "border-neutral-content"}
     />
    {/each}
   </ArrayDisplay>
- </div>
+ </Visualize>
 </Layout>
