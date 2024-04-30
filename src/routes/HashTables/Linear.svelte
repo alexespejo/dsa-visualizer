@@ -8,15 +8,17 @@
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+
  import {
   generateRandomArray,
   arraysAreEqual,
  } from "../../lib/hashTableFunctions/hashTable";
+
  import {
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- import Label from "../../components/custom/Inputs/Label.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
