@@ -1,22 +1,21 @@
 <script lang="ts">
  import Layout from "../../layouts/Layout.svelte";
-
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import Button from "../../components/custom/Button.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertDoubleHashing,
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
- import Controls from "../../components/custom/layout/Controls.svelte";
- import Visualize from "../../components/custom/layout/Visualize.svelte";
- import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
- import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
- import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
