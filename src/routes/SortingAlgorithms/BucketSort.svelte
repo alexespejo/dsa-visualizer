@@ -1,9 +1,9 @@
 <script lang="ts">
  import { onMount } from "svelte";
  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
+ import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import { generateRandomFractions } from "../../lib/sortingAlgo";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let arr = [[], [], [], [], [], [], [], [], [], []];

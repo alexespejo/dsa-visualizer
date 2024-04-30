@@ -1,7 +1,7 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import Layout from "../../layouts/Layout.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import {
   generateRandomArray,
@@ -76,7 +76,7 @@
  });
 </script>
 
-<FunctionVisualizerLayout title="Linear Hashing" dataStructure="HT">
+<Layout title="Linear Hashing" dataStructure="HT">
  <div class="hash-table-controller">
   <FormControl>
    <Label>Capacity</Label>
@@ -173,7 +173,6 @@
   </div>
 
   <div class="flex font-bold">
-   {insertionOrder.length}
    <span>Insertion Order:</span>
    <ol class="flex">
     {#each insertionOrder as item, index}
@@ -202,4 +201,4 @@
    {/each}
   </div>
  </div>
-</FunctionVisualizerLayout>
+</Layout>

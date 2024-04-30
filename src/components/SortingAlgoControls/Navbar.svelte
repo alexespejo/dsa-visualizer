@@ -1,6 +1,6 @@
 <script>
  import { Router, Link, Route } from "svelte-routing";
- import DropdownMenue from "../NavbarDropDown/DropdownMenue.svelte";
+ import DropdownMenue from "../custom/DropdownMenue.svelte";
  import SortingAlgoRouteLinks from "./SortingAlgoRouteLinks.svelte";
 </script>
 
