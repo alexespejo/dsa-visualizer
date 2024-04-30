@@ -1,7 +1,6 @@
 <script lang="ts">
  import HashTableNavbar from "../components/HashTableControls/Navbar.svelte";
  import SortingAlgoNavbar from "../components/SortingAlgoControls/Navbar.svelte";
- export let title: string = "";
  export let dataStructure: string;
 </script>
 
