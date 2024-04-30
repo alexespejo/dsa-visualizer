@@ -57,8 +57,8 @@
  }
 </script>
 
-<Layout title="Quadratic Hashing" dataStructure="HT">
- <Controls>
+<Layout dataStructure="HT">
+ <Controls title="Quadratic Hashing">
   <FormControl>
    <LabelInput>Capacity</LabelInput>
    <div class="join">
@@ -117,7 +117,7 @@
   <div class="p-3 text-base-content font-bold">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * j&#41; % {capacity}
   </div>
-  <InsertionOrderDisplay insertionOrder={hashingArray} />
+  <InsertionOrderDisplay {insertionOrder} />
   <ArrayDisplay>
    {#each hashingArray as item, i}
     <ArrayElementIndexed index={i}>
