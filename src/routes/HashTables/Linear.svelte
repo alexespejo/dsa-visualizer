@@ -1,14 +1,17 @@
 <script lang="ts">
  import { afterUpdate } from "svelte";
+
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
+
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
- import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+
+ import Label from "../../components/custom/Inputs/Label.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
- import Label from "../../components/custom/Inputs/Label.svelte";
 
  import {
   generateRandomArray,
