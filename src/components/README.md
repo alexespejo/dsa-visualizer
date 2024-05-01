@@ -7,9 +7,11 @@
 - **Props**:
   - Requires content to be provided through a slot.
 
-```
+```js
 <div class="label">
- <span class="label-text flex items-center"><slot /></span>
+  <span class="label-text flex items-center">
+    <slot />
+  </span>
 </div>
 ```
 
@@ -26,7 +28,7 @@
   - Optional requirement indicator (`require` property) can be set to enforce input.
   - Default min and max values are set from 1 to 50.
 
-```
+```js
 <input
  bind:value
  required={require}
@@ -50,12 +52,12 @@
   - `styles`(optional): a string value
   - `placeholder`(optional): a string value
 
-```
+```js
 <input
- bind:value
- type="text"
- placeholder={placeholder}
- class={`input input-${color} input-${sz} ${styles} input-bordered w-max-w-xs font-bold`}
+  bind:value
+  type="text"
+  placeholder={placeholder}
+  class={`input input-${color} input-${sz} ${styles} input-bordered w-max-w-xs font-bold`}
 />
 ```
 
@@ -67,12 +69,12 @@
   - `title`(optional): a string value
   - Inner content can be provided using **_slots_**.
 
-```
+```js
 <div class="hash-table-controller">
- <h1 class="title-heading w-fit">{title}</h1>
- <div class="flex flex-col lg:flex-row lg:space-x-2 w-fit">
-  <slot />
- </div>
+  <h1 class="title-heading w-fit">{title}</h1>
+  <div class="flex flex-col lg:flex-row lg:space-x-2 w-fit">
+    <slot />
+  </div>
 </div>
 ```
 
@@ -83,11 +85,10 @@
 - **Props**:
   - Inner content can be provided using **_slots_**.
 
-```
+```js
 <div class="flex items-center justify-center flex-col w-full space-y-5">
- <slot />
+  <slot />
 </div>
-
 ```
 
 ## Button.svelte
@@ -100,9 +101,9 @@
   - `styles`(optional): a string value
   - `onClick()`(optional): a function to handle events
 
-```
+```js
 <button class={`btn btn-${color} btn-${size} ${styles}`} on:click={onClick}>
- <slot />
+  <slot />
 </button>
 ```
 
@@ -113,10 +114,10 @@
 - **Props**:
   - Inner content can be provided using **_slots_**.
 
-```
+```js
 <div class="form-control flex max-w-xs font-bold">
- <slot />
- <div class="join"></div>
+  <slot />
+  <div class="join"></div>
 </div>
 ```
 
@@ -127,9 +128,9 @@
 - **Props**:
   - Inner content can be provided using **_slots_**.
 
-```
+```js
 <div class="flex flex-wrap space-x-0.5 justify-center lg:justify-start">
- <slot />
+  <slot />
 </div>
 ```
 
@@ -143,14 +144,16 @@
   - `classList`(optional): a string value
   - Allows customization of additional styling and animation based on conditions.
 
-```
+```js
 <div
- class={`hash-table-item ${rehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${classList}`}
+  class={`hash-table-item ${
+    rehash && "animate__animated animate__headShake text-red-300 border-red-300"
+  } ${classList}`}
 >
- <div class="px-3 text-base border-b-2 border-inherit text-center">
-  {index}
- </div>
- <slot />
+  <div class="px-3 text-base border-b-2 border-inherit text-center">
+    {index}
+  </div>
+  <slot />
 </div>
 ```
 
@@ -163,7 +166,7 @@
   - Imports and renders different navigation bars based on the selected data structure.
   - Provides a main content area for displaying dynamic content using slots.
 
-```
+```js
 {#if dataStructure === "HT"}
  <HashTableNavbar />
 {:else if dataStructure === "SA"}
