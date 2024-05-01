@@ -96,7 +96,9 @@
    <h2 class="card-title">Trees</h2>
    <p>Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees</p>
    <div class="card-actions justify-end">
-    <Link to="/trees/bst" class="btn btn-warning">Beta</Link>
+    <Link to="/trees/bst" class="btn btn-warning"
+     >Coming Soon<span class="loading loading-dots loading-xs"></span></Link
+    >
    </div>
   </div>
  </div>
