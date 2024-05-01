@@ -11,6 +11,11 @@
  import Selection from "./routes/SortingAlgorithms/Selection.svelte";
  import MergeSort from "./routes/SortingAlgorithms/Merge.svelte";
  import Quicksort from "./routes/SortingAlgorithms/Quicksort.svelte";
+ import BinaryTree from "./routes/Trees/BinaryTree.svelte";
+ import BST from "./routes/Trees/BST.svelte";
+ import AVL from "./routes/Trees/AVL.svelte";
+ import RBT from "./routes/Trees/RBT.svelte";
+ import BTree from "./routes/Trees/BTree.svelte";
  //  import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
  export let url = "";
@@ -32,6 +37,11 @@
    <Route path="/sorting_algo/selection_sort" component={Selection} />
    <Route path="/sorting_algo/merge_sort" component={MergeSort} />
    <Route path="/sorting_algo/quick_sort" component={Quicksort} />
+   <Route path="/trees/binary_tree" component={BinaryTree} />
+   <Route path="/trees/bst" component={BST} />
+   <Route path="/trees/avl" component={AVL} />
+   <Route path="/trees/rbt" component={RBT} />
+   <Route path="/trees/b_tree" component={BTree} />
   </div>
  </Router>
 </main>
