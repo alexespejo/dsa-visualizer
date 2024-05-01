@@ -5,7 +5,6 @@
  export let styles: string = "";
  export let placeholder: string = "";
  export let require: boolean = false;
- //  export let change: () => void = () => {};
 </script>
 
 <input
