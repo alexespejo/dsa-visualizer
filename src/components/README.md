@@ -8,11 +8,7 @@
   - Requires content to be provided through a slot.
 
 ```js
-<div class="label">
-  <span class="label-text flex items-center">
-    <slot />
-  </span>
-</div>
+<Label>Capacity</Label>
 ```
 
 ## NumberInput.svelte
@@ -29,15 +25,11 @@
   - Default min and max values are set from 1 to 50.
 
 ```js
-<input
- bind:value
- required={require}
- on:change
- type="number"
- {placeholder}
- class={`input input-${color} input-${size} ${styles} input-bordered w-max-w-xs font-bold w-40`}
- min="1"
- max="50"
+<NumberInput
+  color="accent"
+  placeholder="Enter Value for q"
+  styles=" w-40 join-item"
+  bind:value={secondHashFunctionK}
 />
 ```
 
@@ -48,16 +40,17 @@
 - **Props**:
   - _`value`(required): a string value_
   - _`color`(required): a string value_
-  - `size`(optional): a string value
+  - `sz`(optional): a string value
   - `styles`(optional): a string value
   - `placeholder`(optional): a string value
 
 ```js
-<input
-  bind:value
-  type="text"
-  placeholder={placeholder}
-  class={`input input-${color} input-${sz} ${styles} input-bordered w-max-w-xs font-bold`}
+<TextInput
+  bind:value={inputValue}
+  color="blue"
+  sz="medium"
+  styles="rounded-lg"
+  placeholder="Enter text"
 />
 ```
 
@@ -70,12 +63,11 @@
   - Inner content can be provided using **_slots_**.
 
 ```js
-<div class="hash-table-controller">
-  <h1 class="title-heading w-fit">{title}</h1>
-  <div class="flex flex-col lg:flex-row lg:space-x-2 w-fit">
-    <slot />
-  </div>
-</div>
+<Controls title="Double Hashing">
+  <FormControl>... // Other Components</FormControl>
+
+  <FormControl>... // Other Components</FormControl>
+</Controls>
 ```
 
 ## Visualize.svelte
@@ -86,9 +78,19 @@
   - Inner content can be provided using **_slots_**.
 
 ```js
-<div class="flex items-center justify-center flex-col w-full space-y-5">
-  <slot />
-</div>
+<Visualize>
+  <div class="text-base-content font-bold mt-5">
+   ...
+  </div>
+  <InsertionOrderDisplay {insertionOrder} />
+  <ArrayDisplay>
+   ...
+    <ArrayElementIndexed index={i}>
+     ...
+    </ArrayElementIndexed>
+   ...
+  </ArrayDisplay>
+ </Visualize>
 ```
 
 ## Button.svelte
@@ -102,9 +104,13 @@
   - `onClick()`(optional): a function to handle events
 
 ```js
-<button class={`btn btn-${color} btn-${size} ${styles}`} on:click={onClick}>
-  <slot />
-</button>
+<Button
+  color="secondary"
+  styles="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+  on:click={() => remove()}
+>
+  Delete
+</Button>
 ```
 
 ## FormControl.svelte
@@ -115,10 +121,10 @@
   - Inner content can be provided using **_slots_**.
 
 ```js
-<div class="form-control flex max-w-xs font-bold">
-  <slot />
-  <div class="join"></div>
-</div>
+<FormControl>
+  <Label>Misc</Label>
+  <div class="join">...</div>
+</FormControl>
 ```
 
 ## ArrayDisplay.svelte
@@ -129,9 +135,13 @@
   - Inner content can be provided using **_slots_**.
 
 ```js
-<div class="flex flex-wrap space-x-0.5 justify-center lg:justify-start">
-  <slot />
-</div>
+<ArrayDisplay>
+   {#each hashingArray as item, i}
+    <ArrayElementIndexed index={i}>
+     ...
+    </ArrayElementIndexed>
+   {/each}
+  </ArrayDisplay>
 ```
 
 ## ArrayElementIndexed.svelte
@@ -145,16 +155,13 @@
   - Allows customization of additional styling and animation based on conditions.
 
 ```js
-<div
-  class={`hash-table-item ${
-    rehash && "animate__animated animate__headShake text-red-300 border-red-300"
-  } ${classList}`}
->
-  <div class="px-3 text-base border-b-2 border-inherit text-center">
-    {index}
-  </div>
-  <slot />
-</div>
+ <ArrayElementIndexed index={i}>
+    {#if item === null}
+    <div class="p-3 text-center">X</div>
+    {:else}
+    <div class="p-3 text-center">{item}</div>
+    {/if}
+  </ArrayElementIndexed>
 ```
 
 ## Layout.svelte
@@ -167,14 +174,22 @@
   - Provides a main content area for displaying dynamic content using slots.
 
 ```js
-{#if dataStructure === "HT"}
- <HashTableNavbar />
-{:else if dataStructure === "SA"}
- <SortingAlgoNavbar />
-{/if}
-<main class="px-2 2xl:px-64 relative flex-col flex items-center">
- <!-- Your content here -->
- <!-- <h1 class="title-heading xl:px-9 3xl:px-24">{title}</h1> -->
- <slot />
-</main>
+<Layout dataStructure="HT">
+  <Controls title="Double Hashing">
+    <FormControl>...</FormControl>
+
+    <FormControl>
+      <Label>...</Label>
+    </FormControl>
+  </Controls>
+
+  <Visualize>
+    ...
+    <ArrayDisplay>
+      ...
+      <ArrayElementIndexed index={i}>...</ArrayElementIndexed>
+      ...
+    </ArrayDisplay>
+  </Visualize>
+</Layout>
 ```
