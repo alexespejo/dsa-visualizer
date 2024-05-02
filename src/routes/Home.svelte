@@ -11,7 +11,7 @@
 </script>
 
 <div
- class="flex flex-col lg:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
+ class="flex flex-col sm:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
 >
  <Card
   title="Hash Tables"
@@ -26,15 +26,15 @@
   icon={SA}
  />
  <Card
-  title="Graph"
-  description="Best-First search, Depth-First search, and Dijsktra's shortest path"
-  icon={GA}
- />
- <Card
   title="Trees"
   description="Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees"
   icon={TR}
   route="/trees/bst"
+ />
+ <Card
+  title="Graph"
+  description="Best-First search, Depth-First search, and Dijsktra's shortest path"
+  icon={GA}
  />
 
  <Card title="Stacks" description="Stacks, Postfix, Prefix" icon={ST} />
