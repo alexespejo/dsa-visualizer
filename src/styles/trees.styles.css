@@ -1,0 +1,106 @@
+.binary-tree {
+ width: fit-content;
+}
+
+.binary-tree div {
+ display: grid;
+ grid-template-columns: 2fr 2fr;
+ grid-template-rows: 1fr auto;
+ gap: 0.5rem;
+ margin-top: 1rem;
+ position: relative;
+ @apply text-xl;
+}
+
+.binary-tree span {
+ grid-column: 1 / 3;
+ border: 2px solid;
+ width: 3rem;
+ height: 3rem;
+ border-radius: 50%;
+ display: grid;
+ place-items: center;
+ margin: auto auto;
+ @apply text-center;
+}
+
+.binary-tree span::before {
+ content: "";
+ position: absolute;
+ width: 50%;
+ height: 1.5rem;
+ left: 50%;
+ top: 0;
+ transform: translateY(-100%);
+ @apply rounded-sm;
+ background: linear-gradient(
+  to bottom right,
+  #0000 47%,
+  #b2ccd6 0 52%,
+  #0000 0
+ );
+}
+
+.binary-tree :nth-child(3) > span::before {
+ left: auto;
+ right: 50%;
+ @apply rounded-sm;
+ background: linear-gradient(to bottom left, #0000 47%, #b2ccd6 0 52%, #0000 0);
+}
+
+.binary-tree > div > span::before {
+ content: none;
+}
+
+/* orders */
+.binary-tree.inorder div,
+.binary-tree.preorder div,
+.binary-tree.postorder div {
+ display: flex;
+ margin: 0;
+ gap: 0;
+}
+
+.binary-tree.inorder span::before,
+.binary-tree.preorder span::before,
+.binary-tree.postorder span::before {
+ content: none;
+}
+
+.binary-tree.preorder :nth-child(1) {
+ order: 1;
+}
+.binary-tree.preorder :nth-child(2) {
+ order: 2;
+}
+.binary-tree.preorder :nth-child(3) {
+ order: 3;
+}
+
+.binary-tree.inorder :nth-child(1) {
+ order: 2;
+}
+.binary-tree.inorder :nth-child(2) {
+ order: 1;
+}
+.binary-tree.inorder :nth-child(3) {
+ order: 3;
+}
+
+.binary-tree.postorder :nth-child(1) {
+ order: 3;
+}
+.binary-tree.postorder :nth-child(2) {
+ order: 1;
+}
+.binary-tree.postorder :nth-child(3) {
+ order: 2;
+}
+
+.binary-tree.invert {
+ transform: scaleX(-1);
+}
+
+.hidden-node {
+ opacity: 0;
+}
