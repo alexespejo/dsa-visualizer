@@ -95,7 +95,7 @@
    <NumberInput
     color="accent"
     placeholder="Enter Value for q"
-    styles=" w-40 join-item"
+    styles=" w-40 join-item input-accent"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
