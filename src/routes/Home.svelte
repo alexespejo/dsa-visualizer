@@ -71,7 +71,7 @@
    <p>Best-First search, Depth-First search, and Dijsktra's shortest path</p>
    <div class="card-actions justify-end">
     <button class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></button
+     ><span class="loading loading-dots loading-xs"></span></button
     >
    </div>
   </div>
@@ -97,7 +97,7 @@
    <p>Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees</p>
    <div class="card-actions justify-end">
     <Link to="/trees/bst" class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></Link
+     ><span class="loading loading-dots loading-xs"></span></Link
     >
    </div>
   </div>
@@ -125,7 +125,58 @@
    <p>Stacks, Postfix, Prefix</p>
    <div class="card-actions justify-end">
     <button class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></button
+     ><span class="loading loading-dots loading-xs"></span></button
+    >
+   </div>
+  </div>
+ </div>
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
+  <figure class="p-3">
+   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-grid-3x2-gap w-36 h-36"
+    viewBox="0 0 16 16"
+   >
+    <path
+     d="M4 4v2H2V4zm1 7V9a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m5 5V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1M9 4v2H7V4zm5 0h-2v2h2zM4 9v2H2V9zm5 0v2H7V9zm5 0v2h-2V9zm-3-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z"
+    />
+   </svg>
+  </figure>
+  <div class="card-body">
+   <h2 class="card-title">Queues</h2>
+   <p>Circular Queues, Priority Queues/Heaps</p>
+   <div class="card-actions justify-end">
+    <button class="btn btn-warning"
+     ><span class="loading loading-dots loading-xs"></span></button
+    >
+   </div>
+  </div>
+ </div>
+ <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
+  <figure class="p-3">
+   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-arrow-left-right w-36 h-36"
+    viewBox="0 0 16 16"
+   >
+    <path
+     fill-rule="evenodd"
+     d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"
+    />
+   </svg>
+  </figure>
+  <div class="card-body">
+   <h2 class="card-title">Linked Lists</h2>
+   <p>Singly Linked List, Doubly Linked List</p>
+   <div class="card-actions justify-end">
+    <button class="btn btn-warning"
+     ><span class="loading loading-dots loading-xs"></span></button
     >
    </div>
   </div>
