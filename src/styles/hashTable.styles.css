@@ -3,9 +3,22 @@
 }
 
 .hash-table-controller {
- @apply flex flex-col lg:items-center justify-center space-y-2 lg:flex-wrap lg:flex-row sm:space-y-0 sm:space-x-2 w-full;
+ @apply flex flex-col space-y-2 lg:flex-wrap  sm:space-y-0 w-fit;
 }
 
 .hash-table-container {
  @apply flex flex-wrap space-x-0.5 justify-center lg:justify-start;
+}
+
+@keyframes colorChange {
+ 0% {
+  @apply text-red-300 border-red-300;
+ }
+ 100% {
+  @apply bg-inherit text-inherit;
+ }
+}
+
+.animate-hash-needed {
+ animation: colorChange 0.5s ease-in-out;
 }

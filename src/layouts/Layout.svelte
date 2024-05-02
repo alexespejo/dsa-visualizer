@@ -1,0 +1,17 @@
+<script lang="ts">
+ import HashTableNavbar from "../components/HashTableControls/Navbar.svelte";
+ import SortingAlgoNavbar from "../components/SortingAlgoControls/Navbar.svelte";
+ import TreeNavbar from "../components/Trees/Navbar.svelte";
+ export let dataStructure: string;
+</script>
+
+{#if dataStructure === "HT"}
+ <HashTableNavbar />
+{:else if dataStructure === "SA"}
+ <SortingAlgoNavbar />
+{:else if dataStructure === "TR"}
+ <TreeNavbar />
+{/if}
+<main class="px-2 2xl:px-64 relative flex-col flex items-center">
+ <slot />
+</main>

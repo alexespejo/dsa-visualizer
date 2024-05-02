@@ -1,12 +1,13 @@
 <script>
- import Navbar from "../../components/SortingAlgoControls/Navbar.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {
   generateRandomThreeDigitArray,
   generateRandomStringArray,
  } from "../../lib/sortingAlgo";
  import { onMount } from "svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let listOfBuckets = [];
  let intOrStringArray = false;
@@ -49,14 +50,13 @@
  });
 </script>
 
-<Navbar />
-<main class="p-4 sm:px-32 lg:px-40">
- <h1 class="title-heading">Radix Sort</h1>
+<FunctionVisualizerLayout dataStructure="SA">
  <div
   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
  >
   <div class="lg:absolute flex space-x-2 top-0 lg:right-0">
-   <FormControl label="Generate Array">
+   <FormControl>
+    <LabelInput>Randomize</LabelInput>
     <button class="btn btn-success btn-outline" on:click={() => createBuckets()}
      >Randomize <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,8 @@
      </svg></button
     >
    </FormControl>
-   <FormControl label="Integers or Strings?">
+   <FormControl>
+    <LabelInput>Insert</LabelInput>
     <div class="join">
      <button
       class={`btn  join-item btn-primary ${!intOrStringArray ? "btn-outline" : ""}`}
@@ -117,7 +118,7 @@
    {/each}
   </div>
  </div>
-</main>
+</FunctionVisualizerLayout>
 
 <style>
  .bucket {

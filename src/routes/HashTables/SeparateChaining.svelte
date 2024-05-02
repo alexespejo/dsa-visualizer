@@ -1,20 +1,15 @@
 <script lang="ts">
  import { afterUpdate, beforeUpdate } from "svelte";
  import Navbar from "../../components/HashTableControls/Navbar.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let stepSize: number = 0;
  let numToInsert: number;
  let capacity: number = 5;
@@ -23,7 +18,7 @@
   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
  function remove() {
-  hashingArray = removeLinear(hashingArray, numToInsert, stepSize, capacity);
+  hashingArray = removeLinear(hashingArray, numToInsert);
  }
 
  function changeCap() {
@@ -50,7 +45,8 @@
   <div
    class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
   >
-   <FormControl label="Capacity">
+   <FormControl>
+    <Label>Capacity</Label>
     <input
      type="number"
      placeholder="Choose a Capacity"
@@ -63,7 +59,8 @@
    </FormControl>
 
    <!-- Insert Button -->
-   <FormControl label="Insert Element">
+   <FormControl>
+    <Label>Insert Element</Label>
     <input
      type="number"
      class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -77,7 +74,8 @@
     >
    </FormControl>
    <!-- Delete Button -->
-   <FormControl label="Delete Element">
+   <Label>Delete ELement</Label>
+   <FormControl>
     <input
      type="number"
      class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
@@ -88,7 +86,8 @@
     >
    </FormControl>
 
-   <FormControl label="Misc">
+   <FormControl>
+    <Label>Misc</Label>
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </FormControl>
   </div>
@@ -99,12 +98,12 @@
    <div class="flex flex-wrap space-x-0.5">
     {#each hashingArray as item, i}
      <div
-      class={`hash-table-item ${item === numToInsert && numToInsert !== undefined ? "border-success text-success" : "border-neutral-content"}`}
+      class={`hash-table-item ${item === numToInsert && numToInsert !== null ? "border-success text-success" : "border-neutral-content"}`}
      >
       <div class="px-3 text-base border-b-2 border-inherit text-center">
        {i}
       </div>
-      {#if item === undefined}
+      {#if item === null}
        <div class="p-3 text-center">0</div>
       {:else}
        <div class="p-3 text-center">

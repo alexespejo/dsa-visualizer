@@ -96,34 +96,33 @@
    <h2 class="card-title">Trees</h2>
    <p>Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees</p>
    <div class="card-actions justify-end">
-    <button class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></button
+    <Link to="/trees/bst" class="btn btn-warning"
+     >Coming Soon<span class="loading loading-dots loading-xs"></span></Link
     >
    </div>
   </div>
  </div>
  <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure>
+  <figure class="p-3">
    <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
     fill="currentColor"
-    class="bi bi-arrow-clockwise w-36 h-36"
+    class="bi bi-stack w-36 h-36"
     viewBox="0 0 16 16"
    >
     <path
-     fill-rule="evenodd"
-     d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"
+     d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"
     />
     <path
-     d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"
+     d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"
     />
    </svg>
   </figure>
   <div class="card-body">
-   <h2 class="card-title">Circular Queue</h2>
-   <p></p>
+   <h2 class="card-title">Stacks</h2>
+   <p>Stacks, Postfix, Prefix</p>
    <div class="card-actions justify-end">
     <button class="btn btn-warning"
      >Coming Soon<span class="loading loading-dots loading-xs"></span></button

@@ -1,7 +1,7 @@
 <script>
- import { Link } from "svelte-routing";
- import HashTableRouteLinks from "./HashTableRouteLinks.svelte";
+ import { Router, Link, Route } from "svelte-routing";
  import DropdownMenue from "../custom/DropdownMenue.svelte";
+ import TreeRoutes from "./TreeRoutes.svelte";
 </script>
 
 <div class="navbar bg-base-100 shadow-sm border-b-2">
@@ -21,13 +21,13 @@
    </svg>
   </Link>
   <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold lg:flex hidden">
-   Hash Tables
+   Trees
   </h1>
  </div>
  <div class="navbar-center lg:flex-none lg:hidden">
-  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Hash Tables</h1>
+  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Trees</h1>
  </div>
  <div class="navbar-end lg:w-fit">
-  <DropdownMenue label="Hash Tables"><HashTableRouteLinks /></DropdownMenue>
+  <DropdownMenue label="Trees"><TreeRoutes /></DropdownMenue>
  </div>
 </div>

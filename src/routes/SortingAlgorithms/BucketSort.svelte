@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
  import { onMount } from "svelte";
+ import TextInput from "../../components/custom/Inputs/TextInput.svelte";
+ import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import { generateRandomFractions } from "../../lib/sortingAlgo";
- import Navbar from "../../components/SortingAlgoControls/Navbar.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
 
  let arr = [[], [], [], [], [], [], [], [], [], []];
  let insertionOrder = [];
@@ -21,16 +23,17 @@
  onMount(() => {
   createBuckets();
  });
+
+ let test: string = "Hello World";
 </script>
 
-<Navbar />
-<main class="p-4 sm:px-32 lg:px-40">
- <h1 class="title-heading">Bucket Sort</h1>
+<FunctionVisualizerLayout title="Bucket Sort" dataStructure="SA">
  <div
   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
  >
   <div class="lg:absolute flex space-x-2 top-0 lg:right-0 w-80 flex-wrap">
-   <FormControl label="Generate Array">
+   <FormControl>
+    <LabelInput>Randomize</LabelInput>
     <button class="btn btn-success btn-outline"
      >Randomize
      <svg
@@ -51,7 +54,8 @@
      </svg>
     </button>
    </FormControl>
-   <FormControl label="Insert">
+   <FormControl>
+    <LabelInput>Insert</LabelInput>
     <input
      type="number"
      class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -61,7 +65,8 @@
      on:click={() => {}}>Insert</button
     >
    </FormControl>
-   <FormControl label="Insert">
+   <FormControl>
+    <LabelInput>Insert</LabelInput>
     <input
      type="number"
      class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -100,7 +105,7 @@
    </div>
   </div>
  </div>
-</main>
+</FunctionVisualizerLayout>
 
 <style>
 </style>

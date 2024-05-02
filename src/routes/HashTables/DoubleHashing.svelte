@@ -1,20 +1,23 @@
 <script lang="ts">
- import FunctionVisualizerLayout from "../../layouts/FunctionVisualizerLayout.svelte";
- import FormControl from "../../components/HashTableControls/FormControl.svelte";
+ import Layout from "../../layouts/Layout.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
+ import Button from "../../components/custom/Button.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertDoubleHashing,
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
 
- let hashingArray: number[] = [
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
- ];
+ let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
  let secondHashFunctionK: number = 0;
  let numToInsert: number;
@@ -67,88 +70,98 @@
   } else {
    hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
    for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray[i] = 0; // You can initialize the new elements to any value you want
+    hashingArray = [...hashingArray, null]; // You can initialize the new elements to any value you want
    }
   }
  }
 </script>
 
-<FunctionVisualizerLayout title="Double Hashing with Second Hashing">
- <div class="hash-table-controller">
+<Layout dataStructure="HT">
+ <Controls title="Double Hashing">
   <!-- Capacity input -->
-  <FormControl label="Capacity">
-   <input
-    type="number"
+  <FormControl>
+   <Label>Capacity</Label>
+   <NumberInput
+    color="info"
     placeholder="Choose a Capacity"
-    class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-    min="1"
-    max="50"
+    styles="w-40 join-item"
     bind:value={capacity}
     on:change={() => changeCap()}
    />
   </FormControl>
 
   <!-- Second hash function -->
-  <FormControl
-   label={`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}
-  >
-   <input
-    type="number"
+  <FormControl>
+   <Label>
+    {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
+   >
+   <NumberInput
+    color="accent"
     placeholder="Enter Value for q"
-    class="font-bold input input-accent input-bordered w-max-w-xs w-40 join-item"
-    min="1"
+    styles=" w-40 join-item"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
   <!-- Insert Button -->
-  <FormControl label="Insert Element">
-   <input
-    type="number"
-    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-    bind:value={numToInsert}
-   />
-   <button
-    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-    on:click={() => insert()}>Insert</button
-   >
+  <FormControl>
+   <Label>Insert Element</Label>
+   <div class="join">
+    <NumberInput
+     color="primary"
+     styles=" w-40 join-item"
+     bind:value={numToInsert}
+    />
+    <Button
+     color="primary"
+     styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     on:click={() => insert()}
+    >
+     Insert
+    </Button>
+   </div>
   </FormControl>
 
   <!-- Delete Button -->
-  <FormControl label="Delete Element">
-   <input
-    type="number"
-    class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
-    bind:value={numToDelete}
-   />
-   <button
-    class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-    on:click={() => remove()}>Delete</button
-   >
+  <FormControl>
+   <Label>Delete Element</Label>
+   <div class="join">
+    <NumberInput
+     color="secondary"
+     styles=" w-max-w-xs w-40 join-item"
+     bind:value={numToDelete}
+    />
+    <Button
+     color="secondary"
+     styles="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     on:click={() => remove()}>Delete</Button
+    >
+   </div>
   </FormControl>
 
-  <FormControl label="Misc">
-   <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+  <FormControl>
+   <Label>Misc</Label>
+   <div class="join">
+    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   </div>
   </FormControl>
- </div>
+ </Controls>
 
- <div class="flex items-center flex-col w-full p-2">
-  <div class="p-3 text-base-content font-bold">
+ <Visualize>
+  <div class="text-base-content font-bold mt-5">
    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * h'&#40;k&#41;&#41;
    % {capacity}
   </div>
-  <div class="flex flex-wrap space-x-0.5 justify-center lg:justify-start">
+  <InsertionOrderDisplay {insertionOrder} />
+  <ArrayDisplay>
    {#each hashingArray as item, i}
-    <div class="hash-table-item">
-     <div class="px-3 text-base border-b-2 border-neutral-content text-center">
-      {i}
-     </div>
-     {#if item === undefined}
-      <div class="p-3 text-center">0</div>
+    <ArrayElementIndexed index={i}>
+     {#if item === null}
+      <div class="p-3 text-center">X</div>
      {:else}
       <div class="p-3 text-center">{item}</div>
      {/if}
-    </div>
+    </ArrayElementIndexed>
    {/each}
-  </div>
- </div>
-</FunctionVisualizerLayout>
+  </ArrayDisplay>
+ </Visualize>
+</Layout>
