@@ -124,6 +124,7 @@
     <NumberInput
      placeholder="Choose a Stepsize"
      color="accent"
+     styles="input-accent"
      bind:value={stepSize}
     />
    </form>

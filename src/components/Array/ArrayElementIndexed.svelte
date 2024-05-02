@@ -5,7 +5,7 @@
 </script>
 
 <div
- class={`hash-table-item ${rehash && "animate__animated animate__headShake text-red-300 border-red-300"} ${classList}`}
+ class={`hash-table-item ${rehash && "animate__animated animate__headShake text-red-300 border-red-300"} border-neutral-content ${classList}`}
 >
  <div class="px-3 text-base border-b-2 border-inherit text-center">
   {index}
