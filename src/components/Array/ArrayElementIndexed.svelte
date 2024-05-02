@@ -10,5 +10,7 @@
  <div class="px-3 text-base border-b-2 border-inherit text-center">
   {index}
  </div>
- <slot />
+ <div class="text-center p-3">
+  <slot />
+ </div>
 </div>

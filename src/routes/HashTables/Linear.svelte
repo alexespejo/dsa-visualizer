@@ -192,11 +192,9 @@
       : "border-neutral-content"}
     >
      {#if item === null}
-      <div class="p-3 text-center">X</div>
+      X
      {:else}
-      <div class="p-3 text-center">
-       {item}
-      </div>
+      {item}
      {/if}
     </ArrayElementIndexed>
    {/each}
