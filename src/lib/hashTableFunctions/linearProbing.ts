@@ -22,7 +22,7 @@ function insertLinear(
  return table;
 }
 
-function removeLinear(table: any[], data: number) {
+function removeLinear(table: number[], data: number) {
  if (!table.includes(data)) {
   return table;
  }
