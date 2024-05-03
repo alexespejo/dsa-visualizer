@@ -1,4 +1,4 @@
-function insertQuadratic(table: number[], data: number | null, capacity: number)
+function insertQuadratic(table: any[], data: number | any, capacity: number)
     : number[] {
     //checks for space in table
     if(!table.includes(null))
