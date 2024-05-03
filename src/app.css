@@ -11,3 +11,14 @@
 .title-heading {
  @apply text-2xl font-bold py-4;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+ -moz-appearance: textfield;
+}
