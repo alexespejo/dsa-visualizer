@@ -23,6 +23,8 @@
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 5;
+ let hashFuncA: number;
+ let hashFuncB: number;
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
@@ -61,15 +63,13 @@
  }
 
  function changeCap() {
-  if (capacity < 0) {
-   throw new Error("New size must be a non-negative integer");
+  if (capacity < 1) {
+   capacity = 1;
+  } else if (capacity > 50) {
+   capacity = 50;
   }
-
-  if (capacity < hashingArray.length) {
-   hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
-  } else {
-   hashingArray = [...hashingArray, null];
-  }
+  hashingArray.length = capacity;
+  hashingArray.fill(null);
  }
 </script>
 
@@ -78,13 +78,45 @@
   <!-- Capacity input -->
   <FormControl>
    <Label>Capacity</Label>
-   <NumberInput
-    color="info"
-    placeholder="Choose a Capacity"
-    styles="w-40 join-item"
-    bind:value={capacity}
-    on:change={() => changeCap()}
-   />
+   <form on:submit|preventDefault={changeCap} class="join">
+    <NumberInput
+     placeholder="Choose a Capacity"
+     bind:value={capacity}
+     color="info"
+     styles="join-item"
+     min={1}
+     max={50}
+    />
+    <Button color="info" styles="btn btn-info btn-outline join-item"
+     >Change</Button
+    >
+   </form>
+  </FormControl>
+
+  <!-- First hash function -->
+  <FormControl>
+   <Label
+    >f&#40;k&#41; =
+    {hashFuncA !== undefined && hashFuncB !== undefined
+     ? `${hashFuncA}k + ${hashFuncB}`
+     : "k"}
+   </Label>
+   <form class="join">
+    <div class="w-36 input-warning input flex items-center">
+     <input
+      type="text"
+      placeholder="a"
+      class="w-3"
+      bind:value={hashFuncA}
+     /><span>k +</span>
+     <input
+      type="text"
+      placeholder="b"
+      class="w-5 ml-1"
+      bind:value={hashFuncB}
+     />
+    </div>
+   </form>
   </FormControl>
 
   <!-- Second hash function -->

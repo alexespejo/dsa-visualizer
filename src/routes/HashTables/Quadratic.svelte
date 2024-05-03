@@ -9,24 +9,27 @@
   insertQuadratic,
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
- import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+ import Button from "../../components/custom/Button.svelte";
 
  let hashingArray: number[] = [null, null, null, null, null];
  let insertionOrder: number[] = [];
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 5;
-
+ let hashFuncA: number;
+ let hashFuncB: number;
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertQuadratic(hashingArray, numToInsert, capacity);
  }
 
  function remove() {
-  hashingArray = removeQuadratic(hashingArray, numToDelete, capacity);
+  hashingArray = removeQuadratic(hashingArray, numToDelete);
  }
 
  function randomizeArray() {
@@ -42,40 +45,63 @@
  }
 
  function changeCap() {
-  if (capacity < 0) {
-   throw new Error("New size must be a non-negative integer");
+  if (capacity < 1) {
+   capacity = 1;
   } else if (capacity > 50) {
-   throw new Error("New size must be less than 50");
+   capacity = 50;
   }
-
-  if (capacity < hashingArray.length) {
-   hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
-  } else {
-   // Extend the hashingArrayay if capacity is larger
-   hashingArray = [...hashingArray, null];
-  }
+  hashingArray.length = capacity;
+  hashingArray.fill(null);
  }
 </script>
 
 <Layout dataStructure="HT">
  <Controls title="Quadratic Hashing">
   <FormControl>
-   <LabelInput>Capacity</LabelInput>
-   <div class="join">
-    <input
-     type="number"
+   <Label>Capacity</Label>
+   <form on:submit|preventDefault={changeCap} class="join">
+    <NumberInput
      placeholder="Choose a Capacity"
-     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-     min="1"
-     max="50"
      bind:value={capacity}
-     on:change={() => changeCap()}
+     color="info"
+     styles="join-item"
+     min={1}
+     max={50}
     />
-   </div>
+    <Button color="info" styles="btn btn-info btn-outline join-item"
+     >Change</Button
+    >
+   </form>
   </FormControl>
+
+  <FormControl>
+   <Label
+    >f&#40;k&#41; =
+    {hashFuncA !== undefined && hashFuncB !== undefined
+     ? `${hashFuncA}k + ${hashFuncB}`
+     : "k"}
+   </Label>
+   <form class="join">
+    <div class="w-36 input-warning input flex items-center">
+     <input
+      type="text"
+      placeholder="a"
+      class="w-3"
+      bind:value={hashFuncA}
+     /><span>k +</span>
+     <input
+      type="text"
+      placeholder="b"
+      class="w-5 ml-1"
+      bind:value={hashFuncB}
+     />
+    </div>
+   </form>
+  </FormControl>
+
   <!-- Insert Button -->
   <FormControl>
-   <LabelInput>Insert Element</LabelInput>
+   <Label>Insert Element</Label>
    <div class="join">
     <input
      type="number"
@@ -91,7 +117,7 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <LabelInput>Delete Element</LabelInput>
+   <Label>Delete Element</Label>
    <div class="join">
     <input
      type="number"
@@ -106,7 +132,7 @@
   </FormControl>
 
   <FormControl>
-   <LabelInput>Misc</LabelInput>
+   <Label>Misc</Label>
    <div class="join">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>
