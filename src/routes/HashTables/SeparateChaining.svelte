@@ -9,6 +9,7 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
  let hashingArray: number[] = [null, null, null, null, null];
  let stepSize: number = 0;
  let numToInsert: number;
@@ -61,21 +62,24 @@
    <!-- Insert Button -->
    <FormControl>
     <Label>Insert Element</Label>
+    <div class="join">
     <input
-     type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
-     bind:value={numToInsert}
+    type="number"
+    class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+    bind:value={numToInsert}
     />
     <button
-     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => {
-      insert();
-     }}>Insert</button
-    >
-   </FormControl>
+    class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+    on:click={() => {
+        insert();
+    }}>Insert</button>
+    </div>
+    </FormControl>
+
    <!-- Delete Button -->
-   <Label>Delete ELement</Label>
    <FormControl>
+    <Label>Delete ELement</Label>
+    <div class="join">
     <input
      type="number"
      class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
@@ -84,12 +88,16 @@
      class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
      on:click={() => remove()}>Delete</button
     >
+    </div>
    </FormControl>
 
    <FormControl>
-    <Label>Misc</Label>
+    <LabelInput>Misc</LabelInput>
+    <div class="join">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+    </div>
    </FormControl>
+
   </div>
   <div class="flex items-center flex-col w-full p-2">
    <div class="p-3 text-base-content font-bold">
