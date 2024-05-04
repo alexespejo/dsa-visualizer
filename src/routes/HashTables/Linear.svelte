@@ -210,10 +210,13 @@
 
  <Visualize>
   <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
-   !stepSize
-    ? ""
-    : `* ${stepSize}`}&#41; % {capacity}
+   <span>f&#40;k&#41;</span> |
+   <span>
+    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
+    !stepSize
+     ? ""
+     : `* ${stepSize}`}&#41; % {capacity}</span
+   >
   </div>
 
   <InsertionOrderDisplay {insertionOrder} />
