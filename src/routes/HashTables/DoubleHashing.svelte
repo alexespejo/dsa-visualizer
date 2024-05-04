@@ -169,7 +169,7 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
+   <div class="join space-x-0.5">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>
   </FormControl>
