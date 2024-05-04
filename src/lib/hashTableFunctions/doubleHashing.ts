@@ -1,25 +1,24 @@
 function insertDoubleHashing(
     table: number[],
-    data: number,
-    secondFunction: number,
+    key: number,
+    q: number,
     capacity: number
 ) {
-    // hash function h(k) = (k + j * h'(k)) % 10
-    // double hash function h'(k) = q - (k % q)
-
-    let index: number = data % capacity;
+    let hashValue: number = key % capacity;
     let loadFactor: number = capacity / 2;
+    let hashFunction: number = key % capacity;
+    let secondFunction: number = q - (key % q);
 
-    if (table[index] === 0) {
-        table[index] = data;
+    if (table[hashValue] === null) {
+        table[hashValue] = key;
     } else {
         let j: number = 1;
-        while ((table[index] !== 0 || table[index] !== -1) && j < loadFactor) {
-            index = ((index % capacity) + (j * (secondFunction - (data % secondFunction)))) % capacity;
+        while (table[hashValue] !== null && j < loadFactor) {
+            hashValue = (hashFunction + (j * secondFunction)) % capacity;
             j++;
         }
-        if (j < loadFactor) {
-            table[index] = data;
+        if (table[hashValue] === null) {
+            table[hashValue] = key;
         }
     }
     return table;
@@ -27,24 +26,25 @@ function insertDoubleHashing(
 
 function removeDoubleHashing(
     table: number[],
-    data: number,
-    secondFunction: number,
+    key: number,
+    q: number,
     capacity: number
 ) {
-
-    let index: number = data % capacity;
+    let hashValue: number = key % capacity;
     let loadFactor: number = capacity / 2;
+    let hashFunction: number = key % capacity;
+    let secondFunction: number = q - (key % q);
 
-    if (table[index] === data) {
-        table[index] = -1;
+    if (table[hashValue] === key) {
+        table[hashValue] = -1;
     } else {
         let j: number = 1;
-        while (table[index] !== data && j < loadFactor) {
-            index = ((index % capacity) + (j * (secondFunction - (data % secondFunction)))) % capacity;
+        while (table[hashValue] !== key && j < loadFactor) {
+            hashValue = (hashFunction + (j * secondFunction)) % capacity;
             j++;
         }
-        if (j < loadFactor) {
-            table[index] = -1;
+        if (table[hashValue] === key) {
+            table[hashValue] = -2;
         }
     }
     return table;
