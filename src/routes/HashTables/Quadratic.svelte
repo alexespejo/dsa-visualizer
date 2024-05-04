@@ -16,11 +16,22 @@
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
  import Button from "../../components/custom/Button.svelte";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
  let insertionOrder: number[] = [];
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
+ let capacity: number = 10;
  let hashFuncA: number;
  let hashFuncB: number;
  function insert() {

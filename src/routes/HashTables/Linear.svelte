@@ -26,13 +26,24 @@
  } from "../../lib/hashTableFunctions/linearProbing";
  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
+ let capacity: number = 10;
  let insertionOrder: number[] = [];
  let stepSize: number = 1;
  let valueInsert: number;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
 
  let hashFuncA: number;
  let hashFuncB: number;

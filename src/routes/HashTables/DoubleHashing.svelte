@@ -17,12 +17,23 @@
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
  let insertionOrder: number[] = [];
  let secondHashFunctionK: number = 0;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
+ let capacity: number = 10;
  let hashFuncA: number;
  let hashFuncB: number;
 
