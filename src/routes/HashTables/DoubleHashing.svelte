@@ -127,7 +127,7 @@
    <NumberInput
     color="accent"
     placeholder="Enter Value for q"
-    styles=" w-40 join-item input-accent"
+    styles=" w-36 join-item input-accent"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
@@ -137,7 +137,7 @@
    <div class="join">
     <NumberInput
      color="primary"
-     styles=" w-40 join-item"
+     styles=" w-28 join-item"
      bind:value={numToInsert}
     />
     <Button
@@ -156,7 +156,7 @@
    <div class="join">
     <NumberInput
      color="secondary"
-     styles=" w-max-w-xs w-40 join-item"
+     styles=" w-max-w-xs w-28 join-item"
      bind:value={numToDelete}
     />
     <Button

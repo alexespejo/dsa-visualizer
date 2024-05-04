@@ -35,6 +35,8 @@
  function randomizeArray() {
   capacity = 10;
   let result = [];
+  result.length = capacity;
+  result.fill(null);
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
@@ -105,7 +107,7 @@
    <div class="join">
     <input
      type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item"
      bind:value={numToInsert}
     />
     <button
@@ -121,7 +123,7 @@
    <div class="join">
     <input
      type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+     class="font-bold input input-secondary input-bordered w-max-w-xs w-28 join-item"
      bind:value={numToDelete}
     />
     <button
@@ -134,7 +136,13 @@
   <FormControl>
    <Label>Misc</Label>
    <div class="join">
-    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+    <SpecialButtons
+     clear={() => {}}
+     randomize={() => {
+      randomizeArray();
+     }}
+     rehash={() => {}}
+    />
    </div>
   </FormControl>
  </Controls>
