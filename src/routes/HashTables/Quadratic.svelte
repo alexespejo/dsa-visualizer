@@ -66,7 +66,7 @@
      placeholder="Choose a Capacity"
      bind:value={capacity}
      color="info"
-     styles="join-item"
+     styles="join-item input-info"
      min={1}
      max={50}
     />
