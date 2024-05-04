@@ -45,8 +45,9 @@
  let numToInsert: number;
  let numToDelete: number;
 
- let hashFuncA: number;
- let hashFuncB: number;
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
 
  let tempTable: number[] = [];
  let needRehash: boolean = false;
@@ -100,6 +101,22 @@
 
  afterUpdate(() => {
   needRehash = arraysAreEqual(hashingArray, tempTable);
+  if (
+   !(
+    hashFuncA === "" ||
+    hashFuncB === "" ||
+    isNaN(hashFuncA) ||
+    isNaN(hashFuncB) ||
+    numToInsert === 0 ||
+    numToInsert === null
+   )
+  ) {
+   funcValue = parseInt(hashFuncA) * numToInsert + parseInt(hashFuncB);
+  } else if (numToInsert !== null && numToInsert !== undefined) {
+   funcValue = numToInsert;
+  } else {
+   funcValue = undefined;
+  }
  });
 </script>
 
@@ -151,9 +168,11 @@
   </FormControl>
 
   <FormControl>
-   <Label
-    >f&#40;k&#41; =
-    {hashFuncA !== undefined && hashFuncB !== undefined
+   <Label>
+    f&#40;k&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
      ? `${hashFuncA}k + ${hashFuncB}`
      : "k"}
    </Label>
@@ -220,14 +239,24 @@
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5">
-   <span>f&#40;k&#41;</span> |
-   <span>
-    h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
-    !stepSize
-     ? ""
-     : `* ${stepSize}`}&#41; % {capacity}</span
-   >
+  <div class="text-base-content font-bold mt-5 flex flex-col">
+   <div class="items-center space-x-4">
+    <span class="text-pink-300">
+     f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+     !isNaN(hashFuncB) &&
+     hashFuncB !== "" &&
+     hashFuncA !== ""
+      ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+      : "k"}
+     {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+    </span>
+    <span class="text-sky-300">
+     h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
+     {!funcValue ? "f(k)" : funcValue} + j
+     {stepSize < 2 || !stepSize ? "" : `* ${stepSize}`}
+     &#41; % {capacity}
+    </span>
+   </div>
   </div>
 
   <InsertionOrderDisplay {insertionOrder} />
