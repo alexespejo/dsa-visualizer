@@ -12,13 +12,13 @@
  @apply text-2xl font-bold py-4;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.hide-num-btn::-webkit-outer-spin-button,
+.hide-num-btn::-webkit-inner-spin-button {
  -webkit-appearance: none;
  margin: 0;
 }
 
 /* Firefox */
-input[type="number"] {
+.hide-num-btn[type="number"] {
  -moz-appearance: textfield;
 }

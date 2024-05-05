@@ -89,19 +89,15 @@
   <!-- Capacity input -->
   <FormControl>
    <Label>Capacity</Label>
-   <form on:submit|preventDefault={changeCap} class="join">
-    <NumberInput
-     placeholder="Choose a Capacity"
-     bind:value={capacity}
-     color="info"
-     styles="join-item"
-     min={1}
-     max={50}
-    />
-    <Button color="info" styles="btn btn-info btn-outline join-item"
-     >Change</Button
-    >
-   </form>
+   <NumberInput
+    placeholder="Choose a Capacity"
+    bind:value={capacity}
+    color="info"
+    styles="join-item"
+    on:change={changeCap}
+    min={1}
+    max={50}
+   />
   </FormControl>
 
   <!-- First hash function -->

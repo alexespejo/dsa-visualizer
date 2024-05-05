@@ -128,14 +128,12 @@
     <NumberInput
      placeholder="Choose a Capacity"
      bind:value={capacity}
+     on:change={changeCap}
      color="info"
      styles="join-item input-info"
      min={1}
      max={50}
     />
-    <Button color="info" styles="btn btn-info btn-outline join-item"
-     >Change</Button
-    >
    </form>
   </FormControl>
 
@@ -240,23 +238,21 @@
 
  <Visualize>
   <div class="text-base-content font-bold mt-5 flex flex-col">
-   <div class="items-center space-x-4">
-    <span class="text-pink-300">
-     f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
-     !isNaN(hashFuncB) &&
-     hashFuncB !== "" &&
-     hashFuncA !== ""
-      ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
-      : "k"}
-     {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
-    </span>
-    <span class="text-sky-300">
-     h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
-     {!funcValue ? "f(k)" : funcValue} + j
-     {stepSize < 2 || !stepSize ? "" : `* ${stepSize}`}
-     &#41; % {capacity}
-    </span>
-   </div>
+   <span class="text-pink-300">
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+     : "k"}
+    {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+   </span>
+   <span class="text-sky-300">
+    h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
+    {!funcValue ? "f(k)" : funcValue} + j
+    {stepSize < 2 || !stepSize ? "" : `* ${stepSize}`}
+    &#41; % {capacity}
+   </span>
   </div>
 
   <InsertionOrderDisplay {insertionOrder} />
