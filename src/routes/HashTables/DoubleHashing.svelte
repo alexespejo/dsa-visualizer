@@ -150,7 +150,7 @@
     <Button
      color="primary"
      styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => insert()}
+     on:click={insert}
     >
      Insert
     </Button>
