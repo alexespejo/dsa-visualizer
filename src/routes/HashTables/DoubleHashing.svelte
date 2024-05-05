@@ -17,12 +17,23 @@
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
  let insertionOrder: number[] = [];
  let secondHashFunctionK: number = 0;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
+ let capacity: number = 10;
  let hashFuncA: number;
  let hashFuncB: number;
 
@@ -78,19 +89,15 @@
   <!-- Capacity input -->
   <FormControl>
    <Label>Capacity</Label>
-   <form on:submit|preventDefault={changeCap} class="join">
-    <NumberInput
-     placeholder="Choose a Capacity"
-     bind:value={capacity}
-     color="info"
-     styles="join-item"
-     min={1}
-     max={50}
-    />
-    <Button color="info" styles="btn btn-info btn-outline join-item"
-     >Change</Button
-    >
-   </form>
+   <NumberInput
+    placeholder="Choose a Capacity"
+    bind:value={capacity}
+    color="info"
+    styles="join-item"
+    on:change={changeCap}
+    min={1}
+    max={50}
+   />
   </FormControl>
 
   <!-- First hash function -->
@@ -127,7 +134,7 @@
    <NumberInput
     color="accent"
     placeholder="Enter Value for q"
-    styles=" w-40 join-item input-accent"
+    styles=" w-36 join-item input-accent"
     bind:value={secondHashFunctionK}
    /></FormControl
   >
@@ -137,13 +144,13 @@
    <div class="join">
     <NumberInput
      color="primary"
-     styles=" w-40 join-item"
+     styles=" w-28 join-item"
      bind:value={numToInsert}
     />
     <Button
      color="primary"
      styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => insert()}
+     on:click={insert}
     >
      Insert
     </Button>
@@ -156,7 +163,7 @@
    <div class="join">
     <NumberInput
      color="secondary"
-     styles=" w-max-w-xs w-40 join-item"
+     styles=" w-max-w-xs w-28 join-item"
      bind:value={numToDelete}
     />
     <Button
@@ -169,7 +176,7 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
+   <div class="join space-x-0.5">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>
   </FormControl>

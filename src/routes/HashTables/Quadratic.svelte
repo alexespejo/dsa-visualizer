@@ -1,4 +1,5 @@
 <script lang="ts">
+ import { afterUpdate } from "svelte";
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
@@ -16,13 +17,25 @@
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
  import Button from "../../components/custom/Button.svelte";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
  let insertionOrder: number[] = [];
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
- let hashFuncA: number;
- let hashFuncB: number;
+ let capacity: number = 10;
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertQuadratic(hashingArray, numToInsert, capacity);
@@ -35,6 +48,8 @@
  function randomizeArray() {
   capacity = 10;
   let result = [];
+  result.length = capacity;
+  result.fill(null);
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
@@ -53,25 +68,40 @@
   hashingArray.length = capacity;
   hashingArray.fill(null);
  }
+
+ afterUpdate(() => {
+  if (
+   !(
+    hashFuncA === "" ||
+    hashFuncB === "" ||
+    isNaN(hashFuncA) ||
+    isNaN(hashFuncB) ||
+    numToInsert === 0 ||
+    numToInsert === null
+   )
+  ) {
+   funcValue = parseInt(hashFuncA) * numToInsert + parseInt(hashFuncB);
+  } else if (numToInsert !== null && numToInsert !== undefined) {
+   funcValue = numToInsert;
+  } else {
+   funcValue = undefined;
+  }
+ });
 </script>
 
 <Layout dataStructure="HT">
  <Controls title="Quadratic Hashing">
   <FormControl>
    <Label>Capacity</Label>
-   <form on:submit|preventDefault={changeCap} class="join">
-    <NumberInput
-     placeholder="Choose a Capacity"
-     bind:value={capacity}
-     color="info"
-     styles="join-item"
-     min={1}
-     max={50}
-    />
-    <Button color="info" styles="btn btn-info btn-outline join-item"
-     >Change</Button
-    >
-   </form>
+   <NumberInput
+    placeholder="Choose a Capacity"
+    bind:value={capacity}
+    on:change={changeCap}
+    color="info"
+    styles="join-item input-info"
+    min={1}
+    max={50}
+   />
   </FormControl>
 
   <FormControl>
@@ -105,7 +135,7 @@
    <div class="join">
     <input
      type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item"
      bind:value={numToInsert}
     />
     <button
@@ -121,7 +151,7 @@
    <div class="join">
     <input
      type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
+     class="font-bold input input-secondary input-bordered w-max-w-xs w-28 join-item"
      bind:value={numToDelete}
     />
     <button
@@ -133,15 +163,38 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
-    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   <div class="join space-x-0.5">
+    <SpecialButtons
+     clear={() => {}}
+     randomize={() => {
+      randomizeArray();
+     }}
+     rehash={() => {}}
+    />
    </div>
   </FormControl>
  </Controls>
 
  <Visualize>
   <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * j&#41; % {capacity}
+   <div class="flex flex-col">
+    <div class="">
+     <span class="text-pink-300">
+      f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+      !isNaN(hashFuncB) &&
+      hashFuncB !== "" &&
+      hashFuncA !== ""
+       ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+       : "k"}
+      {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+     </span>
+    </div>
+    <span class="text-sky-300">
+     h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
+     {!funcValue ? "f(k)" : funcValue} + j<sup>2</sup>
+     &#41; % {capacity}
+    </span>
+   </div>
   </div>
   <InsertionOrderDisplay {insertionOrder} />
   <ArrayDisplay>

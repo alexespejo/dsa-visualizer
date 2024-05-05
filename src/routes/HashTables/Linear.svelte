@@ -26,16 +26,28 @@
  } from "../../lib/hashTableFunctions/linearProbing";
  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
+ let capacity: number = 10;
  let insertionOrder: number[] = [];
  let stepSize: number = 1;
  let valueInsert: number;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
 
- let hashFuncA: number;
- let hashFuncB: number;
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
 
  let tempTable: number[] = [];
  let needRehash: boolean = false;
@@ -89,6 +101,22 @@
 
  afterUpdate(() => {
   needRehash = arraysAreEqual(hashingArray, tempTable);
+  if (
+   !(
+    hashFuncA === "" ||
+    hashFuncB === "" ||
+    isNaN(hashFuncA) ||
+    isNaN(hashFuncB) ||
+    numToInsert === 0 ||
+    numToInsert === null
+   )
+  ) {
+   funcValue = parseInt(hashFuncA) * numToInsert + parseInt(hashFuncB);
+  } else if (numToInsert !== null && numToInsert !== undefined) {
+   funcValue = numToInsert;
+  } else {
+   funcValue = undefined;
+  }
  });
 </script>
 
@@ -100,14 +128,12 @@
     <NumberInput
      placeholder="Choose a Capacity"
      bind:value={capacity}
+     on:change={changeCap}
      color="info"
-     styles="join-item"
+     styles="join-item input-info"
      min={1}
      max={50}
     />
-    <Button color="info" styles="btn btn-info btn-outline join-item"
-     >Change</Button
-    >
    </form>
   </FormControl>
 
@@ -140,9 +166,11 @@
   </FormControl>
 
   <FormControl>
-   <Label
-    >f&#40;k&#41; =
-    {hashFuncA !== undefined && hashFuncB !== undefined
+   <Label>
+    f&#40;k&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
      ? `${hashFuncA}k + ${hashFuncB}`
      : "k"}
    </Label>
@@ -198,7 +226,7 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
+   <div class="join space-x-0.5">
     <SpecialButtons
      clear={clearTable}
      randomize={randomizeArray}
@@ -209,11 +237,22 @@
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
-   !stepSize
-    ? ""
-    : `* ${stepSize}`}&#41; % {capacity}
+  <div class="text-base-content font-bold mt-5 flex flex-col">
+   <span class="text-pink-300">
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+     : "k"}
+    {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+   </span>
+   <span class="text-sky-300">
+    h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
+    {!funcValue ? "f(k)" : funcValue} + j
+    {stepSize < 2 || !stepSize ? "" : `* ${stepSize}`}
+    &#41; % {capacity}
+   </span>
   </div>
 
   <InsertionOrderDisplay {insertionOrder} />

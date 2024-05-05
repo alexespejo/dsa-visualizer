@@ -13,6 +13,7 @@
  bind:value
  required={require}
  on:input
+ on:change
  type="number"
  {placeholder}
  class={`input input-${color} input-${size} ${styles} input-bordered w-max-w-xs font-bold w-28`}
