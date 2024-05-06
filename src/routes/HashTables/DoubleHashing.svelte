@@ -30,19 +30,20 @@
   null,
  ];
  let insertionOrder: number[] = [];
- let secondHashFunctionK: number = 0;
+ let secondHashConstQ: number = 0;
  let numToInsert: number;
  let numToDelete: number;
  let capacity: number = 10;
- let hashFuncA: number;
- let hashFuncB: number;
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertDoubleHashing(
    hashingArray,
    numToInsert,
-   secondHashFunctionK,
+   secondHashConstQ,
    capacity
   );
  }
@@ -51,7 +52,7 @@
   hashingArray = removeDoubleHashing(
    hashingArray,
    numToDelete,
-   secondHashFunctionK,
+   secondHashConstQ,
    capacity
   );
  }
@@ -65,7 +66,7 @@
    result = insertDoubleHashing(
     result,
     insertionOrder[i],
-    secondHashFunctionK,
+    secondHashConstQ,
     capacity
    );
   }
@@ -129,13 +130,13 @@
   <!-- Second hash function -->
   <FormControl>
    <Label>
-    {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
+    {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}</Label
    >
    <NumberInput
     color="accent"
     placeholder="Enter Value for q"
     styles=" w-36 join-item input-accent"
-    bind:value={secondHashFunctionK}
+    bind:value={secondHashConstQ}
    /></FormControl
   >
   <!-- Insert Button -->
@@ -183,9 +184,23 @@
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * h'&#40;k&#41;&#41;
-   % {capacity}
+  <div class="text-base-content font-bold mt-5 flex flex-col">
+   <span class="text-amber-300">
+    {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}
+   </span>
+   <span class="text-pink-300">
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+     : "k"}
+    {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+   </span>
+   <span class="text-sky-300">
+    h&#40;k&#41; = &#40{!numToInsert ? "f(k)" : numToInsert} + j * h'&#40;k&#41;&#41;
+    % {capacity}
+   </span>
   </div>
   <InsertionOrderDisplay {insertionOrder} />
   <ArrayDisplay>
