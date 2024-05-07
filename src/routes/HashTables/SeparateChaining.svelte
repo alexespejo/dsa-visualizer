@@ -1,6 +1,9 @@
 <script lang="ts">
  import { afterUpdate, beforeUpdate } from "svelte";
- import Navbar from "../../components/HashTableControls/Navbar.svelte";
+ import Layout from "../../layouts/Layout.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
@@ -9,58 +12,28 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
- let hashingArray: number[] = [null, null, null, null, null];
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+ let hashingArray: number[][] = [[], [], [], [], [], [], [], [], [], []];
  let stepSize: number = 0;
  let numToInsert: number;
  let capacity: number = 5;
 
  function insert() {
-  hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
+  //   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
  }
  function remove() {
-  hashingArray = removeLinear(hashingArray, numToInsert);
- }
-
- function changeCap() {
-  if (capacity < 0) {
-   throw new Error("New size must be a non-negative integer");
-  }
-
-  if (capacity < hashingArray.length) {
-   hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
-  } else {
-   hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
-   for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray[i] = 0; // You can initialize the new elements to any value you want
-   }
-  }
+  //   hashingArray = removeLinear(hashingArray, numToInsert);
  }
 </script>
 
-<Navbar />
-<div>
- <main class="p-4 sm:px-32 lg:px-40">
-  <h1 class="title-heading">Separate Chaining</h1>
-
-  <div
-   class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
-  >
-   <FormControl>
-    <Label>Capacity</Label>
-    <input
-     type="number"
-     placeholder="Choose a Capacity"
-     class="font-bold input input-bordered input-info w-max-w-xs w-40 join-item"
-     min="1"
-     max="50"
-     bind:value={capacity}
-     on:change={() => changeCap()}
-    />
-   </FormControl>
-
-   <!-- Insert Button -->
-   <FormControl>
-    <Label>Insert Element</Label>
+<Layout dataStructure="HT">
+ <Controls title="Separate Chaining">
+  <!-- Insert Button -->
+  <FormControl>
+   <Label>Insert Element</Label>
+   <div class="join">
     <input
      type="number"
      class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
@@ -72,10 +45,13 @@
       insert();
      }}>Insert</button
     >
-   </FormControl>
-   <!-- Delete Button -->
+   </div>
+  </FormControl>
+
+  <!-- Delete Button -->
+  <FormControl>
    <Label>Delete ELement</Label>
-   <FormControl>
+   <div class="join">
     <input
      type="number"
      class="font-bold input input-secondary input-bordered w-max-w-xs w-40 join-item"
@@ -84,35 +60,27 @@
      class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
      on:click={() => remove()}>Delete</button
     >
-   </FormControl>
-
-   <FormControl>
-    <Label>Misc</Label>
-    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
-   </FormControl>
-  </div>
-  <div class="flex items-center flex-col w-full p-2">
-   <div class="p-3 text-base-content font-bold">
-    h&#40;k&#41; = k % {capacity}
    </div>
-   <div class="flex flex-wrap space-x-0.5">
+  </FormControl>
+
+  <FormControl>
+   <LabelInput>Misc</LabelInput>
+   <div class="join">
+    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+   </div>
+  </FormControl>
+ </Controls>
+ <Visualize>
+  <div class="lg:w-1/2">
+   <div class="space-y-1 p-5 self-start">
     {#each hashingArray as item, i}
      <div
-      class={`hash-table-item ${item === numToInsert && numToInsert !== null ? "border-success text-success" : "border-neutral-content"}`}
+      class="font-bold text-xl border-2 border-neutral-content w-10 h-10 flex items-center justify-center"
      >
-      <div class="px-3 text-base border-b-2 border-inherit text-center">
-       {i}
-      </div>
-      {#if item === null}
-       <div class="p-3 text-center">0</div>
-      {:else}
-       <div class="p-3 text-center">
-        {item}
-       </div>
-      {/if}
+      {i}
      </div>
     {/each}
    </div>
   </div>
- </main>
-</div>
+ </Visualize>
+</Layout>

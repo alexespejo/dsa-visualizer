@@ -9,6 +9,6 @@
 <input
  bind:value
  type="text"
- placeholder={placeholder}
- class={`input input-${color} input-${sz} ${styles} input-bordered w-max-w-xs font-bold`}
+ {placeholder}
+ class={`input input-${color} input-${sz} w-36 ${styles} input-bordered w-max-w-xs font-bold`}
 />

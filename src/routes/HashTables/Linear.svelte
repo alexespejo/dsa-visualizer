@@ -24,14 +24,30 @@
   insertLinear,
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
+ import TextInput from "../../components/custom/Inputs/TextInput.svelte";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
+ let capacity: number = 10;
  let insertionOrder: number[] = [];
  let stepSize: number = 1;
  let valueInsert: number;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
+
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
 
  let tempTable: number[] = [];
  let needRehash: boolean = false;
@@ -40,7 +56,12 @@
   insertionOrder = [...insertionOrder, numToInsert];
   valueInsert = numToInsert;
   tempTable = [...hashingArray];
-  hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
+  hashingArray = insertLinear(
+   hashingArray,
+   numToInsert,
+   stepSize === null ? 1 : stepSize,
+   capacity
+  );
   numToInsert = undefined;
  }
 
@@ -64,18 +85,13 @@
  }
 
  function changeCap() {
-  if (capacity < 0) {
-   throw new Error("New size must be a non-negative integer");
+  if (capacity < 1) {
+   capacity = 1;
   } else if (capacity > 50) {
-   throw new Error("New size must be less than 50");
+   capacity = 50;
   }
-
-  if (capacity < hashingArray.length) {
-   hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
-  } else {
-   // Extend the hashingArrayay if capacity is larger
-   hashingArray = [...hashingArray, null];
-  }
+  hashingArray.length = capacity;
+  hashingArray.fill(null);
  }
 
  function clearTable() {
@@ -85,6 +101,22 @@
 
  afterUpdate(() => {
   needRehash = arraysAreEqual(hashingArray, tempTable);
+  if (
+   !(
+    hashFuncA === "" ||
+    hashFuncB === "" ||
+    isNaN(hashFuncA) ||
+    isNaN(hashFuncB) ||
+    numToInsert === 0 ||
+    numToInsert === null
+   )
+  ) {
+   funcValue = parseInt(hashFuncA) * numToInsert + parseInt(hashFuncB);
+  } else if (numToInsert !== null && numToInsert !== undefined) {
+   funcValue = numToInsert;
+  } else {
+   funcValue = undefined;
+  }
  });
 </script>
 
@@ -92,12 +124,15 @@
  <Controls title="Linear Probing">
   <FormControl>
    <Label>Capacity</Label>
-   <form on:submit|preventDefault={changeCap}>
+   <form on:submit|preventDefault={changeCap} class="join">
     <NumberInput
      placeholder="Choose a Capacity"
      bind:value={capacity}
      on:change={changeCap}
      color="info"
+     styles="join-item input-info"
+     min={1}
+     max={50}
     />
    </form>
   </FormControl>
@@ -122,10 +157,38 @@
    </Label>
    <form on:submit|preventDefault={changeCap}>
     <NumberInput
-     placeholder="Choose a Stepsize"
+     placeholder="Stepsize"
      color="accent"
+     styles="input-accent"
      bind:value={stepSize}
     />
+   </form>
+  </FormControl>
+
+  <FormControl>
+   <Label>
+    f&#40;k&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}k + ${hashFuncB}`
+     : "k"}
+   </Label>
+   <form class="join">
+    <div class="w-36 input-warning input flex items-center">
+     <input
+      type="text"
+      placeholder="a"
+      class="w-3"
+      bind:value={hashFuncA}
+     /><span>k +</span>
+     <input
+      type="text"
+      placeholder="b"
+      class="w-5 ml-1"
+      bind:value={hashFuncB}
+     />
+    </div>
    </form>
   </FormControl>
 
@@ -163,7 +226,7 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
+   <div class="join space-x-0.5">
     <SpecialButtons
      clear={clearTable}
      randomize={randomizeArray}
@@ -174,11 +237,22 @@
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j {stepSize === 0 ||
-   !stepSize
-    ? ""
-    : `* ${stepSize}`}&#41; % {capacity}
+  <div class="text-base-content font-bold mt-5 flex flex-col">
+   <span class="text-pink-300">
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+     : "k"}
+    {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+   </span>
+   <span class="text-sky-300">
+    h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
+    {!funcValue ? "f(k)" : funcValue} + j
+    {stepSize < 2 || !stepSize ? "" : `* ${stepSize}`}
+    &#41; % {capacity}
+   </span>
   </div>
 
   <InsertionOrderDisplay {insertionOrder} />
@@ -192,11 +266,9 @@
       : "border-neutral-content"}
     >
      {#if item === null}
-      <div class="p-3 text-center">X</div>
+      X
      {:else}
-      <div class="p-3 text-center">
-       {item}
-      </div>
+      {item}
      {/if}
     </ArrayElementIndexed>
    {/each}

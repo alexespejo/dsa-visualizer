@@ -1,6 +1,6 @@
 function insertLinear(
  table: number[],
- data: number | null,
+ data: number,
  stepsize: number,
  capacity: number
 ) {

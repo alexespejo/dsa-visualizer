@@ -17,19 +17,33 @@
   removeDoubleHashing,
  } from "../../lib/hashTableFunctions/doubleHashing";
 
- let hashingArray: number[] = [null, null, null, null, null];
+ let hashingArray: number[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ];
  let insertionOrder: number[] = [];
- let secondHashFunctionK: number = 0;
+ let secondHashConstQ: number = 0;
  let numToInsert: number;
  let numToDelete: number;
- let capacity: number = 5;
+ let capacity: number = 10;
+ let hashFuncA: any;
+ let hashFuncB: any;
+ let funcValue: number;
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertDoubleHashing(
    hashingArray,
    numToInsert,
-   secondHashFunctionK,
+   secondHashConstQ,
    capacity
   );
  }
@@ -38,7 +52,7 @@
   hashingArray = removeDoubleHashing(
    hashingArray,
    numToDelete,
-   secondHashFunctionK,
+   secondHashConstQ,
    capacity
   );
  }
@@ -52,7 +66,7 @@
    result = insertDoubleHashing(
     result,
     insertionOrder[i],
-    secondHashFunctionK,
+    secondHashConstQ,
     capacity
    );
   }
@@ -61,18 +75,13 @@
  }
 
  function changeCap() {
-  if (capacity < 0) {
-   throw new Error("New size must be a non-negative integer");
+  if (capacity < 1) {
+   capacity = 1;
+  } else if (capacity > 50) {
+   capacity = 50;
   }
-
-  if (capacity < hashingArray.length) {
-   hashingArray.length = capacity; // Truncate the hashingArrayay if capacity is smaller
-  } else {
-   hashingArray.length = capacity; // Extend the hashingArrayay if capacity is larger
-   for (let i = hashingArray.length; i < capacity; i++) {
-    hashingArray = [...hashingArray, null]; // You can initialize the new elements to any value you want
-   }
-  }
+  hashingArray.length = capacity;
+  hashingArray.fill(null);
  }
 </script>
 
@@ -82,24 +91,52 @@
   <FormControl>
    <Label>Capacity</Label>
    <NumberInput
-    color="info"
     placeholder="Choose a Capacity"
-    styles="w-40 join-item"
     bind:value={capacity}
-    on:change={() => changeCap()}
+    color="info"
+    styles="join-item"
+    on:change={changeCap}
+    min={1}
+    max={50}
    />
+  </FormControl>
+
+  <!-- First hash function -->
+  <FormControl>
+   <Label
+    >f&#40;k&#41; =
+    {hashFuncA !== undefined && hashFuncB !== undefined
+     ? `${hashFuncA}k + ${hashFuncB}`
+     : "k"}
+   </Label>
+   <form class="join">
+    <div class="w-36 input-warning input flex items-center">
+     <input
+      type="text"
+      placeholder="a"
+      class="w-3"
+      bind:value={hashFuncA}
+     /><span>k +</span>
+     <input
+      type="text"
+      placeholder="b"
+      class="w-5 ml-1"
+      bind:value={hashFuncB}
+     />
+    </div>
+   </form>
   </FormControl>
 
   <!-- Second hash function -->
   <FormControl>
    <Label>
-    {`h'(k) = ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"} - (k % ${secondHashFunctionK && secondHashFunctionK !== 0 ? secondHashFunctionK : "q"})`}</Label
+    {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}</Label
    >
    <NumberInput
     color="accent"
     placeholder="Enter Value for q"
-    styles=" w-40 join-item"
-    bind:value={secondHashFunctionK}
+    styles=" w-36 join-item input-accent"
+    bind:value={secondHashConstQ}
    /></FormControl
   >
   <!-- Insert Button -->
@@ -108,13 +145,13 @@
    <div class="join">
     <NumberInput
      color="primary"
-     styles=" w-40 join-item"
+     styles=" w-28 join-item"
      bind:value={numToInsert}
     />
     <Button
      color="primary"
      styles="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => insert()}
+     on:click={insert}
     >
      Insert
     </Button>
@@ -127,7 +164,7 @@
    <div class="join">
     <NumberInput
      color="secondary"
-     styles=" w-max-w-xs w-40 join-item"
+     styles=" w-max-w-xs w-28 join-item"
      bind:value={numToDelete}
     />
     <Button
@@ -140,25 +177,39 @@
 
   <FormControl>
    <Label>Misc</Label>
-   <div class="join">
+   <div class="join space-x-0.5">
     <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
    </div>
   </FormControl>
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5">
-   h&#40;k&#41; = &#40{!numToInsert ? "k" : numToInsert} + j * h'&#40;k&#41;&#41;
-   % {capacity}
+  <div class="text-base-content font-bold mt-5 flex flex-col">
+   <span class="text-amber-300">
+    {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}
+   </span>
+   <span class="text-pink-300">
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
+    !isNaN(hashFuncB) &&
+    hashFuncB !== "" &&
+    hashFuncA !== ""
+     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
+     : "k"}
+    {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
+   </span>
+   <span class="text-sky-300">
+    h&#40;k&#41; = &#40{!numToInsert ? "f(k)" : numToInsert} + j * h'&#40;k&#41;&#41;
+    % {capacity}
+   </span>
   </div>
   <InsertionOrderDisplay {insertionOrder} />
   <ArrayDisplay>
    {#each hashingArray as item, i}
     <ArrayElementIndexed index={i}>
      {#if item === null}
-      <div class="p-3 text-center">X</div>
+      X
      {:else}
-      <div class="p-3 text-center">{item}</div>
+      {item}
      {/if}
     </ArrayElementIndexed>
    {/each}

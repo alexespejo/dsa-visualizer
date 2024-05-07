@@ -1,133 +1,53 @@
 <script>
  import { Link } from "svelte-routing";
+ import Card from "../components/custom/Card.svelte";
+ import HT from "../assets/icons/HT.svg";
+ import GA from "../assets/icons/GA.svg";
+ import LL from "../assets/icons/LL.svg";
+ import QU from "../assets/icons/QU.svg";
+ import SA from "../assets/icons/SA.svg";
+ import ST from "../assets/icons/ST.svg";
+ import TR from "../assets/icons/TR.svg";
 </script>
 
 <div
- class="flex flex-col lg:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
+ class="flex flex-col sm:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
 >
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure>
-   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-table w-36 h-36"
-    viewBox="0 0 16 16"
-   >
-    <path
-     d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"
-    />
-   </svg>
-  </figure>
-  <div class="card-body">
-   <h2 class="card-title">Hash Tables</h2>
-   <p>Separate Chaining, Linear, Quadratic, and Double Probing</p>
-   <div class="card-actions justify-end">
-    <Link to="/hash_tables/linear" class="btn btn-primary">Explore</Link>
-   </div>
-  </div>
- </div>
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure>
-   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-bar-chart w-36 h-36"
-    viewBox="0 0 16 16"
-   >
-    <path
-     d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"
-    />
-   </svg>
-  </figure>
-  <div class="card-body">
-   <h2 class="card-title">Sorting Algorithms</h2>
-   <p>Bubble, Selection, Insertion, Bucket, Radix, Merge, Quick sorts</p>
-   <div class="card-actions justify-end">
-    <Link to="/sorting_algo/bucket_sort" class="btn btn-warning">Beta</Link>
-   </div>
-  </div>
- </div>
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure>
-   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-grid-3x3 w-36 h-36"
-    viewBox="0 0 16 16"
-   >
-    <path
-     d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5zM1.5 1a.5.5 0 0 0-.5.5V5h4V1zM5 6H1v4h4zm1 4h4V6H6zm-1 1H1v3.5a.5.5 0 0 0 .5.5H5zm1 0v4h4v-4zm5 0v4h3.5a.5.5 0 0 0 .5-.5V11zm0-1h4V6h-4zm0-5h4V1.5a.5.5 0 0 0-.5-.5H11zm-1 0V1H6v4z"
-    />
-   </svg>
-  </figure>
-  <div class="card-body">
-   <h2 class="card-title">Graphs</h2>
-   <p>Best-First search, Depth-First search, and Dijsktra's shortest path</p>
-   <div class="card-actions justify-end">
-    <button class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></button
-    >
-   </div>
-  </div>
- </div>
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure>
-   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-diagram-3 w-36 h-36"
-    viewBox="0 0 16 16"
-   >
-    <path
-     fill-rule="evenodd"
-     d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"
-    />
-   </svg>
-  </figure>
-  <div class="card-body">
-   <h2 class="card-title">Trees</h2>
-   <p>Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees</p>
-   <div class="card-actions justify-end">
-    <Link to="/trees/bst" class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></Link
-    >
-   </div>
-  </div>
- </div>
- <div class="card w-full sm:w-72 h-96 bg-base-100 shadow-xl">
-  <figure class="p-3">
-   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-stack w-36 h-36"
-    viewBox="0 0 16 16"
-   >
-    <path
-     d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"
-    />
-    <path
-     d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"
-    />
-   </svg>
-  </figure>
-  <div class="card-body">
-   <h2 class="card-title">Stacks</h2>
-   <p>Stacks, Postfix, Prefix</p>
-   <div class="card-actions justify-end">
-    <button class="btn btn-warning"
-     >Coming Soon<span class="loading loading-dots loading-xs"></span></button
-    >
-   </div>
-  </div>
- </div>
+ <Card
+  title="Hash Tables"
+  description="Separate Chaining, Linear, Quadratic, and Double Probing"
+  icon={HT}
+  route="/hash_tables/linear"
+ />
+ <Card
+  title="Sorting Algorithms"
+  description="Bubble, Selection, Insertion, Bucket, Radix, Merge, Quick sorts"
+  route="/sorting_algo/bucket_sort"
+  icon={SA}
+ />
+ <Card
+  title="Trees"
+  description="Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees"
+  icon={TR}
+  route="/trees/bst"
+ />
+ <Card
+  title="Graph"
+  description="Best-First search, Depth-First search, and Dijsktra's shortest path"
+  icon={GA}
+ />
+
+ <Card title="Stacks" description="Stacks, Postfix, Prefix" icon={ST} />
+
+ <Card
+  title="Queues"
+  icon={QU}
+  description="Circular Queues, Priority Queues/Heaps"
+ />
+
+ <Card
+  title="Linked Lists"
+  description="Singly Linked List, Doubly Linked List"
+  icon={LL}
+ />
 </div>

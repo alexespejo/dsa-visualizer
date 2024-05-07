@@ -1,3 +1,4 @@
+@import url("./styles/trees.styles.css");
 @import url("./styles/hashTable.styles.css");
 
 @tailwind base;
@@ -9,4 +10,15 @@
 }
 .title-heading {
  @apply text-2xl font-bold py-4;
+}
+
+.hide-num-btn::-webkit-outer-spin-button,
+.hide-num-btn::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+
+/* Firefox */
+.hide-num-btn[type="number"] {
+ -moz-appearance: textfield;
 }
