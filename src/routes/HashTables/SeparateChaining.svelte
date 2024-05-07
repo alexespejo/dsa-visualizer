@@ -71,14 +71,16 @@
   </FormControl>
  </Controls>
  <Visualize>
-  <div class="space-y-1 p-5">
-   {#each hashingArray as item, i}
-    <div
-     class="font-bold text-xl border-2 border-neutral-content w-10 h-10 flex items-center justify-center"
-    >
-     {i}
-    </div>
-   {/each}
+  <div class="lg:w-1/2">
+   <div class="space-y-1 p-5 self-start">
+    {#each hashingArray as item, i}
+     <div
+      class="font-bold text-xl border-2 border-neutral-content w-10 h-10 flex items-center justify-center"
+     >
+      {i}
+     </div>
+    {/each}
+   </div>
   </div>
  </Visualize>
 </Layout>
