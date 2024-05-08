@@ -45,6 +45,8 @@
  let numToInsert: number;
  let numToDelete: number;
 
+ let functionType: string = "+";
+
  let hashFuncA: any;
  let hashFuncB: any;
  let funcValue: number;
@@ -165,31 +167,62 @@
    </form>
   </FormControl>
 
+  <!-- f(k) hash function -->
   <FormControl>
-   <Label>
-    f&#40;k&#41; = {!isNaN(hashFuncA) &&
-    !isNaN(hashFuncB) &&
-    hashFuncB !== "" &&
-    hashFuncA !== ""
-     ? `${hashFuncA}k + ${hashFuncB}`
-     : "k"}
-   </Label>
-   <form class="join">
-    <div class="w-36 input-warning input flex items-center">
-     <input
-      type="text"
-      placeholder="a"
-      class="w-3"
-      bind:value={hashFuncA}
-     /><span>k +</span>
-     <input
-      type="text"
-      placeholder="b"
-      class="w-5 ml-1"
-      bind:value={hashFuncB}
-     />
+   <Label>f&#40;k&#41;</Label>
+   <div class="join">
+    <div
+     class="w-28 input-warning input flex items-center justify-center join-item"
+    >
+     {#if functionType === "k"}
+      k
+     {:else if functionType === "+"}
+      <input type="text" placeholder="a" class="w-3" bind:value={hashFuncA} />
+      <span class="flex"> k + </span>
+      <input
+       type="text"
+       placeholder="b"
+       class="w-5 ml-1"
+       bind:value={hashFuncB}
+      />
+     {:else if functionType === "%"}
+      <span> k % </span>
+      <input
+       type="text"
+       placeholder="b"
+       class="w-5 ml-1"
+       bind:value={hashFuncB}
+      />
+     {/if}
     </div>
-   </form>
+    <Button
+     styles={`join-item ${functionType !== "+" ? "btn-outline" : ""}`}
+     color="warning"
+     on:click={() => {
+      functionType = "+";
+     }}
+    >
+     +
+    </Button>
+    <Button
+     styles={`join-item ${functionType !== "%" ? "btn-outline" : ""}`}
+     color="warning"
+     on:click={() => {
+      functionType = "%";
+     }}
+    >
+     %
+    </Button>
+    <Button
+     styles={`join-item ${functionType !== "k" ? "btn-outline" : ""}`}
+     color="warning"
+     on:click={() => {
+      functionType = "k";
+     }}
+    >
+     k
+    </Button>
+   </div>
   </FormControl>
 
   <!-- Insert Button -->
@@ -239,14 +272,17 @@
  <Visualize>
   <div class="text-base-content font-bold mt-5 flex flex-col">
    <span class="text-pink-300">
-    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
-    !isNaN(hashFuncB) &&
-    hashFuncB !== "" &&
-    hashFuncA !== ""
-     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
-     : "k"}
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; =
+    {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
+     {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
+    {:else if !isNaN(hashFuncB) && functionType === "%"}
+     {`${numToInsert ? numToInsert : "k"} % ${hashFuncB}`}
+    {:else}
+     k
+    {/if}
     {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
    </span>
+
    <span class="text-sky-300">
     h&#40;{numToInsert ? numToInsert : "k"}&#41; = &#40;
     {!funcValue ? "f(k)" : funcValue} + j
