@@ -1,6 +1,8 @@
 <script lang="ts">
  import { onMount } from "svelte";
  import { marker } from "../../lib/stores/treeMarker";
+ import markerDisplay from "../../lib/treeFunctions/markerDisplay";
+
  interface RecursiveNode {
   head: number;
   left: RecursiveNode | null;
@@ -23,7 +25,7 @@
 <div>
  {#if index < value1.length && value1[index] !== null}
   <span
-   class={`${value1[index] === -1 ? "opacity-0" : ""} ${nodeMarker === index ? "text-green-300" : ""}`}
+   class={`${value1[index] === -1 ? "opacity-0" : ""} ${markerDisplay(nodeMarker, index)}`}
   >
    {value1[index]}
   </span>
