@@ -23,7 +23,7 @@
 <div>
  {#if index < value1.length && value1[index] !== null}
   <span
-   class={`${value1[index] === -1 ? "opacity-0" : ""} ${nodeMarker === index ? "text-green-300" : "text-red-300"}`}
+   class={`${value1[index] === -1 ? "opacity-0" : ""} ${nodeMarker === index ? "text-green-300" : ""}`}
   >
    {value1[index]}
   </span>

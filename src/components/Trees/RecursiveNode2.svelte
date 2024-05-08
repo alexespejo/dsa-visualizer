@@ -23,7 +23,7 @@
 <div>
  {#if index < value2.length && value2[index] !== null}
   <span
-   class={`${value2[index] === -1 ? "opacity-0" : ""}${nodeMarker === index ? "text-green-300" : "text-red-300"}`}
+   class={`${value2[index] === -1 ? "opacity-0" : ""}${nodeMarker === index ? "text-green-300" : ""}`}
    >{value2[index]}</span
   >
   <RecursiveNode1 value1={value2} index={2 * index + 1} />
