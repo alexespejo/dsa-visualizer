@@ -12,9 +12,9 @@
 
 <div>
  {#if index < value1.length && value1[index] !== null}
-  <span class={`${value1[index] === -1 ? "opacity-0" : ""}`}
-   >{value1[index]}</span
-  >
+  <span class={`${value1[index] === -1 ? "opacity-0" : ""}`}>
+   {value1[index]}
+  </span>
   <RecursiveNode2 value2={value1} index={2 * index + 1} />
   <RecursiveNode2 value2={value1} index={2 * index + 2} />
  {:else}
