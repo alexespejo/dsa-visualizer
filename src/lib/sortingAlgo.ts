@@ -48,10 +48,11 @@ export function generateRandomStringArray() {
 }
 
 export function generateRandomFractions(count) {
- let fractions: number[] = [];
- for (var i = 0; i < count; i++) {
-  var randomFraction = Math.random().toFixed(2);
-  fractions.push(parseFloat(randomFraction));
- }
- return fractions;
+    let fractions: number[] = [];
+    for (var i = 0; i < count; i++) {
+        var randomFraction = (Math.random() * 0.98) + 0.01; 
+        randomFraction = parseFloat(randomFraction.toFixed(2)); 
+        fractions.push(randomFraction);
+    }
+    return fractions;
 }
