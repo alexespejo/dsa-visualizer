@@ -39,8 +39,7 @@
  <Visualize>
   <article class="binary-tree">
    <div>
-    <span class={`${nodeMarker === 0 ? "text-green-300" : "text-red-300"}`}
-     >{aTree[0]}</span
+    <span class={`${nodeMarker === 0 ? "text-green-300" : ""}`}>{aTree[0]}</span
     >
     <RecursiveNode1 value1={aTree} index={1} />
     <RecursiveNode1 value1={aTree} index={2} />
