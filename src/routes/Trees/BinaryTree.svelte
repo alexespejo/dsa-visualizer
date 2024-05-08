@@ -9,7 +9,31 @@
 
  import RecursiveNode1 from "../../components/Trees/RecursiveNode1.svelte";
 
- let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
+ function generateRandomList(capacity: number): number[] {
+  const list: number[] = [];
+  for (let i = 0; i < capacity; i++) {
+   const randomNumber = Math.floor(Math.random() * (capacity - 1)) + 2;
+   list.push(randomNumber);
+  }
+  return list;
+ }
+
+ let aTree: number[] = generateRandomList(15);
+ let traversal: number[] = [];
+ //  let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
+ function preorder() {
+  let list: number[] = [];
+  function preorderHelper(index: number) {
+   if (index >= aTree.length || aTree[index] === -1) {
+    return;
+   }
+   list.push(index);
+   preorderHelper(2 * index + 1);
+   preorderHelper(2 * index + 2);
+  }
+  preorderHelper(0);
+  traversal = list;
+ }
 
  function next() {
   marker.update((value: number) => {
@@ -30,9 +54,13 @@
 
 <Layout dataStructure="TR">
  <Controls>
+  {traversal}
   <div class="join space-x-0.5">
    <Button on:click={previous} color="secondary" styles="join-item"
     >Previous</Button
+   >
+   <Button on:click={preorder} color="accent" styles="join-item"
+    >Preorder</Button
    >
    <Button on:click={next} color="primary" styles="join-item">Next</Button>
   </div>
