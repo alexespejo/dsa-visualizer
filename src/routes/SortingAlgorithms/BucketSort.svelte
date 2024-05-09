@@ -6,6 +6,8 @@
  import { generateRandomFractions } from "../../lib/sortingAlgo";
  import FormControl from "../../components/custom/FormControl.svelte";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
 
  let arr: number[][] = [[], [], [], [], [], [], [], [], [], []];
  let insertionOrder: number[] = [];
@@ -60,11 +62,12 @@
 <FunctionVisualizerLayout dataStructure="SA">
  <Controls title="Bucket Sort">
   <FormControl>
+   <Label>Insert</Label>
    <div class="join">
     <input
      type="number"
      bind:value={insertValue}
-     class="font-bold input input-bordered input-primary w-max-w-xs w-40 join-item"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-36 join-item"
      placeholder="Enter a number..."
     />
     <button
@@ -74,11 +77,12 @@
    </div>
   </FormControl>
   <FormControl>
+   <Label>Delete</Label>
    <div class="join">
     <input
      type="number"
      bind:value={deleteValue}
-     class="font-bold input input-bordered input-secondary w-max-w-xs w-40 join-item"
+     class="font-bold input input-bordered input-secondary w-max-w-xs w-36 join-item"
      placeholder="Enter a number..."
     />
     <button
@@ -88,6 +92,7 @@
    </div>
   </FormControl>
   <FormControl>
+   <Label>Misc</Label>
    <button class="btn btn-success btn-outline" on:click={createBuckets}
     >Randomize
     <svg
@@ -111,17 +116,7 @@
  </Controls>
 
  <Visualize>
-  <div class="flex flex-wrap font-bold text-xs lg:text-sm py-3">
-   <div class="">
-    Insertion Order: &#91;
-
-    {#each insertionOrder as node, index}
-     <span class="font-bold pr-0.5">
-      {node}{index !== insertionOrder.length - 1 ? ", " : ""}
-     </span>
-    {/each} &#93;
-   </div>
-  </div>
+  <InsertionOrderDisplay {insertionOrder} />
   <div class="sm:w-1/2">
    {#each arr as i, index}
     <div class="flex flex-start">
