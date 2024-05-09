@@ -16,7 +16,7 @@
  on:change
  type="number"
  {placeholder}
- class={`input input-${color} input-${size} ${styles} input-bordered w-max-w-xs font-bold w-28`}
+ class={`input input-${color} input-${size} ${styles} input-bordered w-max-w-xs font-bold w-28 input-sm`}
  {min}
  {max}
 />

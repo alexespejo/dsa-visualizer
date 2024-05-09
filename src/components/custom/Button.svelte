@@ -5,6 +5,9 @@
  //  export let onClick: () => void = () => {};
 </script>
 
-<button class={`btn btn-${color} btn-${size} ${styles}`} on:click>
+<button
+ class={`btn btn-${color} btn-${size} ${styles} btn-outline btn-sm`}
+ on:click
+>
  <slot />
 </button>
