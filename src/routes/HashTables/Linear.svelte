@@ -171,9 +171,7 @@
   <FormControl>
    <Label>f&#40;k&#41;</Label>
    <div class="join">
-    <div
-     class="w-28 input-warning input flex items-center justify-center join-item"
-    >
+    <div class="w-28 input-warning input flex items-center join-item">
      {#if functionType === "k"}
       k
      {:else if functionType === "+"}
@@ -195,33 +193,60 @@
       />
      {/if}
     </div>
-    <Button
-     styles={`join-item ${functionType !== "+" ? "btn-outline" : ""}`}
-     color="warning"
-     on:click={() => {
-      functionType = "+";
-     }}
-    >
-     +
-    </Button>
-    <Button
-     styles={`join-item ${functionType !== "%" ? "btn-outline" : ""}`}
-     color="warning"
-     on:click={() => {
-      functionType = "%";
-     }}
-    >
-     %
-    </Button>
-    <Button
-     styles={`join-item ${functionType !== "k" ? "btn-outline" : ""}`}
-     color="warning"
-     on:click={() => {
-      functionType = "k";
-     }}
-    >
-     k
-    </Button>
+    <div class="dropdown dropdown-end btn btn-warning btn-outline join-item">
+     <div
+      tabindex="0"
+      role="button"
+      class=" w-full h-full flex flex-col items-center justify-center"
+     >
+      <div class="flex">
+       {"f(k)"}
+       <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-caret-down-fill"
+        viewBox="0 0 16 16"
+       >
+        <path
+         d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+        />
+       </svg>
+      </div>
+     </div>
+     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+     <ul
+      tabindex="0"
+      class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-28 text-warning border-[1px] border-warning join"
+     >
+      <button
+       class={`${functionType !== "%" ? "btn-outline" : ""} btn-sm`}
+       on:click={() => {
+        functionType = "%";
+       }}
+      >
+       {"k % c"}
+      </button>
+      <button
+       class={`${functionType !== "+" ? "btn-outline" : ""} btn-sm`}
+       on:click={() => {
+        functionType = "+";
+       }}
+      >
+       {"ak + b"}
+      </button>
+
+      <button
+       class={`${functionType !== "k" ? "btn-outline" : ""} btn-sm`}
+       on:click={() => {
+        functionType = "k";
+       }}
+      >
+       k
+      </button>
+     </ul>
+    </div>
    </div>
   </FormControl>
 
