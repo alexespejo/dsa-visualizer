@@ -4,7 +4,9 @@
  export let rehash: () => void;
 </script>
 
-<button class="btn btn-outline btn-success join-item" on:click={randomize}
+<button
+ class="btn btn-outline btn-success join-item btn-sm"
+ on:click={randomize}
  >Random
  <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +25,7 @@
   />
  </svg>
 </button>
-<button class="btn btn-outline btn-warning join-item" on:click={clear}>
+<button class="btn btn-outline btn-warning join-item btn-sm" on:click={clear}>
  Clear
  <svg
   xmlns="http://www.w3.org/2000/svg"
