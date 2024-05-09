@@ -35,6 +35,24 @@
   traversal = list;
  }
 
+ function animatPreorder() {
+  preorder();
+  // To stop the loop after a certain number of iterations, you can use a counter
+  let counter = 0;
+  const maxIterations = traversal.length; // for example, to stop after 5 iterations
+
+  function loopFunctionWithLimit() {
+   marker.set(traversal[counter]);
+   counter++;
+   if (counter >= maxIterations) {
+    clearInterval(intervalIdWithLimit); // Stop the loop
+    // console.log("Loop stopped after " + maxIterations + " iterations.");
+   }
+  }
+
+  // Start the loop
+  const intervalIdWithLimit = setInterval(loopFunctionWithLimit, 500);
+ }
  function next() {
   marker.update((value: number) => {
    return value + 1;
@@ -59,7 +77,7 @@
    <Button on:click={previous} color="secondary" styles="join-item"
     >Previous</Button
    >
-   <Button on:click={preorder} color="accent" styles="join-item"
+   <Button on:click={animatPreorder} color="accent" styles="join-item"
     >Preorder</Button
    >
    <Button on:click={next} color="primary" styles="join-item">Next</Button>
