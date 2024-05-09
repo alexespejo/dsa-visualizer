@@ -42,11 +42,11 @@
  </Controls>
 
  <Visualize>
-  <div class="flex space-x-0.5 w-full h-96 justify-center">
+  <div class="flex space-x-0.5 w-full h-screen justify-center">
    {#each unSortNums as num, index}
     <div
      class={`w-10  ${index === marker ? "bg-red-300" : "bg-blue-300"} ${index === i ? "bg-green-300" : "bg-blue-300"}`}
-     style="height: {num * 10}px"
+     style="height: {num + 20}rem"
     ></div>
    {/each}
   </div>
