@@ -67,7 +67,7 @@
     <input
      type="number"
      bind:value={insertValue}
-     class="font-bold input input-bordered input-primary w-max-w-xs w-36 join-item"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item"
      placeholder="Enter a number..."
     />
     <button
@@ -82,7 +82,7 @@
     <input
      type="number"
      bind:value={deleteValue}
-     class="font-bold input input-bordered input-secondary w-max-w-xs w-36 join-item"
+     class="font-bold input input-bordered input-secondary w-max-w-xs w-28 join-item"
      placeholder="Enter a number..."
     />
     <button
@@ -116,7 +116,9 @@
  </Controls>
 
  <Visualize>
-  <InsertionOrderDisplay {insertionOrder} />
+  <div class="my-5">
+   <InsertionOrderDisplay {insertionOrder} />
+  </div>
   <div class="sm:w-1/2">
    {#each arr as i, index}
     <div class="flex flex-start">
