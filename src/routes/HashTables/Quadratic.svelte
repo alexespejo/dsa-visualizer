@@ -108,7 +108,7 @@
   <FormControl>
    <Label>f&#40;k&#41;</Label>
    <div class="join">
-    <div class="w-28 input-warning input flex items-center join-item">
+    <div class="w-28 input-warning input input-sm flex items-center join-item">
      {#if functionType === "k"}
       k
      {:else if functionType === "+"}
@@ -130,7 +130,9 @@
       />
      {/if}
     </div>
-    <div class="dropdown dropdown-end btn btn-warning btn-outline join-item">
+    <div
+     class="dropdown dropdown-end btn btn-sm btn-warning btn-outline join-item"
+    >
      <div
       tabindex="0"
       role="button"
@@ -191,15 +193,10 @@
   <FormControl>
    <Label>Insert Element</Label>
    <div class="join">
-    <input
-     type="number"
-     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item"
-     bind:value={numToInsert}
-    />
-    <button
-     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
-     on:click={() => insert()}>Insert</button
-    >
+    <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
+    <Button styles="join-item" color="primary" on:click={() => insert()}>
+     Insert
+    </Button>
    </div>
   </FormControl>
 
@@ -207,15 +204,14 @@
   <FormControl>
    <Label>Delete Element</Label>
    <div class="join">
-    <input
-     type="number"
-     class="font-bold input input-secondary input-bordered w-max-w-xs w-28 join-item"
+    <NumberInput
+     color="secondary"
+     styles="join-item"
      bind:value={numToDelete}
     />
-    <button
-     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
-     on:click={() => remove()}>Delete</button
-    >
+    <Button styles="join-item" color="secondary" on:click={() => remove()}>
+     Delete
+    </Button>
    </div>
   </FormControl>
 
