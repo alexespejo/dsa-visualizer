@@ -67,11 +67,11 @@
     <input
      type="number"
      bind:value={insertValue}
-     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item"
+     class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item btn-sm"
      placeholder="Enter a number..."
     />
     <button
-     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs"
+     class="btn btn-outline btn-primary w-16 join-item w-max-w-xs btn-sm"
      on:click={insertValueIntoBuckets}>Insert</button
     >
    </div>
@@ -82,11 +82,11 @@
     <input
      type="number"
      bind:value={deleteValue}
-     class="font-bold input input-bordered input-secondary w-max-w-xs w-28 join-item"
+     class="font-bold input input-bordered input-secondary w-max-w-xs w-28 join-item btn-sm"
      placeholder="Enter a number..."
     />
     <button
-     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs"
+     class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs btn-sm"
      on:click={deleteValueFromBuckets}>Delete</button
     >
    </div>
@@ -95,7 +95,7 @@
    <Label>Misc</Label>
    <div class="join space-x-0.5">
     <button
-     class="btn btn-success btn-outline join-item"
+     class="btn btn-success btn-outline join-item btn-sm"
      on:click={createBuckets}
      >Randomize
      <svg
@@ -116,7 +116,7 @@
      </svg>
     </button>
 
-    <button class="btn btn-outline btn-error join-item">
+    <button class="btn btn-outline btn-error join-item btn-sm">
      Clear
      <svg
       xmlns="http://www.w3.org/2000/svg"
