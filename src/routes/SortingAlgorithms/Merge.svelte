@@ -3,24 +3,51 @@
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
 
+ let unSortNums = generateRandomArray(40);
  function generateRandomArray(capacity: number) {
   let array = [];
   for (let i = 0; i < capacity; i++) {
-   array.push(Math.floor(Math.random() * 100));
+   array.push(Math.floor(Math.random() * 10));
   }
   return array;
  }
 
- let unSortNums = generateRandomArray(20);
+ let marker: number = -1;
+ let i = 0;
+ function animate() {
+  function loopFunctionWithLimit() {
+   for (let j = 0; j < unSortNums.length; j++) {
+    if (unSortNums[i] < unSortNums[j]) {
+     marker = j;
+     let temp = unSortNums[j];
+     unSortNums[j] = unSortNums[i];
+     unSortNums[i] = temp;
+    }
+   }
+   i++;
+   if (i >= unSortNums.length) {
+    clearInterval(intervalIdWithLimit); // Stop the loop
+    // console.log("Loop stopped after " + maxIterations + " iterations.");
+   }
+  }
+
+  // Start the loop
+  const intervalIdWithLimit = setInterval(loopFunctionWithLimit, 100);
+ }
 </script>
 
 <Layout dataStructure="SA">
- <Controls></Controls>
+ <Controls>
+  <button class="btn" on:click={animate}>Animate</button>
+ </Controls>
 
  <Visualize>
   <div class="flex space-x-0.5 w-full h-96 justify-center">
-   {#each unSortNums as num, i}
-    <div class={`w-10 bg-blue-300`} style="height: {num * 2}px"></div>
+   {#each unSortNums as num, index}
+    <div
+     class={`w-10  ${index === marker ? "bg-red-300" : "bg-blue-300"} ${index === i ? "bg-green-300" : "bg-blue-300"}`}
+     style="height: {num * 10}px"
+    ></div>
    {/each}
   </div>
  </Visualize>
