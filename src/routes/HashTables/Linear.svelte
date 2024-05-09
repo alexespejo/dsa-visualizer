@@ -171,7 +171,7 @@
   <FormControl>
    <Label>f&#40;k&#41;</Label>
    <div class="join">
-    <div class="w-28 input-warning input flex items-center join-item">
+    <div class="w-28 input-warning input input-sm flex items-center join-item">
      {#if functionType === "k"}
       k
      {:else if functionType === "+"}
@@ -193,7 +193,9 @@
       />
      {/if}
     </div>
-    <div class="dropdown dropdown-end btn btn-warning btn-outline join-item">
+    <div
+     class="dropdown dropdown-end btn btn-warning btn-sm btn-outline join-item"
+    >
      <div
       tabindex="0"
       role="button"
