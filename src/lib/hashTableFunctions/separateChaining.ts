@@ -2,9 +2,9 @@ function insertSeparateChaining(
  table: number[][],
  data: number,
 ) {
-    let index = data % 10;
+    let index:number = data % 10;
 
-    table[index].push(data);
+    table[index] = [...table[index], data];
     return table;
 }
 
