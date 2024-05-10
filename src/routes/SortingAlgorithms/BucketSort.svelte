@@ -1,77 +1,76 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import Controls from "../../components/custom/layout/Controls.svelte";
-    import Visualize from "../../components/custom/layout/Visualize.svelte";
-    import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
-    import { generateRandomFractions } from "../../lib/sortingAlgo";
-    import FormControl from "../../components/custom/FormControl.svelte";
-    import LabelInput from "../../components/custom/Inputs/Label.svelte";
-    import Label from "../../components/custom/Inputs/Label.svelte";
-    import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
-   
-    let arr: number[][] = [[], [], [], [], [], [], [], [], [], []];
-    let insertionOrder: number[] = [];
-    let insertValue: number = 0;
-    let deleteValue: number = 0;
-   
-    function createBuckets() {
-     let res: number[][] = [[], [], [], [], [], [], [], [], [], []];
-     insertionOrder = generateRandomFractions(15);
-     let index = 0;
-     for (let i = 0; i < insertionOrder.length; i += 1) {
-      index = Math.trunc(insertionOrder[i] * 10);
-      res[index] = [...res[index], insertionOrder[i]];
-      res[index].sort();
-     }
-     arr = res;
-    }
-   
-    let arrCopy: number[][];
-   
-    function updateInsertionOrder() {
-     insertionOrder = arr.flat().sort();
-    }
-   
-    function insertValueIntoBuckets() {
-     if (insertValue >= 0 && insertValue <= 1) {
-      const bucketIndex = Math.trunc(insertValue * 10);
-      arr[bucketIndex].push(insertValue);
-      arr[bucketIndex].sort();
-      updateInsertionOrder();
-      arr = [...arr];
-      insertValue = 0;
-     }
-    }
-   
-    function deleteValueFromBuckets() {
-     if (deleteValue >= 0 && deleteValue <= 1) {
-      const bucketIndex = Math.trunc(deleteValue * 10);
-      const valueIndex = arr[bucketIndex].indexOf(deleteValue);
-      if (valueIndex !== -1) {
-       arr[bucketIndex].splice(valueIndex, 1);
-       updateInsertionOrder();
-       arr = [...arr];
-      }
-      deleteValue = 0;
-     }
-    }
-   
-    function resetArray() {
-        arr = JSON.parse(JSON.stringify(arrCopy));
-        updateInsertionOrder();
-    }
+ import { onMount } from "svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
+ import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
+ import { generateRandomFractions } from "../../lib/sortingAlgo";
+ import FormControl from "../../components/custom/FormControl.svelte";
+ import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
 
-    function clearArray() {
-        arr = [[], [], [], [], [], [], [], [], [], []];
-        updateInsertionOrder();
-    }
+ let arr: number[][] = [[], [], [], [], [], [], [], [], [], []];
+ let insertionOrder: number[] = [];
+ let insertValue: number = 0;
+ let deleteValue: number = 0;
 
-    onMount(() => {
-     createBuckets();
-     arrCopy = JSON.parse(JSON.stringify(arr));
-    });
-    
-   </script>
+ function createBuckets() {
+  let res: number[][] = [[], [], [], [], [], [], [], [], [], []];
+  insertionOrder = generateRandomFractions(15);
+  let index = 0;
+  for (let i = 0; i < insertionOrder.length; i += 1) {
+   index = Math.trunc(insertionOrder[i] * 10);
+   res[index] = [...res[index], insertionOrder[i]];
+   res[index].sort();
+  }
+  arr = res;
+ }
+
+ let arrCopy: number[][];
+
+ function updateInsertionOrder() {
+  insertionOrder = arr.flat().sort();
+ }
+
+ function insertValueIntoBuckets() {
+  if (insertValue >= 0 && insertValue <= 1) {
+   const bucketIndex = Math.trunc(insertValue * 10);
+   arr[bucketIndex].push(insertValue);
+   arr[bucketIndex].sort();
+   updateInsertionOrder();
+   arr = [...arr];
+   insertValue = 0;
+  }
+ }
+
+ function deleteValueFromBuckets() {
+  if (deleteValue >= 0 && deleteValue <= 1) {
+   const bucketIndex = Math.trunc(deleteValue * 10);
+   const valueIndex = arr[bucketIndex].indexOf(deleteValue);
+   if (valueIndex !== -1) {
+    arr[bucketIndex].splice(valueIndex, 1);
+    updateInsertionOrder();
+    arr = [...arr];
+   }
+   deleteValue = 0;
+  }
+ }
+
+ function resetArray() {
+  arr = JSON.parse(JSON.stringify(arrCopy));
+  updateInsertionOrder();
+ }
+
+ function clearArray() {
+  arr = [[], [], [], [], [], [], [], [], [], []];
+  updateInsertionOrder();
+ }
+
+ onMount(() => {
+  createBuckets();
+  arrCopy = JSON.parse(JSON.stringify(arr));
+ });
+</script>
 
 <FunctionVisualizerLayout dataStructure="SA">
  <Controls title="Bucket Sort">
@@ -129,39 +128,24 @@
       />
      </svg>
     </button>
-</FormControl>
-    <FormControl>
-        <LabelInput>Special</LabelInput>
-        <div class="join">
-        <button class="btn btn-outline btn-warning join-item btn-sm"
-        on:click={resetArray}
-        >
-        Reset
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
-          </svg>
-        </button
-        >
-        <button class="btn btn-outline btn-error join-item btn-sm"
-        on:click={clearArray}
-        >
-         Clear
-         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-eraser"
-          viewBox="0 0 16 16"
-         >
-          <path
-           d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"
-          />
-         </svg></button
-        >
-        </div>
-    </FormControl>
+
+    <button class="btn btn-outline btn-error join-item btn-sm">
+     Clear
+     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-eraser"
+      viewBox="0 0 16 16"
+     >
+      <path
+       d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"
+      />
+     </svg>
+    </button>
+   </div>
+  </FormControl>
  </Controls>
 
  <Visualize>

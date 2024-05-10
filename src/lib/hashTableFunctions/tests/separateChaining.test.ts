@@ -1,7 +1,10 @@
 // sum.test.js
 import { expect, test } from "vitest";
 import { generateRandomArray } from "../hashTable";
-import { insertSeparateChaining, removeSeparateChaining } from "../separateChaining";
+import {
+ insertSeparateChaining,
+ removeSeparateChaining,
+} from "../separateChaining";
 
 function createHashTable(valuesToInsert: number[]) {
  let table: any[][] = [];
@@ -43,9 +46,17 @@ test("Insert [50, 21, 25, 43, 7, 37]", () => {
  ]);
 });
 
-
 test("Remove: 25 [ [50],[21],[],[43],[],[25],[],[7, 37],[],[] ]", () => {
-    expect(
-     removeSeparateChaining([[50],[21],[],[43],[],[25],[],[7, 37],[],[],], 25)
-    ).toStrictEqual([[50],[21],[],[43],[],[],[],[7, 37],[],[]]);
-   });
+ expect(
+  removeSeparateChaining(
+   [[50], [21], [], [43], [], [], [], [7, 37], [], []],
+   25
+  )
+ ).toStrictEqual([[50], [21], [], [43], [], [], [], [7, 37], [], []]);
+});
+
+test("Remove: 37 [ [50],[21],[],[43],[],[25],[],[7, 37],[],[] ]", () => {
+ expect(
+  removeSeparateChaining([[50], [21], [], [43], [], [], [], [7], [], []], 37)
+ ).toStrictEqual([[50], [21], [], [43], [], [], [], [7], [], []]);
+});

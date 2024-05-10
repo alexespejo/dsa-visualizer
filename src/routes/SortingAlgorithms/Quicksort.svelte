@@ -56,7 +56,7 @@
 </script>
 
 <Layout dataStructure="SA">
- <Controls>
+ <Controls title="Quicksort">
   <Button on:click={next} color="primary">Pass</Button>
  </Controls>
 
