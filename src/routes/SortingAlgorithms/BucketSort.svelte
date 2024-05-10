@@ -1,63 +1,72 @@
 <script lang="ts">
- import { onMount } from "svelte";
- import Controls from "../../components/custom/layout/Controls.svelte";
- import Visualize from "../../components/custom/layout/Visualize.svelte";
- import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
- import { generateRandomFractions } from "../../lib/sortingAlgo";
- import FormControl from "../../components/custom/FormControl.svelte";
- import LabelInput from "../../components/custom/Inputs/Label.svelte";
- import Label from "../../components/custom/Inputs/Label.svelte";
- import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+    import { onMount } from "svelte";
+    import Controls from "../../components/custom/layout/Controls.svelte";
+    import Visualize from "../../components/custom/layout/Visualize.svelte";
+    import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
+    import { generateRandomFractions } from "../../lib/sortingAlgo";
+    import FormControl from "../../components/custom/FormControl.svelte";
+    import LabelInput from "../../components/custom/Inputs/Label.svelte";
+    import Label from "../../components/custom/Inputs/Label.svelte";
+    import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
+   
+    let arr: number[][] = [[], [], [], [], [], [], [], [], [], []];
+    let insertionOrder: number[] = [];
+    let insertValue: number = 0;
+    let deleteValue: number = 0;
+   
+    function createBuckets() {
+     let res: number[][] = [[], [], [], [], [], [], [], [], [], []];
+     insertionOrder = generateRandomFractions(15);
+     let index = 0;
+     for (let i = 0; i < insertionOrder.length; i += 1) {
+      index = Math.trunc(insertionOrder[i] * 10);
+      res[index] = [...res[index], insertionOrder[i]];
+      res[index].sort();
+     }
+     arr = res;
+    }
+   
+    let arrCopy: number[][];
+   
+    function updateInsertionOrder() {
+     insertionOrder = arr.flat().sort();
+    }
+   
+    function insertValueIntoBuckets() {
+     if (insertValue >= 0 && insertValue <= 1) {
+      const bucketIndex = Math.trunc(insertValue * 10);
+      arr[bucketIndex].push(insertValue);
+      arr[bucketIndex].sort();
+      updateInsertionOrder();
+      arr = [...arr];
+      insertValue = 0;
+     }
+    }
+   
+    function deleteValueFromBuckets() {
+     if (deleteValue >= 0 && deleteValue <= 1) {
+      const bucketIndex = Math.trunc(deleteValue * 10);
+      const valueIndex = arr[bucketIndex].indexOf(deleteValue);
+      if (valueIndex !== -1) {
+       arr[bucketIndex].splice(valueIndex, 1);
+       updateInsertionOrder();
+       arr = [...arr];
+      }
+      deleteValue = 0;
+     }
+    }
+   
+    function clearTheArrayToOriginal() {
+     arr = JSON.parse(JSON.stringify(arrCopy));
+     updateInsertionOrder();
+    }
 
- let arr: number[][] = [[], [], [], [], [], [], [], [], [], []];
- let insertionOrder: number[] = [];
- let insertValue: number = 0;
- let deleteValue: number = 0;
-
- function createBuckets() {
-  let res: number[][] = [[], [], [], [], [], [], [], [], [], []];
-  insertionOrder = generateRandomFractions(15);
-  let index = 0;
-  for (let i = 0; i < insertionOrder.length; i += 1) {
-   index = Math.trunc(insertionOrder[i] * 10);
-   res[index] = [...res[index], insertionOrder[i]];
-   res[index].sort();
-  }
-  arr = res;
- }
-
- function updateInsertionOrder() {
-  insertionOrder = arr.flat().sort();
- }
-
- function insertValueIntoBuckets() {
-  if (insertValue >= 0 && insertValue <= 1) {
-   const bucketIndex = Math.trunc(insertValue * 10);
-   arr[bucketIndex].push(insertValue);
-   arr[bucketIndex].sort();
-   updateInsertionOrder();
-   arr = [...arr];
-   insertValue = 0;
-  }
- }
-
- function deleteValueFromBuckets() {
-  if (deleteValue >= 0 && deleteValue <= 1) {
-   const bucketIndex = Math.trunc(deleteValue * 10);
-   const valueIndex = arr[bucketIndex].indexOf(deleteValue);
-   if (valueIndex !== -1) {
-    arr[bucketIndex].splice(valueIndex, 1);
-    updateInsertionOrder();
-    arr = [...arr];
-   }
-   deleteValue = 0;
-  }
- }
-
- onMount(() => {
-  createBuckets();
- });
-</script>
+    onMount(() => {
+     createBuckets();
+     arrCopy = JSON.parse(JSON.stringify(arr));
+    });
+    
+   </script>
 
 <FunctionVisualizerLayout dataStructure="SA">
  <Controls title="Bucket Sort">
@@ -116,7 +125,9 @@
      </svg>
     </button>
 
-    <button class="btn btn-outline btn-error join-item btn-sm">
+    <button class="btn btn-outline btn-error join-item btn-sm"
+    on:click={clearTheArrayToOriginal}
+    >
      Clear
      <svg
       xmlns="http://www.w3.org/2000/svg"

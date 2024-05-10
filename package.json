@@ -21,6 +21,7 @@
   "vitest": "^1.5.3"
  },
  "dependencies": {
-  "animate.css": "^4.1.1"
+  "animate.css": "^4.1.1",
+  "i": "^0.3.7"
  }
 }
