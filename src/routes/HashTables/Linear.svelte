@@ -49,6 +49,7 @@
 
  let hashFuncA: any;
  let hashFuncB: any;
+ let hashFuncC: any;
  let funcValue: number;
 
  let tempTable: number[] = [];
@@ -62,7 +63,11 @@
    hashingArray,
    numToInsert,
    stepSize === null ? 1 : stepSize,
-   capacity
+   capacity,
+   functionType,
+   parseInt(hashFuncA),
+   parseInt(hashFuncB),
+   parseInt(hashFuncC)
   );
   numToInsert = undefined;
  }
@@ -80,7 +85,16 @@
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
-   result = insertLinear(result, insertionOrder[i], stepSize, capacity);
+   result = insertLinear(
+    result,
+    insertionOrder[i],
+    stepSize,
+    capacity,
+    functionType,
+    parseInt(hashFuncA),
+    parseInt(hashFuncB),
+    parseInt(hashFuncC)
+   );
   }
   hashingArray = result;
   capacity = hashingArray.length;
@@ -187,9 +201,9 @@
       <span> k % </span>
       <input
        type="text"
-       placeholder="b"
+       placeholder="c"
        class="w-5 ml-1"
-       bind:value={hashFuncB}
+       bind:value={hashFuncC}
       />
      {/if}
     </div>
@@ -302,8 +316,8 @@
     f&#40;{numToInsert ? numToInsert : "k"}&#41; =
     {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
      {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
-    {:else if !isNaN(hashFuncB) && functionType === "%"}
-     {`${numToInsert ? numToInsert : "k"} % ${hashFuncB}`}
+    {:else if !isNaN(hashFuncC) && functionType === "%"}
+     {`${numToInsert ? numToInsert : "k"} % ${hashFuncC}`}
     {:else}
      k
     {/if}
