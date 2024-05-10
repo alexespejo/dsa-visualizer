@@ -16,6 +16,7 @@
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
  import Button from "../../components/custom/Button.svelte";
+ import { parse } from "dotenv";
 
  let hashingArray: number[] = [
   null,
@@ -42,7 +43,15 @@
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
-  hashingArray = insertQuadratic(hashingArray, numToInsert, capacity);
+  hashingArray = insertQuadratic(
+   hashingArray,
+   numToInsert,
+   capacity,
+   functionType,
+   parseInt(hashFuncA),
+   parseInt(hashFuncB),
+   parseInt(hashFuncC)
+  );
  }
 
  function remove() {
@@ -57,7 +66,15 @@
   insertionOrder = generateRandomArray(capacity);
 
   for (let i = 0; i < insertionOrder.length; i += 1) {
-   result = insertQuadratic(result, insertionOrder[i], capacity);
+   result = insertQuadratic(
+    result,
+    insertionOrder[i],
+    capacity,
+    functionType,
+    parseInt(hashFuncA),
+    parseInt(hashFuncB),
+    parseInt(hashFuncC)
+   );
   }
   hashingArray = result;
   capacity = hashingArray.length;

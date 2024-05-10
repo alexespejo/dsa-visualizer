@@ -9,10 +9,10 @@ function insertLinear(
  c: number | null = 1
 ) {
  // Since the array is preset with null values, we can check if the array is full so use this instead to check if the array is full
- let func: number = data;
  if (!table.includes(null)) {
   return table;
  }
+ let func: number = data;
  switch (fType) {
   case "k":
    func = data;
