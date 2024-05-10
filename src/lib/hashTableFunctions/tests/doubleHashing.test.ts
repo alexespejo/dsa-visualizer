@@ -56,8 +56,17 @@ test("Insert [8338, 5590, 1423, 5138, 7516, 1440, 5500, 8410, 7392, 1813]", () =
 });
 
 // ≥2 tests for removal
-test("Insert [5925, 4539, 5323, 3649, 5677, 2851, 9477, 6282, 3261]", () => {
-    expect(createHashTable([5925, 4539, 5323, 3649, 5677, 2851, 9477, 6282, 3261], 13, 7)).toStrictEqual([
-        9477, null, 4539, 5677, 2851, null, 5323, 6282, null, 3649, 5925, 3261, null
+let testTable1 = createHashTable([5925, 4539, 5323, 3649, 5677, 2851, 9477, 6282, 3261], 13, 7);
+test("remove 9477", () => {
+    expect(removeDoubleHashing(testTable1, 9477)).toStrictEqual([
+        null, null, 4539, 5677, 2851, null, 5323, 6282, null, 3649, 5925, 3261, null
+    ]);
+});
+
+
+let testTable2 = createHashTable([18, 41, 22, 44, 59, 32, 31], 13, 7);
+test("remove 44", () => {
+    expect(removeDoubleHashing(testTable2, 44)).toStrictEqual([
+        31, null, 41, null, null, 18, 32, 59, null, 22, null, null, null
     ]);
 });
