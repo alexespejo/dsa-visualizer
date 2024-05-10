@@ -1,4 +1,5 @@
 <script lang="ts">
+ import { onMount } from "svelte";
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
@@ -38,6 +39,9 @@
    hashingArray = insertSeparateChaining(hashingArray, insertionOrder[i]);
   }
  }
+ onMount(() => {
+  randomize();
+ });
 </script>
 
 <Layout dataStructure="HT">
@@ -84,6 +88,7 @@
  </Controls>
 
  <Visualize>
+  <span class="font-bold mt-3 text-sky-300"> f&#40;k&#41; = k % 10 </span>
   <InsertionOrderDisplay {insertionOrder} />
   <div class="lg:w-1/2 overflow-x-auto">
    <div class="space-y-1 p-5 self-start">
