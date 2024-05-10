@@ -100,3 +100,18 @@ test("Remove: 2 w/step-size: 3 [50, 2, 30, 57, 13, 25, 89, 3, 69]", () => {
   removeLinear([50, 69, 2, 30, null, 25, 13, 57, 3, 89], 2)
  ).toStrictEqual([50, 69, null, 30, null, 25, 13, 57, 3, 89]);
 });
+
+test("2k + 3 w/stepsize: 1 [5]", () => {
+ expect(insertLinear(Array(10).fill(null), 5, 1, 10, "+", 2, 3)).toStrictEqual([
+  null,
+  null,
+  null,
+  5,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+ ]);
+});
