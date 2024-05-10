@@ -35,8 +35,11 @@
  let capacity: number = 10;
  let hashFuncA: any;
  let hashFuncB: any;
+ let hashFuncC: any;
  let funcValue: number;
+
  let functionType: string = "+";
+
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertQuadratic(hashingArray, numToInsert, capacity);
@@ -124,9 +127,9 @@
       <span> k % </span>
       <input
        type="text"
-       placeholder="b"
+       placeholder="c"
        class="w-5 ml-1"
-       bind:value={hashFuncB}
+       bind:value={hashFuncC}
       />
      {/if}
     </div>
@@ -234,12 +237,14 @@
    <div class="flex flex-col">
     <div class="">
      <span class="text-pink-300">
-      f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
-      !isNaN(hashFuncB) &&
-      hashFuncB !== "" &&
-      hashFuncA !== ""
-       ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
-       : "k"}
+      f&#40;{numToInsert ? numToInsert : "k"}&#41; =
+      {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
+       {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
+      {:else if !isNaN(hashFuncC) && functionType === "%"}
+       {`${numToInsert ? numToInsert : "k"} % ${hashFuncC}`}
+      {:else}
+       k
+      {/if}
       {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
      </span>
     </div>
