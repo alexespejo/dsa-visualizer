@@ -3,37 +3,42 @@ import { expect, test } from "vitest";
 import { generateRandomArray } from "../hashTable";
 import { insertSeparateChaining, removeSeparateChaining } from "../separateChaining";
 
-function createHashTable(valuesToInsert: number[], capacity: number) {
- let table: any[] = [];
- table.length = capacity;
- table.fill(undefined);
+function createHashTable(valuesToInsert: number[]) {
+ let table: any[][] = [];
+ table.length = 10;
+ table.fill([]);
  for (let i = 0; i < valuesToInsert.length; i++) {
-  table = insertSeparateChaining(table, valuesToInsert[i], capacity);
+  table = insertSeparateChaining(table, valuesToInsert[i]);
  }
  return table;
 }
 
-test("Insert [1,2,3,4]", () => {
- expect(createHashTable([5, 6, 11, 7, 12, 9], 5)).toStrictEqual([
+test("Insert [5, 6, 11, 7, 12, 9, 21]", () => {
+ expect(createHashTable([5, 6, 11, 7, 12, 9, 21])).toStrictEqual([
+  [],
+  [11, 21],
+  [12],
+  [],
+  [],
   [5],
-  1,
-  2,
-  3,
-  4,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
+  [6],
+  [7],
+  [],
+  [9],
  ]);
 });
 
-test("Insert [50, 5, 25]", () => {
- expect(createHashTable([50, 5, 25], 5)).toStrictEqual([
-  50,
-  5,
-  25,
-  undefined,
-  undefined,
+test("Insert [50, 21, 25, 43, 7, 37]", () => {
+ expect(createHashTable([50, 21, 25, 43, 7, 37])).toStrictEqual([
+  [50],
+  [21],
+  [],
+  [43],
+  [],
+  [25],
+  [],
+  [7, 37],
+  [],
+  [],
  ]);
 });

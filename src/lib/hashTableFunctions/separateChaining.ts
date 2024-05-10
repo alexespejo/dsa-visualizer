@@ -1,25 +1,18 @@
 function insertSeparateChaining(
  table: number[][],
  data: number,
- capacity: number
 ) {
-    let index = data % capacity;
-
-    if (!table[index]) {
-        table[index] = [];
-    }
+    let index = data % 10;
 
     table[index].push(data);
-    console.log(table);
     return table;
 }
 
 function removeSeparateChaining(
  table: number[][],
  data: number,
- capacity: number
 ) {
-    let index = data % capacity;
+    let index = data % 10;
     let bucket = table[index];
     
     let dataIndex = bucket.indexOf(data); 
