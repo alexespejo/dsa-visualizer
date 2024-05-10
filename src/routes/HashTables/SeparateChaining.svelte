@@ -9,9 +9,9 @@
  import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
-  insertLinear,
-  removeLinear,
- } from "../../lib/hashTableFunctions/linearProbing";
+  insertSeparateChaining,
+  removeSeparateChaining,
+ } from "../../lib/hashTableFunctions/separateChaining";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
@@ -19,12 +19,13 @@
  let stepSize: number = 0;
  let numToInsert: number;
  let capacity: number = 5;
+ let numToRemove: number;
 
  function insert() {
-  //   hashingArray = insertLinear(hashingArray, numToInsert, stepSize, capacity);
+     hashingArray = insertSeparateChaining(hashingArray, numToInsert);
  }
  function remove() {
-  //   hashingArray = removeLinear(hashingArray, numToInsert);
+     hashingArray = removeSeparateChaining(hashingArray, numToRemove);
  }
 </script>
 
@@ -77,7 +78,7 @@
      <div
       class="font-bold text-xl border-2 border-neutral-content w-10 h-10 flex items-center justify-center"
      >
-      {i}
+      {item}
      </div>
     {/each}
    </div>
