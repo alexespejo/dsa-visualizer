@@ -256,7 +256,7 @@
      <span class="text-pink-300">
       f&#40;{numToInsert ? numToInsert : "k"}&#41; =
       {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
-       {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
+       {`${hashFuncA}(${numToInsert ? numToInsert : "k"}) + ${hashFuncB}`}
       {:else if !isNaN(hashFuncC) && functionType === "%"}
        {`${numToInsert ? numToInsert : "k"} % ${hashFuncC}`}
       {:else}
