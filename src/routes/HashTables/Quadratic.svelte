@@ -16,7 +16,6 @@
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
  import Button from "../../components/custom/Button.svelte";
- import { parse } from "dotenv";
 
  let hashingArray: number[] = [
   null,
