@@ -36,25 +36,26 @@
  let capacity: number = 10;
  let hashFuncA: any;
  let hashFuncB: any;
+ let hashFuncC: any;
  let funcValue: number;
  let functionType: string = "+";
+
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];
   hashingArray = insertDoubleHashing(
    hashingArray,
    numToInsert,
    secondHashConstQ,
-   capacity
+   capacity,
+   functionType,
+   parseInt(hashFuncA),
+   parseInt(hashFuncB),
+   parseInt(hashFuncC)
   );
  }
 
  function remove() {
-  hashingArray = removeDoubleHashing(
-   hashingArray,
-   numToDelete,
-   secondHashConstQ,
-   capacity
-  );
+  hashingArray = removeDoubleHashing(hashingArray, numToDelete);
  }
 
  function randomizeArray() {
@@ -122,7 +123,7 @@
        type="text"
        placeholder="b"
        class="w-5 ml-1"
-       bind:value={hashFuncB}
+       bind:value={hashFuncC}
       />
      {/if}
     </div>
@@ -247,12 +248,14 @@
     {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}
    </span>
    <span class="text-pink-300">
-    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {!isNaN(hashFuncA) &&
-    !isNaN(hashFuncB) &&
-    hashFuncB !== "" &&
-    hashFuncA !== ""
-     ? `${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`
-     : "k"}
+    f&#40;{numToInsert ? numToInsert : "k"}&#41; =
+    {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
+     {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
+    {:else if !isNaN(hashFuncC) && functionType === "%"}
+     {`${numToInsert ? numToInsert : "k"} % ${hashFuncC}`}
+    {:else}
+     k
+    {/if}
     {funcValue !== undefined && !isNaN(funcValue) ? `= ${funcValue}` : ""}
    </span>
    <span class="text-sky-300">
