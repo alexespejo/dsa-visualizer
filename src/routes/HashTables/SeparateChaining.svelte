@@ -30,11 +30,12 @@
   numToRemove = null;
  }
  function clear() {
+  insertionOrder = [];
   hashingArray = [[], [], [], [], [], [], [], [], [], []];
  }
  function randomize() {
   clear();
-  let insertionOrder = generateRandomArray(15);
+  insertionOrder = generateRandomArray(15);
   for (let i = 0; i < insertionOrder.length; i++) {
    hashingArray = insertSeparateChaining(hashingArray, insertionOrder[i]);
   }
@@ -88,10 +89,16 @@
  </Controls>
 
  <Visualize>
-  <span class="font-bold mt-3 text-sky-300"> f&#40;k&#41; = k % 10 </span>
-  <InsertionOrderDisplay {insertionOrder} />
+  <!-- <span class="font-bold mt-3 text-sky-300">
+   f&#40;{numToInsert ? numToInsert : "k"}&#41; = {numToInsert
+    ? numToInsert
+    : "k"} % 10
+  </span> -->
+  <div class="mt-2">
+   <InsertionOrderDisplay {insertionOrder} />
+  </div>
   <div class="lg:w-1/2 overflow-x-auto">
-   <div class="space-y-1 p-5 self-start">
+   <div class="self-start space-y-0.5">
     {#each hashingArray as item, i}
      <div class="flex items-center">
       <div
@@ -102,7 +109,9 @@
       <div class="flex items-center">
        {#each item as j}
         <span class="font-bold text-xs lg:text-xl px-2">&rarr;</span>
-        <div class="border-2 border-neutral-content px-2 font-bold py-0.5">
+        <div
+         class="border-2 border-neutral-content px-2 font-bold py-0.5 w-10 text-center max-w-12 overflow-hidden"
+        >
          {j}
         </div>
        {/each}
