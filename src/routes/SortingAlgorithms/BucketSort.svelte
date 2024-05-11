@@ -132,7 +132,7 @@
 </FormControl>
     <FormControl>
         <LabelInput>Special</LabelInput>
-        <div class="join">
+        <div class="join space-x-0.5">
         <button class="btn btn-outline btn-warning join-item btn-sm"
         on:click={resetArray}
         >
