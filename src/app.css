@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 :root {
- @apply transition-all;
+ @apply transition-all bg-base-100;
 }
 .title-heading {
  @apply text-2xl font-bold py-4;
