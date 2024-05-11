@@ -6,7 +6,7 @@
 
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
-
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
@@ -49,7 +49,7 @@
  <Controls title="Separate Chaining">
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
    <form class="join" on:submit|preventDefault={insert}>
     <input
      type="number"
@@ -66,7 +66,7 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
    <form class="join" on:submit|preventDefault={remove}>
     <input
      type="number"
@@ -97,8 +97,8 @@
   <div class="mt-2">
    <InsertionOrderDisplay {insertionOrder} />
   </div>
-  <div class="lg:w-1/2 overflow-x-auto flex h-fit">
-   <div class="self-start space-x-0.5 flex">
+  <div class="lg:w-1/2 overflow-x-auto flex h-fit justify-center">
+   <div class=" space-x-0.5 flex">
     {#each hashingArray as item, i}
      <div class="flex items-center flex-col">
       <div
