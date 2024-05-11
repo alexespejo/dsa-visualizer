@@ -22,3 +22,7 @@
 .hide-num-btn[type="number"] {
  -moz-appearance: textfield;
 }
+
+.group-btn {
+ @apply join space-x-0.5;
+}
