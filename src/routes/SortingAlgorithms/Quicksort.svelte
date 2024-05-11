@@ -1,118 +1,115 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import Layout from "../../layouts/Layout.svelte";
-  import Controls from "../../components/custom/layout/Controls.svelte";
-  import Visualize from "../../components/custom/layout/Visualize.svelte";
-  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
-  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
-  import Button from "../../components/custom/Button.svelte";
-  import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
-  import FormControl from "../../components/custom/FormControl.svelte";
-  import LabelInput from "../../components/custom/Inputs/Label.svelte";
-  import Label from "../../components/custom/Inputs/Label.svelte";
-  import cloneDeep from 'lodash/cloneDeep';
-
-  let unsortedList: number[] = [];
-  let unsortedListCopy: number[] = [];
-  let i: number = 1;
-  let j: number = unsortedList.length - 1;
-
-  // Pivot placeholder
-  let pivot: number = 30;
-
-  let stateStack: { unsortedList: number[], i: number, j: number }[] = [];
-  let inplaceOption: string = "Inplace1";
+    import { onMount } from 'svelte';
+    import Layout from "../../layouts/Layout.svelte";
+    import Controls from "../../components/custom/layout/Controls.svelte";
+    import Visualize from "../../components/custom/layout/Visualize.svelte";
+    import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+    import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+    import Button from "../../components/custom/Button.svelte";
+    import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
+    import FormControl from "../../components/custom/FormControl.svelte";
+    import LabelInput from "../../components/custom/Inputs/Label.svelte";
+    import Label from "../../components/custom/Inputs/Label.svelte";
   
-  function saveState() {
-    stateStack.push({ unsortedList: [...unsortedList], i, j });
-  }
-
-  function next() {
-    saveState();
-    if (inplaceOption === "Inplace1") {
-      if (i < j) {
-        if (unsortedList[i] < pivot) {
-          i += 1;
-        } else if (unsortedList[i] > pivot && unsortedList[j] > pivot) {
-          j -= 1;
-        } else {
-          let temp = unsortedList[i];
-          unsortedList[i] = unsortedList[j];
-          unsortedList[j] = temp;
-          i += 1;
-          j -= 1;
+    let unsortedList: number[] = [];
+    let unsortedListCopy: number[] = [];
+    let i: number = 1;
+    let j: number = unsortedList.length - 1;
+  
+    // Pivot placeholder
+    let pivot: number = 30;
+  
+    let stateStack: { unsortedList: number[], i: number, j: number }[] = [];
+    let inplaceOption: string = "Inplace1";
+  
+    function saveState() {
+      stateStack.push({ unsortedList: [...unsortedList], i, j });
+    }
+  
+    function next() {
+      saveState();
+      if (inplaceOption === "Inplace1") {
+        if (i < j) {
+          if (unsortedList[i] < pivot) {
+            i += 1;
+          } else if (unsortedList[i] > pivot && unsortedList[j] > pivot) {
+            j -= 1;
+          } else {
+            let temp = unsortedList[i];
+            unsortedList[i] = unsortedList[j];
+            unsortedList[j] = temp;
+            i += 1;
+            j -= 1;
+          }
         }
-      }
-    } else if (inplaceOption === "Inplace2") {
-      if (j < pivot) {
-            ++i;
-            ++j;
+      } else if (inplaceOption === "Inplace2") {
+        if (j < pivot) {
+          ++i;
+          ++j;
         } else if (j >= pivot) {
-            ++j;
+          ++j;
         }
-    }
-  }
-
-  function undo() {
-    if (stateStack.length > 0) {
-      let state = stateStack.pop();
-      unsortedList = state.unsortedList;
-      i = state.i;
-      j = state.j;
-    }
-  }
-
-  function inplaceVariable() {
-      if (inplaceOption === "Inplace1") {
-          i = 1;
-          j = unsortedList.length - 1;
-      } else if (inplaceOption === "Inplace2") {
-          i = 0;
-          j = 1;
       }
-  }
-
-  function reset() {
-      if (inplaceOption === "Inplace1") {
-          i = 1;
-          j = unsortedList.length - 1;
-      } else if (inplaceOption === "Inplace2") {
-          i = 0;
-          j = 1;
+    }
+  
+    function undo() {
+      if (stateStack.length > 0) {
+        let state = stateStack.pop();
+        unsortedList = state.unsortedList;
+        i = state.i;
+        j = state.j;
       }
-      unsortedList = cloneDeep(unsortedListCopy);
-  }
-
-  function generateRandomNumbers(length: number): number[] {
-    let numbers: number[] = [];
-
-    // Pivot
-    numbers.push(30);
-
-    for (let i = 1; i < length - 1; i++) {
+    }
+  
+    function inplaceVariable() {
+      if (inplaceOption === "Inplace1") {
+        i = 1;
+        j = unsortedList.length - 1;
+      } else if (inplaceOption === "Inplace2") {
+        i = 0;
+        j = 1;
+      }
+    }
+  
+    function reset() {
+        if (inplaceOption === "Inplace1") {
+            i = 1;
+            j = unsortedList.length - 1;
+        } else if (inplaceOption === "Inplace2") {
+            i = 0;
+            j = 1;
+        }
+        unsortedList = [...unsortedListCopy];
+    }
+  
+    function generateRandomNumbers(length: number): number[] {
+      let numbers: number[] = [];
+  
+      // Pivot
+      numbers.push(30);
+  
+      for (let i = 1; i < length - 1; i++) {
         numbers.push(Math.floor(Math.random() * 199) - 99);
-    }
-    return numbers;
-}
-
-  function randomize() {
-      unsortedList = generateRandomNumbers(10);
-      if (inplaceOption === "Inplace1") {
-          i = 1;
-          j = unsortedList.length - 1;
-      } else if (inplaceOption === "Inplace2") {
-          i = 0;
-          j = 1;
       }
-      unsortedListCopy = cloneDeep(unsortedList);
-  }
-
-  onMount(() => {
+      return numbers;
+    }
+  
+    function randomize() {
+      unsortedList = generateRandomNumbers(10);
+      unsortedListCopy = [...unsortedList];
+      if (inplaceOption === "Inplace1") {
+        i = 1;
+        j = unsortedList.length - 1;
+      } else if (inplaceOption === "Inplace2") {
+        i = 0;
+        j = 1;
+      }
+    }
+  
+    onMount(() => {
       randomize();
-      unsortedListCopy = cloneDeep(unsortedList);
-  });
-
-</script>
+    });
+  </script>
 
 <FunctionVisualizerLayout dataStructure="SA">
   <Controls title="Quick Sort">
