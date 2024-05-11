@@ -25,6 +25,7 @@
   removeLinear,
  } from "../../lib/hashTableFunctions/linearProbing";
  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
 
  let hashingArray: number[] = [
   null,
@@ -268,7 +269,7 @@
 
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
    <form on:submit|preventDefault={insert} class="join">
     <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
     <Button
@@ -282,7 +283,7 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
    <form on:submit|preventDefault={remove} class="join">
     <NumberInput
      color="secondary"
@@ -299,7 +300,7 @@
   </FormControl>
 
   <FormControl>
-   <Label>Misc</Label>
+   <HiddenLabel />
    <div class="join space-x-0.5">
     <SpecialButtons
      clear={clearTable}
