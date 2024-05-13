@@ -11,31 +11,57 @@
 
  let listOfBuckets = [];
  let intOrStringArray = false;
+ let bucket = [];
+ let subBuckets =[]
+ let indexOfPass = 0;
  let itemMarked = "";
+ 
 
  function createBuckets() {
-  let bucket = [];
-  let subBuckets = [];
-  if (intOrStringArray) {
-   bucket = generateRandomThreeDigitArray();
-   subBuckets.push([...bucket]);
-   subBuckets.push([...bucket.sort((a, b) => (a % 10) - (b % 10))]);
-   subBuckets.push([...bucket.sort((a, b) => (a % 100) - (b % 100))]);
-   subBuckets.push([...bucket.sort()]);
-   listOfBuckets = subBuckets;
-  } else {
-   bucket = generateRandomStringArray();
-   subBuckets.push([...bucket]);
-   subBuckets.push([
-    ...bucket.sort((a, b) => a.slice(-1).localeCompare(b.slice(-1))),
-   ]);
-   subBuckets.push([
-    ...bucket.sort((a, b) => a.charAt(1).localeCompare(b.charAt(1))),
-   ]);
-   subBuckets.push([...bucket.sort()]);
-   listOfBuckets = subBuckets;
-  }
+    indexOfPass = 0;
+    bucket = [];
+    subBuckets = [];
+    if (intOrStringArray) {
+    bucket = generateRandomThreeDigitArray();
+    } 
+    else {
+    bucket = generateRandomStringArray();
+    }
+    subBuckets.push([...bucket]);
+    listOfBuckets = subBuckets;
  }
+
+ function updateBuckets() {
+    subBuckets = [];
+    subBuckets.push([...bucket]);
+    if (intOrStringArray) {
+        if(indexOfPass >= 1){
+                subBuckets.push([...bucket.sort((a, b) => (a % 10) - (b % 10))]);
+        }
+        if(indexOfPass >= 2){
+                subBuckets.push([...bucket.sort((a, b) => (a % 100) - (b % 100))]);
+        }    
+        if(indexOfPass >= 3){
+                subBuckets.push([...bucket].sort());
+        }
+    } else {
+        if(indexOfPass >= 1){
+            subBuckets.push([
+                ...bucket.sort((a, b) => a.slice(-1).localeCompare(b.slice(-1))),
+            ]);
+        }
+        if(indexOfPass >= 2){
+            subBuckets.push([
+                ...bucket.sort((a, b) => a.charAt(1).localeCompare(b.charAt(1))),
+            ]);
+        }
+        if(indexOfPass >= 3){
+            subBuckets.push([...bucket].sort());
+        }
+    }
+    listOfBuckets = subBuckets;
+ }
+
 
  function markElement(key) {
   if (itemMarked === key) {
@@ -52,12 +78,33 @@
 
 <FunctionVisualizerLayout dataStructure="SA">
  <div
-  class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative"
+  class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative justify-center w-full"
  >
-  <div class="lg:absolute flex space-x-2 top-0 lg:right-0">
+  <div class="lg:absolute flex top-10">
+    <FormControl>
+        <LabelInput>Passes</LabelInput>
+        <div class="join mr-2">
+            <button class="btn join-item btn-secondary btn-outline" on:click={() => {
+                if (indexOfPass > 0) {
+                    indexOfPass--;
+                    updateBuckets();
+                }
+            }}>
+                Undo Pass
+             </button>
+             <button class="btn join-item btn-secondary btn-outline" on:click={() => {
+                if (indexOfPass < 3) {
+                    indexOfPass++;
+                    updateBuckets();
+                }
+            }}>
+                Next Pass
+             </button>
+        </div>
+    </FormControl>
    <FormControl>
     <LabelInput>Randomize</LabelInput>
-    <button class="btn btn-success btn-outline" on:click={() => createBuckets()}
+    <button class="btn btn-success btn-outline mr-2" on:click={() => createBuckets()}
      >Randomize <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -83,18 +130,20 @@
       class={`btn  join-item btn-primary ${!intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = true;
+       createBuckets()
       }}>Integer</button
      >
      <button
       class={`btn  join-item btn-primary ${intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = false;
+       createBuckets()
       }}>String</button
      >
     </div>
    </FormControl>
   </div>
-  <div class=" flex space-x-5 text-base">
+  <div class=" flex space-x-5 text-base justify-center items-center h-screen">
    {#each listOfBuckets as subBucket, index}
     <div class="bucket">
      <div class="bucket-block border-base-100">
