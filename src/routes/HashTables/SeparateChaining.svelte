@@ -6,7 +6,7 @@
 
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
-
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
@@ -41,7 +41,7 @@
   }
  }
  onMount(() => {
-  randomize();
+  // randomize();
  });
 </script>
 
@@ -49,7 +49,7 @@
  <Controls title="Separate Chaining">
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
    <form class="join" on:submit|preventDefault={insert}>
     <input
      type="number"
@@ -66,7 +66,7 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
    <form class="join" on:submit|preventDefault={remove}>
     <input
      type="number"
@@ -97,20 +97,20 @@
   <div class="mt-2">
    <InsertionOrderDisplay {insertionOrder} />
   </div>
-  <div class="lg:w-1/2 overflow-x-auto">
-   <div class="self-start space-y-0.5">
+  <div class="lg:w-1/2 overflow-x-auto flex h-fit justify-center">
+   <div class=" space-x-0.5 flex">
     {#each hashingArray as item, i}
-     <div class="flex items-center">
+     <div class="flex items-center flex-col">
       <div
        class="font-bold text-xl border-2 border-neutral-content w-10 h-10 flex items-center justify-center min-w-10 min-h-10"
       >
        {i}
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center flex-col">
        {#each item as j}
-        <span class="font-bold text-xs lg:text-xl px-2">&rarr;</span>
+        <span class="font-bold text-xs lg:text-xl px-2">&darr;</span>
         <div
-         class="border-2 border-neutral-content px-2 font-bold py-0.5 w-10 text-center max-w-12 overflow-hidden"
+         class="border-2 border-neutral-content px-2 font-bold py-0.5 w-10 h-10 text-center max-w-12 overflow-hidden flex items-center justify-center min-w-10 min-h-10"
         >
          {j}
         </div>
