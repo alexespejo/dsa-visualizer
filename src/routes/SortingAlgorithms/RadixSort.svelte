@@ -5,7 +5,7 @@
  import Visualize from "../../components/custom/layout/Visualize.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {
-  generateRandomThreeDigitArray,
+  generateRandomIntArray,
   generateRandomStringArray,
  } from "../../lib/sortingAlgo";
  import { onMount } from "svelte";
@@ -15,9 +15,10 @@
  let listOfBuckets = [];
  let intOrStringArray = false;
  let bucket = [];
- let subBuckets =[]
+ let subBuckets =[];
+ let insertValue = "";
  let indexOfPass = 0;
- let insertValue = 1;
+ let characterCount = 1;
  let itemMarked = "";
  let alphabet = "abcdefghijklmnopqrstuvwxyz";
  
@@ -27,10 +28,10 @@
     bucket = [];
     subBuckets = [];
     if (intOrStringArray) {
-    bucket = generateRandomThreeDigitArray(insertValue);
+    bucket = generateRandomIntArray(characterCount);
     } 
     else {
-    bucket = generateRandomStringArray(insertValue);
+    bucket = generateRandomStringArray(characterCount);
     }
     subBuckets.push([...bucket]);
     listOfBuckets = subBuckets;
@@ -83,7 +84,7 @@
                 Undo Pass
              </button>
              <button class="btn join-item btn-primary btn-outline" on:click={() => {
-                if (indexOfPass < insertValue) {
+                if (indexOfPass < characterCount) {
                     indexOfPass++;
                     updateBuckets();
                 }
@@ -93,22 +94,47 @@
         </div>
     </FormControl>
     <FormControl>
+        <LabelInput>Insert</LabelInput>
+        <div class="join">
+            <input
+            type="string"
+            class="font-bold input input-bordered join-item input-primary"
+            maxlength = {characterCount}
+            bind:value={(insertValue)}
+            />
+            <button class="btn btn-primary btn-outline join-item" on:click={() => {
+                if (intOrStringArray && !isNaN(Number(insertValue))) {
+                    bucket.push(parseInt(insertValue));
+                }
+                else if(!intOrStringArray && !/\d/.test(insertValue)){
+                    bucket.push(insertValue.toUpperCase());
+                }
+                else{
+                    bucket.push("-");
+                }
+                updateBuckets();
+            }}>
+                Insert
+            </button>
+        </div>
+    </FormControl>
+    <FormControl>
         <LabelInput>Character Count</LabelInput>
         <div class="join">
             <input
             type="number"
             class="font-bold input input-bordered join-item input-success"
-            bind:value={insertValue}
+            bind:value={characterCount}
             placeholder="Maximum: 6"
             on:input={() => {
-                if (insertValue > 6) {
-                    insertValue = 6;
+                if (characterCount > 6) {
+                    characterCount = 6;
                 }
             }}
             />
             <button class="btn btn-success btn-outline join-item"
                 on:click={() => {
-                    createBuckets()
+                    createBuckets();;
                 }}>
                 Update
             </button>
@@ -142,14 +168,14 @@
       class={`btn  join-item btn-primary ${!intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = true;
-       createBuckets()
+       createBuckets();
       }}>Integer</button
      >
      <button
       class={`btn  join-item btn-primary ${intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = false;
-       createBuckets()
+       createBuckets();
       }}>String</button
      >
     </div>
@@ -163,9 +189,9 @@
           {#if index === 0}
            Original
            {:else if index >= 1}
-           <span>{alphabet.slice(0, insertValue - index)}</span>
-           <span class="text-info">{alphabet.slice(insertValue - index, insertValue - index + 1)}</span>
-           <span>{alphabet.slice((insertValue-index)+1, insertValue)}</span>
+           <span>{alphabet.slice(0, characterCount - index)}</span>
+           <span class="text-info">{alphabet.slice(characterCount - index, characterCount - index + 1)}</span>
+           <span>{alphabet.slice((characterCount-index)+1, characterCount)}</span>
           {/if}
          </div>
          {#each subBucket as item}

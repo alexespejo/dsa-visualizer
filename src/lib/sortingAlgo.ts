@@ -1,4 +1,4 @@
-export function generateRandomThreeDigitArray(length) {
+export function generateRandomIntArray(length) {
  let randomArray: number[] = [];
  let generatedNumbers = {}; // Object to keep track of generated numbers
 
