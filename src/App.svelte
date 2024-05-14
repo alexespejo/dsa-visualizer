@@ -19,7 +19,7 @@
  //  import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
 
- import Kevin from "./routes/Playgrounds/🍆.svelte";
+ import Kevin from "./routes/Playgrounds/Kevin.svelte";
  import Katrina from "./routes/Playgrounds/Hurricane.svelte";
  import Ayushmaan from "./routes/Playgrounds/Ayushman.svelte";
  import Pantea from "./routes/Playgrounds/Panera.svelte";
