@@ -1,6 +1,8 @@
 <script>
  import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
+ import Controls from "../../components/custom/layout/Controls.svelte";
+ import Visualize from "../../components/custom/layout/Visualize.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {
   generateRandomThreeDigitArray,
@@ -8,6 +10,7 @@
  } from "../../lib/sortingAlgo";
  import { onMount } from "svelte";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
+  import Layout from "../../layouts/Layout.svelte";
 
  let listOfBuckets = [];
  let intOrStringArray = false;
@@ -36,10 +39,10 @@
     subBuckets.push([...bucket]);
     if (intOrStringArray) {
         if(indexOfPass >= 1){
-                subBuckets.push([...bucket.sort((a, b) => (a % 10) - (b % 10))]);
+                subBuckets.push([...bucket].sort((a, b) => (a % 10) - (b % 10)));
         }
         if(indexOfPass >= 2){
-                subBuckets.push([...bucket.sort((a, b) => (a % 100) - (b % 100))]);
+                subBuckets.push([...bucket].sort((a, b) => (a % 100) - (b % 100)));
         }    
         if(indexOfPass >= 3){
                 subBuckets.push([...bucket].sort());
@@ -47,13 +50,13 @@
     } else {
         if(indexOfPass >= 1){
             subBuckets.push([
-                ...bucket.sort((a, b) => a.slice(-1).localeCompare(b.slice(-1))),
-            ]);
+                ...bucket].sort((a, b) => a.slice(-1).localeCompare(b.slice(-1))),
+            );
         }
         if(indexOfPass >= 2){
             subBuckets.push([
-                ...bucket.sort((a, b) => a.charAt(1).localeCompare(b.charAt(1))),
-            ]);
+                ...bucket].sort((a, b) => a.charAt(1).localeCompare(b.charAt(1))),
+            );
         }
         if(indexOfPass >= 3){
             subBuckets.push([...bucket].sort());
@@ -76,11 +79,8 @@
  });
 </script>
 
-<FunctionVisualizerLayout dataStructure="SA">
- <div
-  class=" p-3 flex flex-col space-y-2 lg:flex-row sm:space-y-0 sm:space-x-2 relative justify-center w-full"
- >
-  <div class="lg:absolute flex top-10">
+<Layout dataStructure="SA">
+  <Controls>
     <FormControl>
         <LabelInput>Passes</LabelInput>
         <div class="join mr-2">
@@ -142,32 +142,32 @@
      >
     </div>
    </FormControl>
-  </div>
-  <div class=" flex space-x-5 text-base justify-center items-center h-screen">
-   {#each listOfBuckets as subBucket, index}
-    <div class="bucket">
-     <div class="bucket-block border-base-100">
-      {#if index === 0}
-       Original
-      {:else if index === 1}
-       ab<span class=" text-info">c</span>
-      {:else if index === 2}
-       a<span class=" text-info">b</span>c
-      {:else if index === 3}
-       <span class=" text-info">a</span>bc
-      {/if}
-     </div>
-
-     {#each subBucket as item}
-      <MarkedElements mark={itemMarked === item} func={() => markElement(item)}>
-       {item}
-      </MarkedElements>
-     {/each}
-    </div>
-   {/each}
-  </div>
- </div>
-</FunctionVisualizerLayout>
+</Controls>
+  <Visualize>
+      <div class=" flex space-x-5 text-base">
+       {#each listOfBuckets as subBucket, index}
+        <div class="bucket">
+         <div class="bucket-block border-base-100">
+          {#if index === 0}
+           Original
+          {:else if index === 1}
+           ab<span class=" text-info">c</span>
+          {:else if index === 2}
+           a<span class=" text-info">b</span>c
+          {:else if index === 3}
+           <span class=" text-info">a</span>bc
+          {/if}
+         </div>
+         {#each subBucket as item}
+          <MarkedElements mark={itemMarked === item} func={() => markElement(item)}>
+           {item}
+          </MarkedElements>
+         {/each}
+        </div>
+       {/each}
+      </div>
+  </Visualize>
+</Layout>
 
 <style>
  .bucket {
