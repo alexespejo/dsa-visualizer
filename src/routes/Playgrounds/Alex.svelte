@@ -61,5 +61,32 @@
 
 <FormControl>
  <Label>Range Input {rangeValue}</Label>
- <Range bind:value={rangeValue} step={10} min={10} max={90} />
+ <div class="space-y-2 join join-vertical">
+  <Range
+   bind:value={rangeValue}
+   step={10}
+   min={10}
+   max={90}
+   color="range-sky"
+  />
+  <Range
+   bind:value={rangeValue}
+   step={10}
+   min={10}
+   max={90}
+   color="range-emerald"
+  />
+  <Range
+   bind:value={rangeValue}
+   step={10}
+   min={10}
+   max={90}
+   color="range-amber"
+  />
+ </div>
+</FormControl>
+
+<FormControl>
+ <Label>Range With Tick Marks</Label>
+ <Range step={10} color="range-purple" markings={true} />
 </FormControl>
