@@ -18,6 +18,13 @@
  import BTree from "./routes/Trees/BTree.svelte";
  //  import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
+
+ import Kevin from "./routes/Playgrounds/🍆.svelte";
+ import Katrina from "./routes/Playgrounds/Hurricane.svelte";
+ import Ayushmaan from "./routes/Playgrounds/Ayushman.svelte";
+ import Pantea from "./routes/Playgrounds/Panera.svelte";
+ import Sebas from "./routes/Playgrounds/Seabass.svelte";
+ import Alex from "./routes/Playgrounds/Alex.svelte";
  export let url = "";
 </script>
 
@@ -42,6 +49,13 @@
    <Route path="/trees/avl" component={AVL} />
    <Route path="/trees/rbt" component={RBT} />
    <Route path="/trees/b_tree" component={BTree} />
+
+   <Route path="/kevin" component={Kevin} />
+   <Route path="/alex" component={Alex} />
+   <Route path="/katrina" component={Katrina} />
+   <Route path="/ayushmaan" component={Ayushmaan} />
+   <Route path="/pantea" component={Pantea} />
+   <Route path="/sebas" component={Sebas} />
   </div>
  </Router>
 </main>
