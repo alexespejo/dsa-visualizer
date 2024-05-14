@@ -26,11 +26,17 @@
  .btn-purple-outline {
   @apply btn bg-base-100 btn-outline border-purple-300 text-purple-300 hover:bg-purple-300/90 hover:border-purple-300;
  }
- .btn-lime {
-  @apply btn text-neutral bg-lime-300 hover:bg-lime-300/90 hover:border-lime-300;
+ .btn-emerald {
+  @apply btn text-neutral bg-emerald-300 hover:bg-emerald-300/90 hover:border-emerald-300;
  }
- .btn-lime-outline {
-  @apply btn bg-base-100 btn-outline border-lime-300 text-lime-300 hover:bg-lime-300/90 hover:border-lime-300;
+ .btn-emerald-outline {
+  @apply btn bg-base-100 btn-outline border-emerald-300 text-emerald-300 hover:bg-emerald-300/90 hover:border-emerald-300;
+ }
+ .btn-teal {
+  @apply btn text-neutral bg-teal-300 hover:bg-teal-300/90 hover:border-teal-300;
+ }
+ .btn-teal-outline {
+  @apply btn bg-base-100 btn-outline border-teal-300 text-teal-300 hover:bg-teal-300/90 hover:border-teal-300;
  }
  .btn-indigo {
   @apply btn text-neutral bg-indigo-300 hover:bg-indigo-300/90 hover:border-indigo-300;
