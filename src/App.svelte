@@ -16,7 +16,7 @@
  import AVL from "./routes/Trees/AVL.svelte";
  import RBT from "./routes/Trees/RBT.svelte";
  import BTree from "./routes/Trees/BTree.svelte";
- import Playground from "./routes/Playground.svelte";
+ //  import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
 
  import Kevin from "./routes/Playgrounds/Kevin.svelte";
@@ -32,7 +32,7 @@
  <Router {url}>
   <div class="">
    <Route path="/" component={Home} />
-   <Route path="/playground" component={Playground} />
+   <!-- <Route path="/playground" component={Playground} /> -->
    <Route path="/hash_tables/separate_chaining" component={SeparateChaining} />
    <Route path="/hash_tables/linear" component={Linear} />
    <Route path="/hash_tables/quadratic" component={Quadratic} />
