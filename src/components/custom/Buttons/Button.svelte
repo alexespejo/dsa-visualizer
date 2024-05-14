@@ -32,4 +32,10 @@
  .btn-lime-outline {
   @apply btn bg-base-100 btn-outline border-lime-300 text-lime-300 hover:bg-lime-300/90 hover:border-lime-300;
  }
+ .btn-indigo {
+  @apply btn text-neutral bg-indigo-300 hover:bg-indigo-300/90 hover:border-indigo-300;
+ }
+ .btn-indigo-outline {
+  @apply btn bg-base-100 btn-outline border-indigo-200 text-indigo-200 hover:bg-indigo-200/90 hover:border-indigo-200;
+ }
 </style>
