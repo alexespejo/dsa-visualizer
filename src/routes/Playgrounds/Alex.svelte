@@ -6,6 +6,7 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
+ import Range from "../../components/custom/Update/Range.svelte";
 
  let value = "";
  let rangeValue = 25;
@@ -60,19 +61,5 @@
 
 <FormControl>
  <Label>Range Input {rangeValue}</Label>
- <input
-  type="range"
-  bind:value={rangeValue}
-  min="0"
-  max="100"
-  class="range range-xs range-primary w-36"
-  step="25"
- />
- <div class="w-36 flex justify-between text-xs px-2">
-  <span>|</span>
-  <span>|</span>
-  <span>|</span>
-  <span>|</span>
-  <span>|</span>
- </div>
+ <Range bind:value={rangeValue} step={10} min={10} max={90} />
 </FormControl>
