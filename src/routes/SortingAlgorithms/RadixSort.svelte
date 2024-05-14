@@ -178,7 +178,7 @@
    <div class="join">
     <NumberInput
      color="success"
-     styles="font-bold input input-bordered join-item"
+     styles="font-bold input input-bordered join-item input-success"
      bind:value={characterCount}
      placeholder="Maximum: 6"
      on:input={() => {
