@@ -12,5 +12,5 @@
  type="text"
  {placeholder}
  maxlength = {maxLength}
- class={`input input-${color} input-${sz} w-36 ${styles} input-bordered w-max-w-xs font-bold`}
+ class={`input input-${color} input-${sz} w-28 ${styles} input-bordered w-max-w-xs font-bold`}
 />
