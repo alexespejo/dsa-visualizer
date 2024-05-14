@@ -4,6 +4,6 @@
  export let color: string = "";
 </script>
 
-<button on:click class={`btn ${color} ${color}-outline`}>
+<button on:click class={`btn ${color}`}>
  {label}
 </button>
