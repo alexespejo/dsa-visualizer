@@ -1,5 +1,5 @@
 <script lang="ts">
- export let value: number;
+ export let value: number = null;
  export let color: string;
  export let size: string = "";
  export let styles: string = "";
