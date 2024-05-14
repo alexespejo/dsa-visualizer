@@ -5,6 +5,9 @@
  export let classList: string = "";
 </script>
 
-<button on:click class={`btn btn-sm max-w-sm join-item ${color} ${classList}`}>
+<button
+ on:click
+ class={`btn btn-sm max-w-sm min-w-sm join-item ${color} ${classList}`}
+>
  {label}
 </button>

@@ -1,6 +1,8 @@
 <script>
  import Input from "../../components/custom/Update/Input.svelte";
  import Button from "../../components/custom/Update/Button.svelte";
+ import FormTrigger from "../../components/custom/layout/FormTrigger.svelte";
+ import Join from "../../components/custom/layout/Join.svelte";
  let value = "";
 </script>
 
@@ -17,8 +19,14 @@
   <Button label="Sky Button" color="btn-sky-outline" />
  </div>
 
- <Input placeholder="type..." bind:value color="input-emerald" />
- <Input placeholder="type..." bind:value color="input-purple" />
- <Input placeholder="type..." bind:value color="input-indigo" />
- <Input placeholder="type..." bind:value color="input-teal" />
+ <FormTrigger onTrigger={() => alert("breh")}>
+  <Input placeholder="type..." bind:value color="input-emerald" />
+  <Button label="Emerald Button" color="btn-emerald-outline" />
+ </FormTrigger>
+
+ <Join>
+  <Button label="Button" color="btn-indigo-outline" />
+  <Button label="Button" color="btn-purple-outline" />
+  <Button label="Button" color="btn-teal-outline" />
+ </Join>
 </div>
