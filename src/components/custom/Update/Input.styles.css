@@ -1,0 +1,18 @@
+.input-amber {
+ @apply border-amber-300 bg-base-100 focus:border-amber-300 focus-within:outline-amber-300;
+}
+.input-purple {
+ @apply border-purple-300 bg-base-100 focus:border-purple-300 focus-within:outline-purple-300;
+}
+.input-indigo {
+ @apply border-indigo-300 bg-base-100 focus:border-indigo-300 focus-within:outline-indigo-300;
+}
+.input-emerald {
+ @apply border-emerald-300 bg-base-100 focus:border-emerald-300 focus-within:outline-emerald-300;
+}
+.input-sky {
+ @apply border-sky-300 bg-base-100 focus:border-sky-300 focus-within:outline-sky-300;
+}
+.input-teal {
+ @apply border-teal-300 bg-base-100 focus:border-teal-300 focus-within:outline-teal-300;
+}
