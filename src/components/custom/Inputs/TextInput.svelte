@@ -4,11 +4,13 @@
  export let sz: string = "";
  export let styles: string = "";
  export let placeholder: string = "";
+ export let maxLength: number = 1;
 </script>
 
 <input
  bind:value
  type="text"
  {placeholder}
+ maxlength = {maxLength}
  class={`input input-${color} input-${sz} w-36 ${styles} input-bordered w-max-w-xs font-bold`}
 />

@@ -3,6 +3,7 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
+ import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import MarkedElements from "../../components/SortingAlgoControls/BucketSortControls/MarkedElements.svelte";
  import {
   generateRandomIntArray,
@@ -11,6 +12,8 @@
  import { onMount } from "svelte";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
   import Layout from "../../layouts/Layout.svelte";
+  import Button from "../../components/custom/Button.svelte";
+  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
 
  let listOfBuckets = [];
  let intOrStringArray = false;
@@ -75,34 +78,34 @@
     <FormControl>
         <LabelInput>Passes</LabelInput>
         <div class="join">
-            <button class="btn join-item btn-secondary btn-outline" on:click={() => {
+            <Button color="secondary" styles="btn join-item btn-outline" on:click={() => {
                 if (indexOfPass > 0) {
                     indexOfPass--;
                     updateBuckets();
                 }
             }}>
                 Undo Pass
-             </button>
-             <button class="btn join-item btn-primary btn-outline" on:click={() => {
+             </Button>
+             <Button color="primary" styles="btn join-item btn-outline" on:click={() => {
                 if (indexOfPass < characterCount) {
                     indexOfPass++;
                     updateBuckets();
                 }
             }}>
                 Next Pass
-             </button>
+             </Button>
         </div>
     </FormControl>
     <FormControl>
         <LabelInput>Insert</LabelInput>
         <div class="join">
-            <input
-            type="string"
-            class="font-bold input input-bordered join-item input-primary"
-            maxlength = {characterCount}
+            <TextInput
+            color="primary"
+            styles="font-bold input input-outline w-16 join-item w-max-w-xs input-sm"
+            maxLength = {characterCount}
             bind:value={(insertValue)}
             />
-            <button class="btn btn-primary btn-outline join-item" on:click={() => {
+            <Button color="primary" styles="btn btn-primary btn-outline join-item" on:click={() => {
                 if (intOrStringArray && !isNaN(Number(insertValue))) {
                     bucket.push(parseInt(insertValue));
                 }
@@ -115,15 +118,15 @@
                 updateBuckets();
             }}>
                 Insert
-            </button>
+            </Button>
         </div>
     </FormControl>
     <FormControl>
         <LabelInput>Character Count</LabelInput>
         <div class="join">
-            <input
-            type="number"
-            class="font-bold input input-bordered join-item input-success"
+            <NumberInput
+            color = "success"
+            styles="font-bold input input-bordered join-item"
             bind:value={characterCount}
             placeholder="Maximum: 6"
             on:input={() => {
@@ -132,37 +135,39 @@
                 }
             }}
             />
-            <button class="btn btn-success btn-outline join-item"
+            <Button color="success" styles="btn btn-outline join-item"
                 on:click={() => {
                     createBuckets();;
                 }}>
                 Update
-            </button>
+            </Button>
         </div>
     </FormControl>
    <FormControl>
     <LabelInput>Type</LabelInput>
     <div class="join">
-     <button
-      class={`btn  join-item btn-primary ${!intOrStringArray ? "btn-outline" : ""}`}
+     <Button
+     color="primary"
+      styles={`btn  join-item ${!intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = true;
        createBuckets();
-      }}>Integer</button
+      }}>Integer</Button
      >
-     <button
-      class={`btn  join-item btn-primary ${intOrStringArray ? "btn-outline" : ""}`}
+     <Button
+      color = "primary"
+      styles={`btn  join-item ${intOrStringArray ? "btn-outline" : ""}`}
       on:click={() => {
        intOrStringArray = false;
        createBuckets();
-      }}>String</button
+      }}>String</Button
      >
     </div>
    </FormControl>
    <FormControl>
     <LabelInput>Randomize</LabelInput>
     <div class="join">
-        <button class="btn btn-accent btn-outline join-item mr-2" on:click={() => createBuckets()}
+        <Button color = "accent" styles="btn btn-outline join-item mr-2" on:click={() => createBuckets()}
          >Randomize <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -178,8 +183,8 @@
           <path
            d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"
           />
-         </svg></button>
-         <button class="btn btn-accent btn-outline join-item"  on:click={() => {
+         </svg></Button>
+         <Button color = "accent" styles="btn btn-outline join-item"  on:click={() => {
             for (let i = bucket.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [bucket[i], bucket[j]] = [bucket[j], bucket[i]];
@@ -187,7 +192,7 @@
             updateBuckets();
            }}>
             Shuffle
-         </button>
+         </Button>
     </div>
    </FormControl>
 </Controls>
