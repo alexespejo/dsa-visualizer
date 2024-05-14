@@ -1,4 +1,5 @@
 <script lang="ts">
+ import "./Range.styles.css";
  export let value: number = null;
  export let min: number = 0;
  export let max: number = 100;
@@ -23,24 +24,3 @@
   {/each}
  </div>
 {/if}
-
-<style>
- .range-sky {
-  --range-shdw: #7fd4fc;
- }
- .range-emerald {
-  --range-shdw: #6ee7b7;
- }
- .range-teal {
-  --range-shdw: #5eead4;
- }
- .range-purple {
-  --range-shdw: #d8b4fe;
- }
- .range-indigo {
-  --range-shdw: #a5b4fc;
- }
- .range-amber {
-  --range-shdw: #fcd34d;
- }
-</style>
