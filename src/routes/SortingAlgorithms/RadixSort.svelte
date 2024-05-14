@@ -17,7 +17,9 @@
  let bucket = [];
  let subBuckets =[]
  let indexOfPass = 0;
+ let insertValue = 1;
  let itemMarked = "";
+ let alphabet = "abcdefghijklmnopqrstuvwxyz";
  
 
  function createBuckets() {
@@ -25,10 +27,10 @@
     bucket = [];
     subBuckets = [];
     if (intOrStringArray) {
-    bucket = generateRandomThreeDigitArray();
+    bucket = generateRandomThreeDigitArray(insertValue);
     } 
     else {
-    bucket = generateRandomStringArray();
+    bucket = generateRandomStringArray(insertValue);
     }
     subBuckets.push([...bucket]);
     listOfBuckets = subBuckets;
@@ -38,32 +40,20 @@
     subBuckets = [];
     subBuckets.push([...bucket]);
     if (intOrStringArray) {
-        if(indexOfPass >= 1){
-                subBuckets.push([...bucket].sort((a, b) => (a % 10) - (b % 10)));
-        }
-        if(indexOfPass >= 2){
-                subBuckets.push([...bucket].sort((a, b) => (a % 100) - (b % 100)));
-        }    
-        if(indexOfPass >= 3){
-                subBuckets.push([...bucket].sort());
+        for (let i = 1; i <= indexOfPass; i++) {
+            subBuckets.push([...bucket].sort((a, b) => {
+                return Math.floor((a % Math.pow(10, i)) / Math.pow(10, i - 1)) - Math.floor((b % Math.pow(10, i)) / Math.pow(10, i - 1));
+            }));
         }
     } else {
-        if(indexOfPass >= 1){
-            subBuckets.push([
-                ...bucket].sort((a, b) => a.slice(-1).localeCompare(b.slice(-1))),
-            );
-        }
-        if(indexOfPass >= 2){
-            subBuckets.push([
-                ...bucket].sort((a, b) => a.charAt(1).localeCompare(b.charAt(1))),
-            );
-        }
-        if(indexOfPass >= 3){
-            subBuckets.push([...bucket].sort());
+        for (let i = 1; i <= indexOfPass; i++) {
+            subBuckets.push([...bucket].sort((a, b) => {
+                return a.slice(-i).localeCompare(b.slice(-i));
+            }));
         }
     }
     listOfBuckets = subBuckets;
- }
+}
 
 
  function markElement(key) {
@@ -92,8 +82,8 @@
             }}>
                 Undo Pass
              </button>
-             <button class="btn join-item btn-secondary btn-outline" on:click={() => {
-                if (indexOfPass < 3) {
+             <button class="btn join-item btn-primary btn-outline" on:click={() => {
+                if (indexOfPass < insertValue) {
                     indexOfPass++;
                     updateBuckets();
                 }
@@ -102,9 +92,31 @@
              </button>
         </div>
     </FormControl>
+    <FormControl>
+        <LabelInput>Character Count</LabelInput>
+        <div class="join">
+            <input
+            type="number"
+            class="font-bold input input-bordered join-item input-success"
+            bind:value={insertValue}
+            placeholder="Maximum: 6"
+            on:input={() => {
+                if (insertValue > 6) {
+                    insertValue = 6;
+                }
+            }}
+            />
+            <button class="btn btn-success btn-outline join-item"
+                on:click={() => {
+                    createBuckets()
+                }}>
+                Update
+            </button>
+        </div>
+    </FormControl>
    <FormControl>
     <LabelInput>Randomize</LabelInput>
-    <button class="btn btn-success btn-outline mr-2" on:click={() => createBuckets()}
+    <button class="btn btn-success btn-outline ml-4 mr-2" on:click={() => createBuckets()}
      >Randomize <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -124,7 +136,7 @@
     >
    </FormControl>
    <FormControl>
-    <LabelInput>Insert</LabelInput>
+    <LabelInput>Type</LabelInput>
     <div class="join">
      <button
       class={`btn  join-item btn-primary ${!intOrStringArray ? "btn-outline" : ""}`}
@@ -150,12 +162,10 @@
          <div class="bucket-block border-base-100">
           {#if index === 0}
            Original
-          {:else if index === 1}
-           ab<span class=" text-info">c</span>
-          {:else if index === 2}
-           a<span class=" text-info">b</span>c
-          {:else if index === 3}
-           <span class=" text-info">a</span>bc
+           {:else if index >= 1}
+           <span>{alphabet.slice(0, insertValue - index)}</span>
+           <span class="text-info">{alphabet.slice(insertValue - index, insertValue - index + 1)}</span>
+           <span>{alphabet.slice((insertValue-index)+1, insertValue)}</span>
           {/if}
          </div>
          {#each subBucket as item}

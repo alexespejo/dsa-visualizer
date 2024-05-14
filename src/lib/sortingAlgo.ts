@@ -1,26 +1,35 @@
-export function generateRandomThreeDigitArray() {
+export function generateRandomThreeDigitArray(length) {
  let randomArray: number[] = [];
  let generatedNumbers = {}; // Object to keep track of generated numbers
 
  // Function to generate a random 3-digit number
- function generateRandomNumber() {
-  return Math.floor(Math.random() * 900) + 100; // Generates a number between 100 and 999
- }
+ function generateRandomNumber(length) {
+    if (length <= 0) {
+      throw new Error("Length must be greater than 0");
+    }
+    if (length === 1) {
+      return Math.floor(Math.random() * 9) + 1; // Generates a number between 1 and 9 for single digit
+    }
+    const min = Math.pow(10, length - 1);
+    const max = Math.pow(10, length) - 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
  // Generate unique 3-digit numbers until the array length is 10
- while (randomArray.length < 7) {
-  let randomNumber = generateRandomNumber();
-  if (!generatedNumbers[randomNumber]) {
-   // Check if the number is not already generated
-   generatedNumbers[randomNumber] = true;
-   randomArray.push(randomNumber);
+ for (let i = 0; i < 7; i++) {
+    let randomNumber = generateRandomNumber(length);
+    while (generatedNumbers[randomNumber]) {
+      // Regenerate if the number is already generated
+      randomNumber = generateRandomNumber(length);
+    }
+    generatedNumbers[randomNumber] = true;
+    randomArray.push(randomNumber);
   }
- }
 
  return randomArray;
 }
 
-export function generateRandomStringArray() {
+export function generateRandomStringArray(length) {
  let randomArray: string[] = [];
  let generatedStrings = {}; // Object to keep track of generated strings
 
@@ -28,7 +37,7 @@ export function generateRandomStringArray() {
  function generateRandomString() {
   let characters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let result: string = "";
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < length; i++) {
    result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
