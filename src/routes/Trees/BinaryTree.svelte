@@ -1,5 +1,6 @@
 <script lang="ts">
  import { marker } from "../../lib/stores/treeMarker";
+ import buildTree from "../../lib/treeFunctions/treeHelpers";
  import markerDisplay from "../../lib/treeFunctions/markerDisplay";
 
  import Button from "../../components/custom/Button.svelte";
@@ -18,7 +19,12 @@
   return list;
  }
 
- let aTree: number[] = generateRandomList(15);
+ let aTree: number[] = [
+  4, 44, 85, 84, 56, 25, 69, -1, -1, 38, -1, -1, -1, 27, 56,
+ ];
+ function createTree() {
+  aTree = buildTree(aTree, 3);
+ }
  let traversal: number[] = [];
  //  let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
  function preorder() {
@@ -77,8 +83,8 @@
    <Button on:click={previous} color="secondary" styles="join-item"
     >Previous</Button
    >
-   <Button on:click={animatPreorder} color="accent" styles="join-item"
-    >Preorder</Button
+   <Button on:click={createTree} color="accent" styles="join-item"
+    >Random</Button
    >
    <Button on:click={next} color="primary" styles="join-item">Next</Button>
   </div>
