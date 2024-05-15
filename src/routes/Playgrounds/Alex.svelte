@@ -10,6 +10,7 @@
 
  let value = "";
  let rangeValue = 25;
+ let toggleValue = false;
 </script>
 
 <FormControl>
@@ -89,4 +90,15 @@
 <FormControl>
  <Label>Range With Tick Marks</Label>
  <Range step={10} color="range-purple" markings={true} />
+</FormControl>
+
+<FormControl>
+ <label class="cursor-pointer label justify-normal space-x-2 max-w-48">
+  <span class="label-text">Remember me {toggleValue}</span>
+  <input
+   type="checkbox"
+   bind:checked={toggleValue}
+   class="toggle toggle-primary"
+  />
+ </label>
 </FormControl>
