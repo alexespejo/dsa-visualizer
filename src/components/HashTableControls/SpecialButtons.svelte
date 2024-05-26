@@ -25,7 +25,7 @@
   />
  </svg>
 </button>
-<button class="btn btn-outline btn-warning join-item btn-sm" on:click={clear}>
+<button class="btn btn-outline btn-error join-item btn-sm" on:click={clear}>
  Clear
  <svg
   xmlns="http://www.w3.org/2000/svg"

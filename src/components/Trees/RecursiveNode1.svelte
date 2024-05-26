@@ -25,13 +25,11 @@
 <div>
  {#if index < value1.length && value1[index] !== null}
   <span
-   class={`${value1[index] === -1 ? "opacity-0" : ""} ${markerDisplay(nodeMarker, index)}`}
+   class={`${value1[index] === -1 ? "text-red-300 opacity-0" : ""} ${markerDisplay(nodeMarker, index)}`}
   >
    {value1[index]}
   </span>
   <RecursiveNode2 value2={value1} index={2 * index + 1} />
   <RecursiveNode2 value2={value1} index={2 * index + 2} />
- {:else}
-  <span>x</span>
  {/if}
 </div>

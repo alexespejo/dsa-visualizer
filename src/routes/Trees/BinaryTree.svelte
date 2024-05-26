@@ -1,5 +1,7 @@
 <script lang="ts">
+ import { onMount } from "svelte";
  import { marker } from "../../lib/stores/treeMarker";
+ import buildTree from "../../lib/treeFunctions/treeHelpers";
  import markerDisplay from "../../lib/treeFunctions/markerDisplay";
 
  import Button from "../../components/custom/Button.svelte";
@@ -18,7 +20,13 @@
   return list;
  }
 
- let aTree: number[] = generateRandomList(15);
+ let aTree: number[] = [
+  4, 44, 85, 84, 56, 25, 69, 69, 69, 38, 69, 69, 69, 27, 56, 69, 69, 69, 69, 69,
+  69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
+ ];
+ function createTree() {
+  aTree = buildTree(aTree, 3);
+ }
  let traversal: number[] = [];
  //  let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
  function preorder() {
@@ -55,12 +63,20 @@
  }
  function next() {
   marker.update((value: number) => {
-   return value + 1;
+   for (let i = value + 1; i < aTree.length; i++) {
+    if (aTree[i] !== -1) {
+     return i;
+    }
+   }
   });
  }
  function previous() {
   marker.update((value: number) => {
-   return value - 1;
+   for (let i = value - 1; i > 0; i -= 1) {
+    if (aTree[i] !== -1 || aTree[i] === aTree[value]) {
+     return i;
+    }
+   }
   });
  }
 
@@ -68,18 +84,22 @@
  const unsubscribe = marker.subscribe((value: number) => {
   nodeMarker = value;
  });
+
+ onMount(() => {
+  createTree();
+ });
 </script>
 
 <Layout dataStructure="TR">
- <Controls>
+ <Controls title="Tree Traversals">
   {traversal}
   <div class="join space-x-0.5">
-   <Button on:click={previous} color="secondary" styles="join-item"
-    >Previous</Button
-   >
-   <Button on:click={animatPreorder} color="accent" styles="join-item"
-    >Preorder</Button
-   >
+   <Button on:click={previous} color="secondary" styles="join-item">
+    Previous
+   </Button>
+   <Button on:click={createTree} color="accent" styles="join-item">
+    Random
+   </Button>
    <Button on:click={next} color="primary" styles="join-item">Next</Button>
   </div>
  </Controls>

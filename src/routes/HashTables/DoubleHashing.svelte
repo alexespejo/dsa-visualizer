@@ -244,10 +244,10 @@
 
  <Visualize>
   <div class="text-base-content font-bold mt-5 flex flex-col">
-   <span class="text-amber-300">
+   <span class="text-accent">
     {`h'(k) = ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"} - (k % ${secondHashConstQ && secondHashConstQ !== 0 ? secondHashConstQ : "q"})`}
    </span>
-   <span class="text-pink-300">
+   <span class="text-warning">
     f&#40;{numToInsert ? numToInsert : "k"}&#41; =
     {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
      {`${hashFuncA}${numToInsert ? numToInsert : "k"} + ${hashFuncB}`}
