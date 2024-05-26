@@ -252,7 +252,7 @@
   <div class="text-base-content font-bold mt-5">
    <div class="flex flex-col">
     <div class="">
-     <span class="text-pink-300">
+     <span class="text-warning">
       f&#40;{numToInsert ? numToInsert : "k"}&#41; =
       {#if !isNaN(hashFuncA) && !isNaN(hashFuncB) && functionType === "+" && hashFuncB !== "" && hashFuncA !== ""}
        {`${hashFuncA}(${numToInsert ? numToInsert : "k"}) + ${hashFuncB}`}
