@@ -14,15 +14,15 @@
 
 .binary-tree span {
  grid-column: 1 / 3;
-
  border: 2px solid;
- width: 1.5rem;
- height: 1.5rem;
+ width: 2rem;
+ height: 2rem;
  border-radius: 50%;
  display: grid;
  place-items: center;
  margin: auto auto;
- @apply text-center text-sm;
+
+ @apply text-center;
 }
 
 .binary-tree span::before {
