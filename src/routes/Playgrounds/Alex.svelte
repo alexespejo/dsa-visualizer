@@ -1,4 +1,73 @@
 <script>
+ import { onMount } from "svelte";
+ import Toggle from "../../components/custom/Update/Toggle.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+
+ let graph = Array(15).fill(Array(24).fill(0));
+
+ let columnMaker = false;
+ let rowMaker = false;
+
+ function markPoint(i, j) {
+  if (columnMaker) {
+   graph[i] = [...graph[i]]; // create a shallow copy of the row
+   for (let k = 0; k < graph.length; ++k) {
+    graph[k][j] = 1;
+   }
+  } else if (rowMaker) {
+   graph[i] = [...graph[i]]; // create a shallow copy of the row
+   for (let k = 0; k < graph[i].length; ++k) {
+    graph[i][k] = 1;
+   }
+  } else {
+   graph[i] = [...graph[i]]; // create a shallow copy of the row
+   graph[i][j] = graph[i][j] === 1 ? 0 : 1;
+  }
+ }
+ onMount(() => {
+  graph[0] = [...graph[0]];
+  graph[0].fill(1);
+  graph[graph.length - 1] = [...graph[graph.length - 1]];
+  graph[graph.length - 1].fill(1);
+  for (let i = 0; i < graph.length; ++i) {
+   graph[i] = [...graph[i]];
+   graph[i][0] = 1;
+   graph[i][graph[i].length - 1] = 1;
+  }
+ });
+</script>
+
+<div class="flex flex-col p-2">
+ <FormControl>
+  <Label>Row Maker</Label>
+ </FormControl>
+ <Toggle color="toggle-amber" bind:checked={rowMaker} />
+
+ <FormControl>
+  <Label>Column Maker</Label>
+  <Toggle color="toggle-purple" bind:checked={columnMaker} />
+ </FormControl>
+</div>
+<div
+ class="flex flex-col last:border-r-2 last:border-b-2"
+ style="height: 75vh; width: 75vw"
+>
+ {#each graph as row, i}
+  <div class="flex" style="height: 24% ">
+   {#each row as _, j}
+    <button
+     class={`text-center border-t-2 border-l-2 text-xs ${graph[i][j] === 1 ? "bg-primary" : "bg-neutral"}`}
+     style="width: 24%"
+     on:click={() => markPoint(i, j)}
+    >
+    </button>
+   {/each}
+  </div>
+ {/each}
+</div>
+<!-- <script>
+
  import Input from "../../components/custom/Update/Input.svelte";
  import Button from "../../components/custom/Update/Button.svelte";
  import FormTrigger from "../../components/custom/layout/FormTrigger.svelte";
@@ -103,4 +172,4 @@
   <Toggle bind:checked={toggleValue} color="toggle-indigo" />
   <Toggle bind:checked={toggleValue} color="toggle-teal" />
  </div>
-</FormControl>
+</FormControl> -->
