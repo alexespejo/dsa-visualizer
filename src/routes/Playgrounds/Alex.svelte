@@ -7,10 +7,11 @@
  import Label from "../../components/custom/Inputs/Label.svelte";
  import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Range from "../../components/custom/Update/Range.svelte";
+ import Toggle from "../../components/custom/Update/Toggle.svelte";
 
  let value = "";
  let rangeValue = 25;
- let toggleValue = false;
+ let toggleValue = true;
 </script>
 
 <FormControl>
@@ -93,12 +94,13 @@
 </FormControl>
 
 <FormControl>
- <label class="cursor-pointer label justify-normal space-x-2 max-w-48">
-  <span class="label-text">Remember me {toggleValue}</span>
-  <input
-   type="checkbox"
-   bind:checked={toggleValue}
-   class="toggle toggle-primary"
-  />
- </label>
+ <Label>Toggle</Label>
+ <div>
+  <Toggle bind:checked={toggleValue} color="toggle-amber" />
+  <Toggle bind:checked={toggleValue} color="toggle-sky" />
+  <Toggle bind:checked={toggleValue} color="toggle-emerald" />
+  <Toggle bind:checked={toggleValue} color="toggle-purple" />
+  <Toggle bind:checked={toggleValue} color="toggle-indigo" />
+  <Toggle bind:checked={toggleValue} color="toggle-teal" />
+ </div>
 </FormControl>
