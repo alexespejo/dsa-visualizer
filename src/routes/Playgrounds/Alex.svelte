@@ -4,7 +4,7 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
 
- let graph = Array(15).fill(Array(24).fill(0));
+ let graph = Array(15).fill(Array(30).fill(0));
 
  let columnMaker = false;
  let rowMaker = false;
@@ -54,11 +54,11 @@
  style="height: 75vh; width: 75vw"
 >
  {#each graph as row, i}
-  <div class="flex" style="height: 24% ">
+  <div class="flex" style="height: 30% ">
    {#each row as _, j}
     <button
      class={`text-center border-t-2 border-l-2 text-xs ${graph[i][j] === 1 ? "bg-primary" : "bg-neutral"}`}
-     style="width: 24%"
+     style="width: 30%"
      on:click={() => markPoint(i, j)}
     >
     </button>
@@ -66,6 +66,14 @@
   </div>
  {/each}
 </div>
+
+{#each graph as row}
+ {"["}
+ <div>
+  {row}
+ </div>
+ {"]"}
+{/each}
 <!-- <script>
 
  import Input from "../../components/custom/Update/Input.svelte";
