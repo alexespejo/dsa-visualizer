@@ -7,8 +7,8 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
 
- //  let graph = Array(15).fill(Array(30).fill(0));
- let graph = alexGraph_1;
+ let graph = Array(15).fill(Array(30).fill(0));
+ //  let graph = alexGraph_1;
 
  let columnMaker = false;
  let rowMaker = false;
