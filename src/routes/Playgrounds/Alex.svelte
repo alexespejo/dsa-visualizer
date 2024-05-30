@@ -67,13 +67,15 @@
  {/each}
 </div>
 
+{"["}
 {#each graph as row}
- {"["}
  <div>
+  {"["}
   {row}
+  {"],"}
  </div>
- {"]"}
 {/each}
+{"]"}
 <!-- <script>
 
  import Input from "../../components/custom/Update/Input.svelte";

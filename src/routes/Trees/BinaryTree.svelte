@@ -25,7 +25,7 @@
   69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
  ];
  function createTree() {
-  aTree = buildTree(aTree, 3);
+  aTree = buildTree(aTree, 4);
  }
  let traversal: number[] = [];
  //  let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
