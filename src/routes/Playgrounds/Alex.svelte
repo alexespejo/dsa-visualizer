@@ -161,7 +161,7 @@
   >
   <pre data-prefix="1">
     <code> 
-     <span class="text-purple-400">let</span><span class="text-red-400"
+     <span class="text-purple-400">let </span><span class="text-red-400"
      >graph</span
     > =<span class="text-orange-300"> {"["}
     {#each graph as row}
