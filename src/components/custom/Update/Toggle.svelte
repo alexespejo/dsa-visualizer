@@ -5,4 +5,9 @@
  export let classList: string = "";
 </script>
 
-<input type="checkbox" bind:checked class={`toggle ${color} ${classList}`} />
+<input
+ type="checkbox"
+ on:change
+ bind:checked
+ class={`toggle ${color} ${classList}`}
+/>
