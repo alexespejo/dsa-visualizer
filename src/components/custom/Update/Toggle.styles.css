@@ -1,0 +1,18 @@
+.toggle-amber {
+ @apply checked:bg-amber-300 checked:border-amber-300;
+}
+.toggle-teal {
+ @apply checked:bg-teal-300 checked:border-teal-300;
+}
+.toggle-sky {
+ @apply checked:bg-sky-300 checked:border-sky-300;
+}
+.toggle-purple {
+ @apply checked:bg-purple-300 checked:border-purple-300;
+}
+.toggle-indigo {
+ @apply checked:bg-indigo-300 checked:border-indigo-300;
+}
+.toggle-emerald {
+ @apply checked:bg-emerald-300 checked:border-emerald-300;
+}

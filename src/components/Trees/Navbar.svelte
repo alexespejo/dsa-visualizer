@@ -20,7 +20,9 @@
     />
    </svg>
   </Link>
-  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold lg:flex hidden">
+  <h1
+   class="text-xl sm:text-2xl lg:text-4xl font-bold lg:flex lg:items-center hidden relative after:ml-2 after:badge after:badge-warning after:content-['limintations'] after:animate-pulse"
+  >
    Trees
   </h1>
  </div>
