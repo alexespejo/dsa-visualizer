@@ -7,8 +7,8 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
 
- //  let graph = Array(15).fill(Array(30).fill(0));
- let graph = alexGraph_1;
+ let graph = Array(15).fill(Array(30).fill(0));
+ //  let graph = alexGraph_1;
 
  let columnMaker = false;
  let rowMaker = false;
@@ -161,7 +161,7 @@
   >
   <pre data-prefix="1">
     <code> 
-     <span class="text-purple-400">let</span><span class="text-red-400"
+     <span class="text-purple-400">let </span><span class="text-red-400"
      >graph</span
     > =<span class="text-orange-300"> {"["}
     {#each graph as row}
