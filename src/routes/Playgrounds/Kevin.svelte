@@ -10,6 +10,7 @@
  import Toggle from "../../components/custom/Update/Toggle.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
+ import Badge from "../../components/custom/Update/Badge.svelte";
 
  let value = "";
  let rangeValue = 25;
@@ -17,6 +18,7 @@
  let elements = [1, 2, 3, 4, 5];
 </script>
 
+<h1 class="text-3xl p-4 font-bold">New Colors/Components</h1>
 <ArrayDisplay>
  {#each elements as x, i}
   <ArrayElementIndexed index={i} flat>{x}</ArrayElementIndexed>
@@ -111,5 +113,16 @@
   <Toggle bind:checked={toggleValue} color="toggle-purple" />
   <Toggle bind:checked={toggleValue} color="toggle-indigo" />
   <Toggle bind:checked={toggleValue} color="toggle-teal" />
+ </div>
+</FormControl>
+<FormControl>
+ <Label>Badges</Label>
+ <div class="flex space-x-1">
+  <Badge label="Amber" color="badge-amber" />
+  <Badge label="Teal" color="badge-teal" />
+  <Badge label="Indigo" color="badge-indigo" />
+  <Badge label="Purple" color="badge-purple" />
+  <Badge label="Emerald" color="badge-emerald" />
+  <Badge label="Sky" color="badge-sky" />
  </div>
 </FormControl>

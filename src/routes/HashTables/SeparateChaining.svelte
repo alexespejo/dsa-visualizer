@@ -7,13 +7,11 @@
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
  import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
- import Label from "../../components/custom/Inputs/Label.svelte";
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
  import {
   insertSeparateChaining,
   removeSeparateChaining,
  } from "../../lib/hashTableFunctions/separateChaining";
- import LabelInput from "../../components/custom/Inputs/Label.svelte";
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
  let hashingArray: number[][] = [[], [], [], [], [], [], [], [], [], []];
  let insertionOrder: number[] = [];
@@ -41,7 +39,7 @@
   }
  }
  onMount(() => {
-  // randomize();
+  randomize();
  });
 </script>
 
@@ -81,7 +79,7 @@
   </FormControl>
 
   <FormControl>
-   <LabelInput>Misc</LabelInput>
+   <HiddenLabel />
    <div class="join space-x-0.5">
     <SpecialButtons {clear} {randomize} rehash={() => {}} />
    </div>
@@ -89,11 +87,11 @@
  </Controls>
 
  <Visualize>
-  <!-- <span class="font-bold mt-3 text-sky-300">
+  <span class="font-bold mt-3 text-sky-300">
    f&#40;{numToInsert ? numToInsert : "k"}&#41; = {numToInsert
     ? numToInsert
     : "k"} % 10
-  </span> -->
+  </span>
   <div class="mt-2">
    <InsertionOrderDisplay {insertionOrder} />
   </div>
