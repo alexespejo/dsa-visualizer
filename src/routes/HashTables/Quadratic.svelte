@@ -38,7 +38,7 @@
  let hashFuncC: any;
  let funcValue: number;
 
- let functionType: string = "+";
+ let functionType: string = "k";
 
  function insert() {
   insertionOrder = [...insertionOrder, numToInsert];

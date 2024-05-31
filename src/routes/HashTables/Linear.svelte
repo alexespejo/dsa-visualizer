@@ -45,7 +45,7 @@
  let numToInsert: number;
  let numToDelete: number;
 
- let functionType: string = "+";
+ let functionType: string = "k";
 
  let hashFuncA: any;
  let hashFuncB: any;
