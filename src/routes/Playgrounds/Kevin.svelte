@@ -8,11 +8,20 @@
  import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Range from "../../components/custom/Update/Range.svelte";
  import Toggle from "../../components/custom/Update/Toggle.svelte";
+ import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
+ import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  let value = "";
  let rangeValue = 25;
  let toggleValue = true;
+ let elements = [1, 2, 3, 4, 5];
 </script>
+
+<ArrayDisplay>
+ {#each elements as x, i}
+  <ArrayElementIndexed index={i} flat>{x}</ArrayElementIndexed>
+ {/each}
+</ArrayDisplay>
 
 <FormControl>
  <Label>New Colors</Label>
