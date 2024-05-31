@@ -11,6 +11,7 @@
  } from "../../lib/sortingAlgo";
  import { onMount } from "svelte";
  import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Layout from "../../layouts/Layout.svelte";
  import Button from "../../components/custom/Button.svelte";
  import TextInput from "../../components/custom/Inputs/TextInput.svelte";
@@ -80,7 +81,7 @@
 <Layout dataStructure="SA">
  <Controls title="Radix Sort">
   <FormControl>
-   <LabelInput>Passes</LabelInput>
+   <HiddenLabel />
    <div class="join space-x-0.5">
     <Button
      color="secondary"
@@ -109,7 +110,7 @@
    </div>
   </FormControl>
   <FormControl>
-   <LabelInput>Insert</LabelInput>
+   <HiddenLabel />
    <div class="join">
     <TextInput
      color="primary"
@@ -136,7 +137,7 @@
    </div>
   </FormControl>
   <FormControl>
-   <LabelInput>Character Count</LabelInput>
+   <HiddenLabel />
    <div class="join">
     <NumberInput
      color="success"
@@ -160,8 +161,9 @@
     </Button>
    </div>
   </FormControl>
+
   <FormControl>
-   <LabelInput>Type</LabelInput>
+   <HiddenLabel />
    <div class="join">
     <Button
      color="primary"
@@ -182,7 +184,7 @@
    </div>
   </FormControl>
   <FormControl>
-   <LabelInput>Randomize</LabelInput>
+   <HiddenLabel />
    <div class="join">
     <Button
      color="accent"

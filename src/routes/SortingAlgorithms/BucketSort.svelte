@@ -5,7 +5,7 @@
  import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import { generateRandomFractions } from "../../lib/sortingAlgo";
  import FormControl from "../../components/custom/FormControl.svelte";
- import LabelInput from "../../components/custom/Inputs/Label.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
 
@@ -75,7 +75,7 @@
 <FunctionVisualizerLayout dataStructure="SA">
  <Controls title="Bucket Sort">
   <FormControl>
-   <Label>Insert</Label>
+   <HiddenLabel />
    <div class="join">
     <input
      type="number"
@@ -90,7 +90,7 @@
    </div>
   </FormControl>
   <FormControl>
-   <Label>Delete</Label>
+   <HiddenLabel />
    <div class="join">
     <input
      type="number"
@@ -104,8 +104,9 @@
     >
    </div>
   </FormControl>
+
   <FormControl>
-   <Label>Misc</Label>
+   <HiddenLabel />
    <div class="join space-x-0.5">
     <button
      class="btn btn-success btn-outline join-item btn-sm"
