@@ -25,10 +25,11 @@
 
  //helpers
  let i = 1; //external index
+ let j = 1;
  function insertionPass() {
   if (i < size) {
    let key = unsortedArr[i];
-   let j = i - 1;
+   j = i - 1;
    while (j >= 0 && unsortedArr[j] > key) {
     unsortedArr[j + 1] = unsortedArr[j];
     j -= 1;
@@ -53,7 +54,16 @@
   <!-- Resize -->
   <FormControl>
    <Label>Size: {size}</Label>
-   <Range min={1} max={50} bind:value={size} step={1} color="range-purple" />
+   <Range
+    min={1}
+    max={50}
+    bind:value={size}
+    step={1}
+    color="range-purple"
+    on:change={() => {
+     unsortedArr = generateRandomArray(size);
+    }}
+   />
   </FormControl>
 
   <!-- Shuffle Buttons -->
@@ -77,7 +87,7 @@
 
  <Visualize>
   <div class="my-3 font-bold text-primary">
-   Original: <span class="tracking-wider">{`[ ${store.sorted} ]`}</span>
+   Original: <span class="tracking-wider">{`[ ${store.unsorted} ]`}</span>
   </div>
   <ArrayDisplay>
    {#each unsortedArr as x, i}
