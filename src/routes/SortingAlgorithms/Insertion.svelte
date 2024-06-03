@@ -19,6 +19,7 @@
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
 
  //state
+ let isArrayStyle: boolean = true;
  let animationMode: boolean = false;
  let size: number = 10;
  let unsortedArr = generateRandomArray(size);
@@ -70,7 +71,7 @@
 <Layout dataStructure="SA">
  <Controls title="Insertion Sort">
   <!-- Animation Mode -->
-  <FormControl classList="absolute top-0 left-0">
+  <FormControl classList="absolute top-0 left-0 md:left-40">
    <Label>Animation Mode: {animationMode ? "On" : "Off"}</Label>
    <Toggle bind:checked={animationMode} color="toggle-info" />
   </FormControl>
@@ -122,14 +123,13 @@
   {:else}
    <!-- Animation Controls -->
    <FormControl>
-    <Label>Animations</Label>
+    <Label>Animate</Label>
     <div class="space-x-0.5">
      <div
       class="tooltip tooltip-bottom"
       data-tip="Animates the complete sorting algorithm"
      >
-      <Button color="btn-teal-outline" on:click={animate}>Insertion Sort</Button
-      >
+      <Button color="btn-primary" on:click={animate}>Insertion Sort</Button>
      </div>
     </div>
    </FormControl>
@@ -137,9 +137,13 @@
    <!-- Animated Passes -->
    <FormControl>
     <HiddenLabel />
-    <Join class="space-x-0.5">
-     <Button color="btn-amber-outline" on:click={animate}>Undo</Button>
-     <Button color="btn-sky-outline" on:click={animate}>Pass</Button>
+    <Join classList="space-x-0.5">
+     <div class="tooltip tooltip-top" data-tip="Doesn't animate undo">
+      <Button color="btn-amber-outline" on:click={animate}>Undo</Button>
+     </div>
+     <div class="tooltip tooltip-top" data-tip="Animates the pass">
+      <Button color="btn-sky-outline" on:click={animate}>Pass Next</Button>
+     </div>
     </Join>
    </FormControl>
 
@@ -158,6 +162,19 @@
      markings
      color="range-purple"
     />
+   </FormControl>
+
+   <!-- Bar/Array Style -->
+   <FormControl>
+    <Label>Style</Label>
+    <Join classList="space-x-0.5">
+     <Button color={isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
+      >Bars</Button
+     >
+     <Button color={!isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
+      >Arrays</Button
+     >
+    </Join>
    </FormControl>
   {/if}
  </Controls>
