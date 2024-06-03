@@ -11,12 +11,15 @@
  import Join from "../../components/custom/layout/Join.svelte";
  import Button from "../../components/custom/Button.svelte";
  import Range from "../../components/custom/Update/Range.svelte";
+ import Toggle from "../../components/custom/Update/Toggle.svelte";
  import ArrayDisplay from "../../components/Array/ArrayDisplay.svelte";
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  //lib functions
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
+
  //state
+ let animationMode: boolean = false;
  let size: number = 10;
  let unsortedArr = generateRandomArray(size);
  let store = {
@@ -38,51 +41,125 @@
    i += 1;
   }
  }
+
+ //animation loop
+ let key: number | null; // value to compare
+ let animationSpeed: number = 200;
+ function animate() {
+  key = unsortedArr[i];
+  j = i - 1;
+  function timedLoopWithLimit() {
+   if (i < size) {
+    if (j >= 0 && unsortedArr[j] >= key) {
+     unsortedArr[j + 1] = unsortedArr[j];
+     unsortedArr[j] = key;
+     j -= 1;
+    } else {
+     unsortedArr[j + 1] = key;
+     i += 1;
+     key = -1;
+     clearInterval(intervalIdWithLimit);
+    }
+   }
+  }
+
+  const intervalIdWithLimit = setInterval(timedLoopWithLimit, 400);
+ }
 </script>
 
 <Layout dataStructure="SA">
  <Controls title="Insertion Sort">
-  <!-- Passess -->
-  <FormControl>
-   <HiddenLabel />
-   <Join classList="space-x-0.5">
-    <Button color="btn-secondary">Undo Pass</Button>
-    <Button color="btn-primary" on:click={insertionPass}>Next Pass</Button>
-   </Join>
+  <!-- Animation Mode -->
+  <FormControl classList="absolute top-0 left-0">
+   <Label>Animation Mode: {animationMode ? "On" : "Off"}</Label>
+   <Toggle bind:checked={animationMode} color="toggle-info" />
   </FormControl>
 
-  <!-- Resize -->
-  <FormControl>
-   <Label>Size: {size}</Label>
-   <Range
-    min={1}
-    max={50}
-    bind:value={size}
-    step={1}
-    color="range-purple"
-    on:change={() => {
-     unsortedArr = generateRandomArray(size);
-    }}
-   />
-  </FormControl>
+  {#if !animationMode}
+   <!-- Passess -->
+   <FormControl>
+    <HiddenLabel />
+    <Join classList="space-x-0.5">
+     <Button color="btn-secondary">Undo Pass</Button>
+     <Button color="btn-primary" on:click={insertionPass}>Next Pass</Button>
+    </Join>
+   </FormControl>
 
-  <!-- Shuffle Buttons -->
-  <FormControl>
-   <HiddenLabel />
-   <Join classList="space-x-0.5">
-    <Button color="btn-warning">Randomize</Button>
-    <Button color="btn-info">Shuffle</Button>
-    <Button color="btn-error">Reset</Button>
-   </Join>
-  </FormControl>
+   <!-- Resize -->
+   <FormControl>
+    <Label>Resize {size}</Label>
+    <Join classList="space-x-0.5">
+     <Button
+      color="btn-accent"
+      on:click={() => {
+       size -= 1;
+       unsortedArr = generateRandomArray(size);
+       store.unsorted = unsortedArr;
+      }}
+     >
+      &uarr;
+     </Button>
+     <Button
+      color="btn-accent"
+      on:click={() => {
+       size += 1;
+       unsortedArr = generateRandomArray(size);
+       store.unsorted = unsortedArr;
+      }}>&darr;</Button
+     >
+    </Join>
+   </FormControl>
 
-  <!-- Animation Controls -->
-  <FormControl>
-   <HiddenLabel />
-   <Join classList="space-x-0.5">
-    <Button color="btn-sky-outline">Animate</Button>
-   </Join>
-  </FormControl>
+   <!-- Shuffle Buttons -->
+   <FormControl>
+    <HiddenLabel />
+    <Join classList="space-x-0.5">
+     <Button color="btn-warning">Randomize</Button>
+     <Button color="btn-info">Shuffle</Button>
+     <Button color="btn-error">Reset</Button>
+    </Join>
+   </FormControl>
+  {:else}
+   <!-- Animation Controls -->
+   <FormControl>
+    <Label>Animations</Label>
+    <div class="space-x-0.5">
+     <div
+      class="tooltip tooltip-bottom"
+      data-tip="Animates the complete sorting algorithm"
+     >
+      <Button color="btn-teal-outline" on:click={animate}>Insertion Sort</Button
+      >
+     </div>
+    </div>
+   </FormControl>
+
+   <!-- Animated Passes -->
+   <FormControl>
+    <HiddenLabel />
+    <Join class="space-x-0.5">
+     <Button color="btn-amber-outline" on:click={animate}>Undo</Button>
+     <Button color="btn-sky-outline" on:click={animate}>Pass</Button>
+    </Join>
+   </FormControl>
+
+   <!-- Resize -->
+   <FormControl>
+    <Label
+     >Animation Speed: {animationSpeed / 1000}{animationSpeed / 1000 === 1
+      ? ".0"
+      : ""}s</Label
+    >
+    <Range
+     min={100}
+     max={1000}
+     bind:value={animationSpeed}
+     step={100}
+     markings
+     color="range-purple"
+    />
+   </FormControl>
+  {/if}
  </Controls>
 
  <Visualize>
@@ -90,10 +167,22 @@
    Original: <span class="tracking-wider">{`[ ${store.unsorted} ]`}</span>
   </div>
   <ArrayDisplay>
-   {#each unsortedArr as x, i}
-    <ArrayElementIndexed index={i}>
-     {x}
-    </ArrayElementIndexed>
+   {#each unsortedArr as x, index}
+    <div class="">
+     <div class="text-center font-bold">
+      {#if index === i}
+       i
+      {:else}
+       &nbsp;
+      {/if}
+     </div>
+     <ArrayElementIndexed
+      {index}
+      classList={index === j + 1 && key ? "border-primary text-primary" : ""}
+     >
+      {x}
+     </ArrayElementIndexed>
+    </div>
    {/each}
   </ArrayDisplay>
  </Visualize>

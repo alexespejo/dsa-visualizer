@@ -3,5 +3,5 @@
 </script>
 
 <div class={`label ${styles}`}>
- <span class="label-text flex items-center"><slot /></span>
+ <span class="label-text flex items-center text-xs"><slot /></span>
 </div>
