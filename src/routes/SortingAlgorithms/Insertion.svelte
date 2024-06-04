@@ -71,7 +71,7 @@
 <Layout dataStructure="SA">
  <Controls title="Insertion Sort">
   <!-- Animation Mode -->
-  <FormControl classList="absolute top-0 left-0 md:left-40">
+  <FormControl classList="absolute top-0 right-0 md:right-40">
    <Label>Animation Mode: {animationMode ? "On" : "Off"}</Label>
    <Toggle bind:checked={animationMode} color="toggle-info" />
   </FormControl>

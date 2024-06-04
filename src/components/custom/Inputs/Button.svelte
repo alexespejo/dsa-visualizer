@@ -1,9 +1,16 @@
 <script lang="ts">
  import "./Button.styles.css";
- export let label: string;
  export let color: string = "";
+ export let size: string = "";
+ export let styles: string = "";
+ export let classList: string = "";
+ export let disabled: boolean = false;
 </script>
 
-<button on:click class={`btn ${color}`}>
- {label}
+<button
+ class={`btn btn-${color} ${color} btn-${size} ${styles} btn-outline btn-sm join-item ${classList}`}
+ on:click
+ {disabled}
+>
+ <slot />
 </button>
