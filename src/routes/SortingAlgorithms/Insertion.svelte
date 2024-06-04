@@ -20,7 +20,7 @@
 
  //state
  let isArrayStyle: boolean = true;
- let animationMode: boolean = false;
+ let animationMode: boolean = true;
  let size: number = 10;
  let unsortedArr = generateRandomArray(size);
  let store = {
@@ -46,7 +46,7 @@
  //animation loop
  let key: number | null; // value to compare
  let animationSpeed: number = 200;
- function animate() {
+ function animatePass() {
   key = unsortedArr[i];
   j = i - 1;
   function timedLoopWithLimit() {
@@ -58,13 +58,34 @@
     } else {
      unsortedArr[j + 1] = key;
      i += 1;
-     key = -1;
+     //  key = -1;
      clearInterval(intervalIdWithLimit);
     }
    }
   }
-
   const intervalIdWithLimit = setInterval(timedLoopWithLimit, 400);
+ }
+ function animate() {
+  i = 1;
+  key = unsortedArr[i];
+  j = i - 1;
+  function timedLoop() {
+   if (i < size) {
+    if (j >= 0 && unsortedArr[j] >= key) {
+     unsortedArr[j + 1] = unsortedArr[j];
+     unsortedArr[j] = key;
+     j -= 1;
+    } else {
+     unsortedArr[j + 1] = key;
+     i += 1;
+     key = unsortedArr[i];
+     j = i - 1;
+    }
+   } else {
+    clearInterval(intervalId);
+   }
+  }
+  const intervalId = setInterval(timedLoop, animationSpeed);
  }
 </script>
 
@@ -139,10 +160,10 @@
     <HiddenLabel />
     <Join classList="space-x-0.5">
      <div class="tooltip tooltip-top" data-tip="Doesn't animate undo">
-      <Button color="btn-amber-outline" on:click={animate}>Undo</Button>
+      <Button color="btn-amber-outline">Undo</Button>
      </div>
      <div class="tooltip tooltip-top" data-tip="Animates the pass">
-      <Button color="btn-sky-outline" on:click={animate}>Pass Next</Button>
+      <Button color="btn-sky-outline" on:click={animatePass}>Pass Next</Button>
      </div>
     </Join>
    </FormControl>
