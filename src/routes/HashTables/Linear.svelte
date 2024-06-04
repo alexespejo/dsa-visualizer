@@ -45,7 +45,7 @@
  let numToInsert: number;
  let numToDelete: number;
 
- let functionType: string = "+";
+ let functionType: string = "k";
 
  let hashFuncA: any;
  let hashFuncB: any;
@@ -301,11 +301,7 @@
   <FormControl>
    <Label>Misc</Label>
    <div class="join space-x-0.5">
-    <SpecialButtons
-     clear={clearTable}
-     randomize={randomizeArray}
-     rehash={() => {}}
-    />
+    <SpecialButtons clear={clearTable} randomize={randomizeArray} />
    </div>
   </FormControl>
  </Controls>

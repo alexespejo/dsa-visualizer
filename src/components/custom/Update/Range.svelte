@@ -14,8 +14,9 @@
  bind:value
  {min}
  {max}
- class={`range range-xs w-36 ${color}`}
+ class={`range range-sm w-36 ${color}`}
  {step}
+ on:change
 />
 {#if markings}
  <div class="w-36 flex justify-between text-xs px-2">

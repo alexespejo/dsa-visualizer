@@ -18,7 +18,7 @@
   x: -1,
   y: -1,
  };
-
+ let pathMarker = false;
  let markerValues = new Set();
  function getValue() {
   function getRandomIntBetween1And99() {
@@ -52,6 +52,8 @@
    startPos.y = j;
    graph[startPos.x][startPos.y] =
     graph[startPos.x][startPos.y] === -2 ? 0 : -2;
+  } else if (pathMarker) {
+   graph[i][j] = graph[i][j] === -3 ? 0 : -3;
   } else {
    graph[i][j] = graph[i][j] === -1 ? 0 : -1;
   }
@@ -126,6 +128,19 @@
    }}
   />
  </FormControl>
+ <FormControl>
+  <Label>Path Marker</Label>
+  <Toggle
+   color="toggle-emerald"
+   bind:checked={pathMarker}
+   on:change={() => {
+    startMaker = false;
+    rowMaker = false;
+    columnMaker = false;
+    destMarker = false;
+   }}
+  />
+ </FormControl>
 </Controls>
 
 <Visualize>
@@ -137,7 +152,8 @@
    <div class="flex border-inherit" style="height: 30% ">
     {#each row as x, j}
      <button
-      class={`text-center border-t-[1px] border-l-[1px] border-inherit text-xs flex items-center justify-center ${x === -1 ? "bg-blue-950" : "bg-blue-100"}`}
+      data-tip={`${i}, ${j}`}
+      class={`tooltip text-center border-t-[1px] border-l-[1px] border-inherit text-xs flex items-center justify-center ${x === -1 ? "bg-blue-950" : x === -3 ? "bg-orange-300" : "bg-blue-100"}`}
       style="width: 30%"
       on:click={() => markPoint(i, j)}
      >

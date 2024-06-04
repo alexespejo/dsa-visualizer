@@ -1,5 +1,5 @@
 .hash-table-item {
- @apply border-2 font-bold text-xl flex flex-col mb-2 w-16 h-20;
+ @apply border-2 font-bold md:text-xl flex flex-col mb-2 md:w-16 md:h-20 w-12 h-16;
 }
 
 .hash-table-controller {
