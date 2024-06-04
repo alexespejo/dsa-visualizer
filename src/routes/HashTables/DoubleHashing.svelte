@@ -58,7 +58,7 @@
   hashingArray = removeDoubleHashing(hashingArray, numToDelete);
  }
 
- function randomizeArray() {
+ function randomize() {
   capacity = 10;
   let result = [];
   insertionOrder = generateRandomArray(capacity);
@@ -83,6 +83,11 @@
   }
   hashingArray.length = capacity;
   hashingArray.fill(null);
+ }
+
+ function clear() {
+  hashingArray = hashingArray.map(() => null);
+  insertionOrder = [];
  }
 </script>
 
@@ -237,7 +242,11 @@
   <FormControl>
    <Label>Misc</Label>
    <div class="join space-x-0.5">
-    <SpecialButtons clear={() => {}} randomize={() => {}} rehash={() => {}} />
+    <SpecialButtons
+     {clear}
+     {randomize}
+     randomDisable={secondHashConstQ === 0}
+    />
    </div>
   </FormControl>
  </Controls>

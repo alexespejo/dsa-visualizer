@@ -7,6 +7,7 @@
  export let require: boolean = false;
  export let min: number = null;
  export let max: number = null;
+ export let disabled: boolean = false;
 </script>
 
 <input
@@ -17,6 +18,7 @@
  type="number"
  {placeholder}
  class={`input input-${color} input-${size} ${styles} input-bordered w-max-w-xs font-bold w-28 input-sm`}
+ {disabled}
  {min}
  {max}
 />

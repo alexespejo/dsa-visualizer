@@ -81,7 +81,7 @@
   <FormControl>
    <HiddenLabel />
    <div class="join space-x-0.5">
-    <SpecialButtons {clear} {randomize} rehash={() => {}} />
+    <SpecialButtons {clear} {randomize} />
    </div>
   </FormControl>
  </Controls>

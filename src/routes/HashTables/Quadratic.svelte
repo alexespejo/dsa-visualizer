@@ -57,7 +57,7 @@
   hashingArray = removeQuadratic(hashingArray, numToDelete);
  }
 
- function randomizeArray() {
+ function randomize() {
   capacity = 10;
   let result = [];
   result.length = capacity;
@@ -89,6 +89,10 @@
   hashingArray.fill(null);
  }
 
+ function clear() {
+  hashingArray = hashingArray.map(() => null);
+  insertionOrder = [];
+ }
  afterUpdate(() => {
   if (
    !(
@@ -237,13 +241,7 @@
   <FormControl>
    <Label>Misc</Label>
    <div class="join space-x-0.5">
-    <SpecialButtons
-     clear={() => {}}
-     randomize={() => {
-      randomizeArray();
-     }}
-     rehash={() => {}}
-    />
+    <SpecialButtons {clear} {randomize} />
    </div>
   </FormControl>
  </Controls>
