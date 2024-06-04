@@ -23,8 +23,8 @@
  let animationMode: boolean = true;
  let size: number = 10;
  let unsortedArr = generateRandomArray(size);
- let store = {
-  unsorted: unsortedArr,
+ const store = {
+  unsorted: [...unsortedArr],
  };
 
  //helpers
@@ -63,7 +63,7 @@
     }
    }
   }
-  const intervalIdWithLimit = setInterval(timedLoopWithLimit, 400);
+  const intervalIdWithLimit = setInterval(timedLoopWithLimit, animationSpeed);
  }
  function animate() {
   i = 1;
@@ -153,6 +153,18 @@
       <Button color="btn-primary" on:click={animate}>Insertion Sort</Button>
      </div>
     </div>
+   </FormControl>
+
+   <!-- Reset -->
+   <FormControl>
+    <HiddenLabel />
+    <Button
+     color="btn-secondary"
+     on:click={() => {
+      alert(store.unsorted);
+      unsortedArr = [...store.unsorted];
+     }}>Reset</Button
+    >
    </FormControl>
 
    <!-- Animated Passes -->
