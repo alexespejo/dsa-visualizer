@@ -1,4 +1,5 @@
 <script lang="ts">
+ import { beforeUpdate } from "svelte";
  //layouts
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
@@ -23,7 +24,8 @@
  let animationMode: boolean = true;
  let size: number = 10;
  let unsortedArr = generateRandomArray(size);
- const store = {
+ let historyStack = [[...unsortedArr]];
+ let store = {
   unsorted: [...unsortedArr],
  };
 
@@ -40,6 +42,7 @@
    }
    unsortedArr[j + 1] = key;
    i += 1;
+   historyStack.push([...unsortedArr]);
   }
  }
 
@@ -92,124 +95,154 @@
 <Layout dataStructure="SA">
  <Controls title="Insertion Sort">
   <!-- Animation Mode -->
-  <FormControl classList="absolute top-0 right-0 md:right-40">
-   <Label>Animation Mode: {animationMode ? "On" : "Off"}</Label>
-   <Toggle bind:checked={animationMode} color="toggle-info" />
-  </FormControl>
+  <div class="flex flex-col items-center">
+   <div class="form-control w-52">
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label class="cursor-pointer label">
+     <span class="label-text"
+      >Animation Mode:
+      <span class="font-bold">
+       {animationMode ? "On" : "Off"}
+      </span>
+     </span>
+     <Toggle bind:checked={animationMode} color="toggle-info" />
+    </label>
+   </div>
 
-  {#if !animationMode}
-   <!-- Passess -->
-   <FormControl>
-    <HiddenLabel />
-    <Join classList="space-x-0.5">
-     <Button color="btn-secondary">Undo Pass</Button>
-     <Button color="btn-primary" on:click={insertionPass}>Next Pass</Button>
-    </Join>
-   </FormControl>
+   <div class="flex space-x-2 flex-wrap justify-center">
+    {#if !animationMode}
+     <!-- Passess -->
+     <FormControl>
+      <HiddenLabel />
+      <Join classList="space-x-0.5">
+       <Button color="btn-secondary">Undo Pass</Button>
+       <Button color="btn-primary" on:click={insertionPass}>Next Pass</Button>
+      </Join>
+     </FormControl>
 
-   <!-- Resize -->
-   <FormControl>
-    <Label>Resize {size}</Label>
-    <Join classList="space-x-0.5">
-     <Button
-      color="btn-accent"
-      on:click={() => {
-       size -= 1;
-       unsortedArr = generateRandomArray(size);
-       store.unsorted = unsortedArr;
-      }}
-     >
-      &uarr;
-     </Button>
-     <Button
-      color="btn-accent"
-      on:click={() => {
-       size += 1;
-       unsortedArr = generateRandomArray(size);
-       store.unsorted = unsortedArr;
-      }}>&darr;</Button
-     >
-    </Join>
-   </FormControl>
+     <!-- Resize -->
+     <FormControl>
+      <Label>Resize {size}</Label>
+      <Join classList="space-x-0.5">
+       <Button
+        color="btn-accent"
+        on:click={() => {
+         size += 1;
+         unsortedArr = generateRandomArray(size);
+         store.unsorted = unsortedArr;
+        }}
+       >
+        &uarr;
+       </Button>
+       <Button
+        color="btn-accent"
+        on:click={() => {
+         size -= 1;
+         unsortedArr = generateRandomArray(size);
+         store.unsorted = unsortedArr;
+        }}>&darr;</Button
+       >
+      </Join>
+     </FormControl>
 
-   <!-- Shuffle Buttons -->
-   <FormControl>
-    <HiddenLabel />
-    <Join classList="space-x-0.5">
-     <Button color="btn-warning">Randomize</Button>
-     <Button color="btn-info">Shuffle</Button>
-     <Button color="btn-error">Reset</Button>
-    </Join>
-   </FormControl>
-  {:else}
-   <!-- Animation Controls -->
-   <FormControl>
-    <Label>Animate</Label>
-    <div class="space-x-0.5">
-     <div
-      class="tooltip tooltip-bottom"
-      data-tip="Animates the complete sorting algorithm"
-     >
-      <Button color="btn-primary" on:click={animate}>Insertion Sort</Button>
-     </div>
-    </div>
-   </FormControl>
+     <!-- Shuffle Buttons -->
+     <FormControl>
+      <HiddenLabel />
+      <Join classList="space-x-0.5">
+       <Button
+        color="btn-warning"
+        on:click={() => {
+         unsortedArr = generateRandomArray(size);
+         store.unsorted = unsortedArr;
+         i = 1;
+        }}>Randomize</Button
+       >
+       <Button
+        color="btn-info"
+        on:click={() => {
+         unsortedArr = unsortedArr.sort(() => Math.random() - 0.5);
+         store.unsorted = unsortedArr;
+         i = 1;
+        }}>Shuffle</Button
+       >
+       <Button
+        color="btn-error"
+        on:click={() => {
+         unsortedArr = [...store.unsorted];
+         i = 1;
+        }}>Reset</Button
+       >
+      </Join>
+     </FormControl>
+    {:else}
+     <!-- Animation Controls -->
+     <FormControl>
+      <Label>Animate</Label>
+      <div class="space-x-0.5">
+       <div
+        class="tooltip tooltip-bottom"
+        data-tip="Animates the complete sorting algorithm"
+       >
+        <Button color="btn-primary" on:click={animate}>Insertion Sort</Button>
+       </div>
+      </div>
+     </FormControl>
 
-   <!-- Reset -->
-   <FormControl>
-    <HiddenLabel />
-    <Button
-     color="btn-secondary"
-     on:click={() => {
-      alert(store.unsorted);
-      unsortedArr = [...store.unsorted];
-     }}>Reset</Button
-    >
-   </FormControl>
+     <!-- Animated Passes -->
+     <FormControl>
+      <HiddenLabel />
+      <Join classList="space-x-0.5">
+       <div class="tooltip tooltip-top" data-tip="Doesn't animate undo">
+        <Button color="btn-amber-outline">Undo</Button>
+       </div>
+       <Button
+        color="btn-secondary"
+        on:click={() => {
+         unsortedArr = [...store.unsorted];
+         i = 1;
+        }}>Reset</Button
+       >
+       <div class="tooltip tooltip-top" data-tip="Animates the pass">
+        <Button color="btn-sky-outline" on:click={animatePass}>Pass Next</Button
+        >
+       </div>
+      </Join>
+     </FormControl>
 
-   <!-- Animated Passes -->
-   <FormControl>
-    <HiddenLabel />
-    <Join classList="space-x-0.5">
-     <div class="tooltip tooltip-top" data-tip="Doesn't animate undo">
-      <Button color="btn-amber-outline">Undo</Button>
-     </div>
-     <div class="tooltip tooltip-top" data-tip="Animates the pass">
-      <Button color="btn-sky-outline" on:click={animatePass}>Pass Next</Button>
-     </div>
-    </Join>
-   </FormControl>
+     <!-- Resize -->
+     <FormControl>
+      <Label
+       >Animation Speed: {animationSpeed / 1000}{animationSpeed / 1000 === 1
+        ? ".0"
+        : ""}s</Label
+      >
+      <Range
+       min={100}
+       max={1000}
+       bind:value={animationSpeed}
+       step={100}
+       markings
+       color="range-purple"
+      />
+     </FormControl>
 
-   <!-- Resize -->
-   <FormControl>
-    <Label
-     >Animation Speed: {animationSpeed / 1000}{animationSpeed / 1000 === 1
-      ? ".0"
-      : ""}s</Label
-    >
-    <Range
-     min={100}
-     max={1000}
-     bind:value={animationSpeed}
-     step={100}
-     markings
-     color="range-purple"
-    />
-   </FormControl>
-
-   <!-- Bar/Array Style -->
-   <FormControl>
-    <Label>Style</Label>
-    <Join classList="space-x-0.5">
-     <Button color={isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
-      >Bars</Button
-     >
-     <Button color={!isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
-      >Arrays</Button
-     >
-    </Join>
-   </FormControl>
-  {/if}
+     <!-- Bar/Array Style -->
+     <FormControl>
+      <HiddenLabel />
+      <Join classList="space-x-0.5">
+       <Button
+        color={isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
+        on:click={() => (isArrayStyle = false)}>Bars</Button
+       >
+       <Button
+        color={!isArrayStyle ? "btn-indigo-outline" : "btn-indigo"}
+        on:click={() => (isArrayStyle = true)}>Arrays</Button
+       >
+      </Join>
+     </FormControl>
+    {/if}
+   </div>
+  </div>
  </Controls>
 
  <Visualize>
@@ -218,7 +251,7 @@
   </div>
   <ArrayDisplay>
    {#each unsortedArr as x, index}
-    <div class="">
+    <div>
      <div class="text-center font-bold">
       {#if index === i}
        i
@@ -226,12 +259,21 @@
        &nbsp;
       {/if}
      </div>
-     <ArrayElementIndexed
-      {index}
-      classList={index === j + 1 && key ? "border-primary text-primary" : ""}
-     >
-      {x}
-     </ArrayElementIndexed>
+     {#if isArrayStyle}
+      <ArrayElementIndexed
+       {index}
+       classList={index === j + 1 && key ? "border-primary text-primary" : ""}
+      >
+       {x}
+      </ArrayElementIndexed>
+     {:else}
+      <div
+       class={`${index === j + 1 && key ? "bg-primary" : "bg-neutral-content"} text-base-100 text-xs md:p-3 p-2 text-center font-bold `}
+       style={`height: ${(x + 10) * 2}px`}
+      >
+       {x}
+      </div>
+     {/if}
     </div>
    {/each}
   </ArrayDisplay>
