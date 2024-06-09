@@ -1,9 +1,4 @@
 function generateRandomArray(size: number) {
- if (size <= 5) {
-  console.error("Array size must be larger than 5");
-  return [];
- }
-
  let randomArray: number[] = [];
 
  while (randomArray.length < size) {

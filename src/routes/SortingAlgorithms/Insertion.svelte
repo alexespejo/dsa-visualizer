@@ -1,5 +1,5 @@
 <script lang="ts">
- import { beforeUpdate } from "svelte";
+ import { onMount } from "svelte";
  //layouts
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
@@ -20,32 +20,72 @@
  import { generateRandomArray } from "../../lib/hashTableFunctions/hashTable";
 
  //state
- let isArrayStyle: boolean = true;
- let animationMode: boolean = true;
+ let isArrayStyle: boolean = false;
+ let animationMode: boolean = false;
  let size: number = 10;
- let unsortedArr = generateRandomArray(size);
- let historyStack = [[...unsortedArr]];
+ let unsortedArr = [];
+ let historyStack = [];
  let store = {
-  unsorted: [...unsortedArr],
+  unsorted: [],
  };
-
- //helpers
- let i = 1; //external index
+ let i = 0; //external index
  let j = 1;
- function insertionPass() {
-  if (i < size) {
-   let key = unsortedArr[i];
-   j = i - 1;
-   while (j >= 0 && unsortedArr[j] > key) {
-    unsortedArr[j + 1] = unsortedArr[j];
-    j -= 1;
+ /*
+  Startup function that initializes the unsorted array and the history stack for generating the passes
+ */
+ function onStartUp() {
+  unsortedArr = generateRandomArray(size);
+  historyStack = [];
+  store = {
+   unsorted: [...unsortedArr],
+  };
+  i = 0;
+
+  let pass = [...unsortedArr];
+  let i_pass = 0;
+  let j_pass = 0;
+  while (i_pass < size) {
+   let key = pass[i_pass];
+   j_pass = i_pass - 1;
+   while (j_pass >= 0 && pass[j_pass] > key) {
+    pass[j_pass + 1] = pass[j_pass];
+    j_pass -= 1;
    }
-   unsortedArr[j + 1] = key;
-   i += 1;
-   historyStack.push([...unsortedArr]);
+   pass[j_pass + 1] = key;
+   i_pass += 1;
+   historyStack = [...historyStack, [...pass]];
   }
  }
 
+ //controls
+ // moves i forward and generates the next pass
+ function insertionPass() {
+  if (i < size) {
+   unsortedArr = historyStack[i];
+   i += 1;
+   if (i == size) {
+    i -= 1;
+   }
+  }
+ }
+
+ // moves i back and generates the previous pass
+ function insertionUndo() {
+  if (i > 0) {
+   unsortedArr = historyStack[i];
+   i -= 1;
+  }
+ }
+
+ // resize up or down
+ function resize(x: string) {
+  if (x === "+") {
+   size += 1;
+  } else {
+   size -= 1;
+  }
+  onStartUp();
+ }
  //animation loop
  let key: number | null; // value to compare
  let animationSpeed: number = 200;
@@ -63,11 +103,19 @@
      i += 1;
      //  key = -1;
      clearInterval(intervalIdWithLimit);
+     if (i >= size) {
+      i = size - 1;
+     }
     }
    }
   }
   const intervalIdWithLimit = setInterval(timedLoopWithLimit, animationSpeed);
  }
+
+ /*
+  on animation start we need to set the i to zero despite whatever pass we're at
+  */
+ // animates full insertion sort
  function animate() {
   i = 1;
   key = unsortedArr[i];
@@ -86,10 +134,15 @@
     }
    } else {
     clearInterval(intervalId);
+    if (i >= size) {
+     i = size - 1;
+    }
    }
   }
   const intervalId = setInterval(timedLoop, animationSpeed);
  }
+
+ onMount(onStartUp);
 </script>
 
 <Layout dataStructure="SA">
@@ -115,7 +168,7 @@
      <FormControl>
       <HiddenLabel />
       <Join classList="space-x-0.5">
-       <Button color="btn-secondary">Undo Pass</Button>
+       <Button color="btn-secondary" on:click={insertionUndo}>Undo Pass</Button>
        <Button color="btn-primary" on:click={insertionPass}>Next Pass</Button>
       </Join>
      </FormControl>
@@ -127,9 +180,7 @@
        <Button
         color="btn-accent"
         on:click={() => {
-         size += 1;
-         unsortedArr = generateRandomArray(size);
-         store.unsorted = unsortedArr;
+         resize("+");
         }}
        >
         &uarr;
@@ -137,9 +188,7 @@
        <Button
         color="btn-accent"
         on:click={() => {
-         size -= 1;
-         unsortedArr = generateRandomArray(size);
-         store.unsorted = unsortedArr;
+         resize("-");
         }}>&darr;</Button
        >
       </Join>
@@ -149,19 +198,12 @@
      <FormControl>
       <HiddenLabel />
       <Join classList="space-x-0.5">
-       <Button
-        color="btn-warning"
-        on:click={() => {
-         unsortedArr = generateRandomArray(size);
-         store.unsorted = unsortedArr;
-         i = 1;
-        }}>Randomize</Button
-       >
+       <Button color="btn-warning" on:click={onStartUp}>Randomize</Button>
        <Button
         color="btn-info"
         on:click={() => {
          unsortedArr = unsortedArr.sort(() => Math.random() - 0.5);
-         store.unsorted = unsortedArr;
+         store.unsorted = [...unsortedArr];
          i = 1;
         }}>Shuffle</Button
        >
@@ -169,7 +211,7 @@
         color="btn-error"
         on:click={() => {
          unsortedArr = [...store.unsorted];
-         i = 1;
+         i = 0;
         }}>Reset</Button
        >
       </Join>
@@ -193,13 +235,13 @@
       <HiddenLabel />
       <Join classList="space-x-0.5">
        <div class="tooltip tooltip-top" data-tip="Doesn't animate undo">
-        <Button color="btn-amber-outline">Undo</Button>
+        <Button color="btn-amber-outline" on:click={insertionUndo}>Undo</Button>
        </div>
        <Button
         color="btn-secondary"
         on:click={() => {
          unsortedArr = [...store.unsorted];
-         i = 1;
+         i = 0;
         }}>Reset</Button
        >
        <div class="tooltip tooltip-top" data-tip="Animates the pass">
@@ -268,7 +310,7 @@
       </ArrayElementIndexed>
      {:else}
       <div
-       class={`${index === j + 1 && key ? "bg-primary" : "bg-neutral-content"} text-base-100 text-xs md:p-3 p-2 text-center font-bold `}
+       class={`${index === j + 1 && key ? "bg-primary" : "bg-neutral-content"} text-base-100 text-xs md:px-3 px-2 text-center font-bold `}
        style={`height: ${(x + 10) * 2}px`}
       >
        {x}
