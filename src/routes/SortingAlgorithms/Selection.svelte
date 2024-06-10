@@ -21,7 +21,7 @@
 
  //state
  let isArrayStyle: boolean = false;
- let animationMode: boolean = true;
+ let animationMode: boolean = false;
  let size: number = 10;
  let unsortedArr = [];
  let historyStack = [];
