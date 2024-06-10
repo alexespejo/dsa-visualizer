@@ -1,5 +1,4 @@
 <script>
- import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
