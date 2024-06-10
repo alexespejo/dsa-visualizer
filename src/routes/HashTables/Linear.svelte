@@ -74,7 +74,7 @@
 
  function remove() {
   hashingArray = removeLinear(hashingArray, numToDelete);
-  numToDelete = undefined;
+  numToDelete = null;
  }
 
  function randomizeArray() {
@@ -116,7 +116,7 @@
  }
 
  afterUpdate(() => {
-  needRehash = arraysAreEqual(hashingArray, tempTable);
+  // needRehash = arraysAreEqual(hashingArray, tempTable);
   if (
    !(
     hashFuncA === "" ||

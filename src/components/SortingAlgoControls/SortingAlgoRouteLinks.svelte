@@ -7,5 +7,5 @@
 <Link class="btn join-item" to="/sorting_algo/insertion_sort">Insertion</Link>
 <Link class="btn join-item" to="/sorting_algo/bucket_sort">Bucket</Link>
 <Link class="btn join-item" to="/sorting_algo/radix_sort">Radix</Link>
-<Link class="btn join-item" to="/sorting_algo/merge_sort">Merge</Link>
+<!-- <Link class="btn join-item" to="/sorting_algo/merge_sort">Merge</Link> -->
 <Link class="btn join-item" to="/sorting_algo/quick_sort">Quicksort</Link>
