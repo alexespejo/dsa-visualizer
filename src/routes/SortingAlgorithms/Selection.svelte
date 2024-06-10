@@ -21,7 +21,7 @@
 
  //state
  let isArrayStyle: boolean = false;
- let animationMode: boolean = false;
+ let animationMode: boolean = true;
  let size: number = 10;
  let unsortedArr = [];
  let historyStack = [];
@@ -93,21 +93,21 @@
  let animationSpeed: number = 200;
  function animatePass() {
   key = unsortedArr[i];
-  j = i - 1;
+  j = i;
   function timedLoopWithLimit() {
-   if (i < size) {
-    if (j >= 0 && unsortedArr[j] >= key) {
-     unsortedArr[j + 1] = unsortedArr[j];
-     unsortedArr[j] = key;
-     j -= 1;
-    } else {
-     unsortedArr[j + 1] = key;
-     i += 1;
-     //  key = -1;
-     clearInterval(intervalIdWithLimit);
-     if (i >= size) {
-      i = size - 1;
-     }
+   if (j < size) {
+    if (unsortedArr[j] < unsortedArr[i]) {
+     let temp = unsortedArr[j];
+     unsortedArr[j] = unsortedArr[i];
+     unsortedArr[i] = temp;
+    }
+    j += 1;
+   } else {
+    //  key = -1;
+    clearInterval(intervalIdWithLimit);
+    i += 1;
+    if (i >= size) {
+     i = size - 1;
     }
    }
   }
@@ -119,20 +119,21 @@
   */
  // animates full insertion sort
  function animate() {
-  i = 1;
+  i = 0;
   key = unsortedArr[i];
-  j = i - 1;
+  j = i;
   function timedLoop() {
    if (i < size) {
-    if (j >= 0 && unsortedArr[j] >= key) {
-     unsortedArr[j + 1] = unsortedArr[j];
-     unsortedArr[j] = key;
-     j -= 1;
+    if (j < size) {
+     if (unsortedArr[j] < unsortedArr[i]) {
+      let temp = unsortedArr[j];
+      unsortedArr[j] = unsortedArr[i];
+      unsortedArr[i] = temp;
+     }
+     j += 1;
     } else {
-     unsortedArr[j + 1] = key;
      i += 1;
-     key = unsortedArr[i];
-     j = i - 1;
+     j = i;
     }
    } else {
     clearInterval(intervalId);
@@ -149,9 +150,6 @@
 
 <Layout dataStructure="SA">
  <Controls title="Selection Sort">
-  {#each historyStack as pass}
-   <div>{pass}</div>
-  {/each}
   <!-- Animation Mode -->
   <div class="flex flex-col items-center">
    <div class="form-control w-52">
@@ -302,6 +300,8 @@
      <div class="text-center font-bold">
       {#if index === i}
        i
+      {:else if index === j}
+       j
       {:else}
        &nbsp;
       {/if}
@@ -309,13 +309,13 @@
      {#if isArrayStyle}
       <ArrayElementIndexed
        {index}
-       classList={index === j + 1 && key ? "border-primary text-primary" : ""}
+       classList={index === j && key ? "border-primary text-primary" : ""}
       >
        {x}
       </ArrayElementIndexed>
      {:else}
       <div
-       class={`${index === j + 1 && key ? "bg-primary" : "bg-neutral-content"} text-base-100 text-xs md:px-3 px-2 text-center font-bold `}
+       class={`${index === j && key ? "bg-primary" : "bg-neutral-content"} text-base-100 text-xs md:px-3 px-2 text-center font-bold `}
        style={`height: ${(x + 10) * 2}px`}
       >
        {x}
