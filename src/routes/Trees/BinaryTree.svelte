@@ -9,6 +9,11 @@
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
 
+ import Join from "../../components/custom/layout/Join.svelte";
+ import Label from "../../components/custom/Inputs/Label.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
+ import FormControl from "../../components/custom/FormControl.svelte";
+
  import RecursiveNode1 from "../../components/Trees/RecursiveNode1.svelte";
 
  function generateRandomList(capacity: number): number[] {
@@ -92,15 +97,32 @@
 
 <Layout dataStructure="TR">
  <Controls title="Tree Traversals">
-  {traversal}
-  <div class="join space-x-0.5">
-   <Button on:click={previous} color="secondary" styles="join-item">
-    Previous
-   </Button>
-   <Button on:click={createTree} color="accent" styles="join-item">
-    Random
-   </Button>
-   <Button on:click={next} color="primary" styles="join-item">Next</Button>
+  <div class="flex flex-col items-center">
+   <!-- Open the modal using ID.showModal() method -->
+   <!-- svelte-ignore missing-declaration -->
+
+   <div class="flex space-x-2 flex-wrap justify-center">
+    <FormControl>
+     <Label>Traversals</Label>
+     <Join classList="space-x-0.5">
+      <Button color="btn-amber-outline">Pre-order</Button>
+      <Button color="btn-teal-outline">Post-order</Button>
+      <Button color="btn-purple-outline">Inorder</Button>
+      <Button color="btn-info">Level Order</Button>
+     </Join>
+    </FormControl>
+
+    <FormControl>
+     <HiddenLabel />
+     <Join classList="space-x-0.5">
+      <Button on:click={createTree} color="primary">Randomize</Button>
+      <Button color="secondary">Reorder</Button>
+     </Join>
+    </FormControl>
+    <FormControl>
+     <HiddenLabel />
+    </FormControl>
+   </div>
   </div>
  </Controls>
 
