@@ -1,5 +1,4 @@
 <script>
- import FunctionVisualizerLayout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
@@ -257,6 +256,6 @@
   @apply flex flex-col;
  }
  .bucket-block {
-  @apply font-bold p-3 w-20 text-center border-2 border-base-100 flex items-center justify-center;
+  @apply font-bold p-3 w-10 text-center border-2 border-base-100 flex items-center justify-center;
  }
 </style>
