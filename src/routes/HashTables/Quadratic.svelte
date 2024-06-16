@@ -10,6 +10,8 @@
   insertQuadratic,
   removeQuadratic,
  } from "../../lib/hashTableFunctions/quardaticProbing";
+
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import InsertionOrderDisplay from "../../components/HashTableControls/InsertionOrderDisplay.svelte";
@@ -214,7 +216,8 @@
 
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Insert Element</Label> -->
    <div class="join">
     <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
     <Button styles="join-item" color="primary" on:click={() => insert()}>
@@ -225,7 +228,8 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Delete Element</Label> -->
    <div class="join">
     <NumberInput
      color="secondary"
@@ -239,7 +243,8 @@
   </FormControl>
 
   <FormControl>
-   <Label>Misc</Label>
+   <HiddenLabel />
+   <!-- <Label>Misc</Label> -->
    <div class="join space-x-0.5">
     <SpecialButtons {clear} {randomize} />
    </div>
