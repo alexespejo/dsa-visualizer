@@ -1,6 +1,7 @@
 <script lang="ts">
  import Layout from "../../layouts/Layout.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import Label from "../../components/custom/Inputs/Label.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import Button from "../../components/custom/Button.svelte";
@@ -205,7 +206,8 @@
   >
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Insert Element</Label> -->
    <div class="join">
     <NumberInput
      color="primary"
@@ -224,7 +226,8 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Delete Element</Label> -->
    <div class="join">
     <NumberInput
      color="secondary"
@@ -240,7 +243,8 @@
   </FormControl>
 
   <FormControl>
-   <Label>Misc</Label>
+   <HiddenLabel />
+   <!-- <Label>Misc</Label> -->
    <div class="join space-x-0.5">
     <SpecialButtons
      {clear}
