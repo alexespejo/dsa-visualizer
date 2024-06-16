@@ -32,6 +32,12 @@
   route="/trees/bst"
  />
  <Card
+  title="Linked Lists"
+  description="Singly Linked List, Doubly Linked List"
+  route="/linklist/singly"
+  icon={LL}
+ />
+ <Card
   title="Graph"
   description="Best-First search, Depth-First search, and Dijsktra's shortest path"
   icon={GA}
@@ -43,11 +49,5 @@
   title="Queues"
   icon={QU}
   description="Circular Queues, Priority Queues/Heaps"
- />
-
- <Card
-  title="Linked Lists"
-  description="Singly Linked List, Doubly Linked List"
-  icon={LL}
  />
 </div>

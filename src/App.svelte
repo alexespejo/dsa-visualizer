@@ -16,6 +16,8 @@
  import AVL from "./routes/Trees/AVL.svelte";
  import RBT from "./routes/Trees/RBT.svelte";
  import BTree from "./routes/Trees/BTree.svelte";
+ import SinglyLinked from "./routes/LinkList/SinglyLinked.svelte";
+ import DoublyLinked from "./routes/LinkList/DoublyLinked.svelte";
  //  import Playground from "./routes/Playground.svelte";
  import Home from "./routes/Home.svelte";
 
@@ -49,6 +51,8 @@
    <Route path="/trees/avl" component={AVL} />
    <Route path="/trees/rbt" component={RBT} />
    <Route path="/trees/b_tree" component={BTree} />
+   <Route path="/linklist/singly" component={SinglyLinked} />
+   <Route path="/linklist/doubly" component={DoublyLinked} />
 
    <Route path="/kevin" component={Kevin} />
    <Route path="/alex" component={Alex} />
