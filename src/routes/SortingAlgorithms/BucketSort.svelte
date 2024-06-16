@@ -82,6 +82,11 @@
      bind:value={insertValue}
      class="font-bold input input-bordered input-primary w-max-w-xs w-28 join-item btn-sm"
      placeholder="Enter a number..."
+     on:input={(e) => {
+      if (e.target.value < 0 || e.target.value >= 1 || e.target.value === "") {
+       insertValue = 0;
+      }
+     }}
     />
     <button
      class="btn btn-outline btn-primary w-16 join-item w-max-w-xs btn-sm"
@@ -97,6 +102,11 @@
      bind:value={deleteValue}
      class="font-bold input input-bordered input-secondary w-max-w-xs w-28 join-item btn-sm"
      placeholder="Enter a number..."
+     on:input={(e) => {
+      if (e.target.value < 0 || e.target.value >= 1 || e.target.value === "") {
+       deleteValue = 0;
+      }
+     }}
     />
     <button
      class="btn btn-outline btn-secondary w-16 join-item w-max-w-xs btn-sm"
@@ -130,7 +140,10 @@
      </svg>
     </button>
 
-    <button class="btn btn-outline btn-error join-item btn-sm">
+    <button
+     class="btn btn-outline btn-error join-item btn-sm"
+     on:click={clearArray}
+    >
      Clear
      <svg
       xmlns="http://www.w3.org/2000/svg"
