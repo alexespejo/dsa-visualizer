@@ -100,15 +100,21 @@
   marker = null;
   const interval = setInterval(remove, 250);
  }
+
+ function undo() {
+  let temp = [...list];
+  list = [...prevList];
+  prevList = temp;
+ }
 </script>
 
 <Layout dataStructure="LL">
  <Controls title="Singly Linked Lists">
   <!-- Place a pointer -->
-  <FormControl>
+  <!-- <FormControl>
    <Label>Place Pointer</Label>
    <Button color="info">Place Pointer</Button>
-  </FormControl>
+  </FormControl> -->
 
   <!-- Insert an Item -->
   <FormControl>
@@ -151,7 +157,7 @@
   <FormControl>
    <HiddenLabel />
    <Join classList="space-x-0.5">
-    <Button color="warning">Undo</Button>
+    <Button color="warning" on:click={undo}>Undo</Button>
     <Button color="error">Clear</Button>
    </Join>
   </FormControl>
@@ -159,7 +165,7 @@
 
  <Visualize>
   <div
-   class="flex flex-wrap justify-center font-bold text-lg items-center mt-10"
+   class="flex flex-wrap justify-center font-bold text-lg items-center mt-10 h-fit"
   >
    {#each list as item, index}
     <div class="flex flex-col items-center justify-center">
@@ -169,6 +175,9 @@
       &nbsp;
      {/if}
      <div class="flex items-center">
+      {#if index === 0}
+       head:
+      {/if}
       <div class="border-2 w-16 h-10 flex items-center justify-center ml-1">
        <div class={`flex items-center`}>
         {item}
