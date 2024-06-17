@@ -21,7 +21,7 @@
    </svg>
   </Link>
   <h1
-   class="text-xl sm:text-2xl lg:text-4xl font-bold lg:flex lg:items-center hidden relative"
+   class="text-xl sm:text-2xl lg:text-3xl font-bold lg:flex lg:items-center hidden relative"
   >
    Link Lists
   </h1>

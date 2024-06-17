@@ -20,7 +20,7 @@
     />
    </svg>
   </Link>
-  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold lg:flex hidden">
+  <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold lg:flex hidden">
    Sorting Algorithms
   </h1>
  </div>
