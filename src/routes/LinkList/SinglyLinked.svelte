@@ -10,6 +10,7 @@
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import FormTrigger from "../../components/custom/layout/FormTrigger.svelte";
  import Join from "../../components/custom/layout/Join.svelte";
+ import Toggle from "../../components/custom/Update/Toggle.svelte";
 
  let list = [1, 2, 3, 4, 5];
  let prevList = [...list];
@@ -19,6 +20,7 @@
  let insertionType: string;
  let indexToInsert: number;
  let numberToDelete: number;
+ let pointerPlayGround: boolean = false;
 
  function animateInsert() {
   if (!numberToInsert) return;
@@ -47,7 +49,7 @@
     numberToInsert = null;
     return;
    }
-
+   4;
    if (marker !== null) {
     marker++;
    } else {
@@ -115,52 +117,66 @@
    <Label>Place Pointer</Label>
    <Button color="info">Place Pointer</Button>
   </FormControl> -->
+  <div class="flex flex-col items-center justify-center">
+   <!-- <FormControl>
+    <label class="cursor-pointer label space-x-1">
+     <span class="label-text"
+      >Animation Mode:
+      <span class="font-bold">
+       {pointerPlayGround ? "On" : "Off"}
+      </span>
+     </span>
+     <Toggle bind:checked={pointerPlayGround} color="toggle-info" />
+    </label>
+   </FormControl> -->
+   <div class="flex space-x-2 flex-wrap justify-center">
+    <!-- Insert an Item -->
+    <FormControl>
+     <Label>Animated Insert</Label>
+     <FormTrigger onTrigger={animateInsert}>
+      <NumberInput bind:value={numberToInsert} color="primary" />
+      {#if insertionType === "Insert Position"}
+       <NumberInput
+        color="primary"
+        placeholder="Index"
+        bind:value={indexToInsert}
+       />
+      {/if}
+      <Button
+       color="primary"
+       disabled={insertionType === "Insert Position" && !indexToInsert}
+       >Insert</Button
+      >
+      <select
+       class="select select-bordered select-sm max-w-xs w-fit join-item select-primary"
+       bind:value={insertionType}
+      >
+       <option selected>Insert Front</option>
+       <option>Insert Back</option>
+       <option>Insert Position</option>
+      </select>
+     </FormTrigger>
+    </FormControl>
 
-  <!-- Insert an Item -->
-  <FormControl>
-   <Label>Animated Insert</Label>
-   <FormTrigger onTrigger={animateInsert}>
-    <NumberInput bind:value={numberToInsert} color="primary" />
-    {#if insertionType === "Insert Position"}
-     <NumberInput
-      color="primary"
-      placeholder="Index"
-      bind:value={indexToInsert}
-     />
-    {/if}
-    <Button
-     color="primary"
-     disabled={insertionType === "Insert Position" && !indexToInsert}
-     >Insert</Button
-    >
-    <select
-     class="select select-bordered select-sm max-w-xs w-fit join-item select-primary"
-     bind:value={insertionType}
-    >
-     <option selected>Insert Front</option>
-     <option>Insert Back</option>
-     <option>Insert Position</option>
-    </select>
-   </FormTrigger>
-  </FormControl>
+    <!-- Delete an Item -->
+    <FormControl>
+     <Label>Animated Delete</Label>
+     <FormTrigger onTrigger={animateDelete}>
+      <NumberInput bind:value={numberToDelete} color="secondary" />
+      <Button color="secondary">Delete</Button>
+     </FormTrigger>
+    </FormControl>
 
-  <!-- Delete an Item -->
-  <FormControl>
-   <Label>Animated Delete</Label>
-   <FormTrigger onTrigger={animateDelete}>
-    <NumberInput bind:value={numberToDelete} color="secondary" />
-    <Button color="secondary">Delete</Button>
-   </FormTrigger>
-  </FormControl>
-
-  <!-- Misc -->
-  <FormControl>
-   <HiddenLabel />
-   <Join classList="space-x-0.5">
-    <Button color="warning" on:click={undo}>Undo</Button>
-    <Button color="error">Clear</Button>
-   </Join>
-  </FormControl>
+    <!-- Misc -->
+    <FormControl>
+     <HiddenLabel />
+     <Join classList="space-x-0.5">
+      <Button color="warning" on:click={undo}>Undo</Button>
+      <Button color="error">Clear</Button>
+     </Join>
+    </FormControl>
+   </div>
+  </div>
  </Controls>
 
  <Visualize>
