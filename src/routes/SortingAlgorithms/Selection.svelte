@@ -257,9 +257,8 @@
      <!-- Resize -->
      <FormControl>
       <Label
-       >Animation Speed: {animationSpeed / 1000}{animationSpeed / 1000 === 1
-        ? ".0"
-        : ""}s</Label
+       >Animation Speed: {animationSpeed / 1000}
+       {animationSpeed / 1000 === 1 ? ".0" : ""}s</Label
       >
       <Range
        min={100}

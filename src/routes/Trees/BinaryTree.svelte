@@ -12,6 +12,7 @@
 
  import Button from "../../components/custom/Button.svelte";
  import Layout from "../../layouts/Layout.svelte";
+ import Range from "../../components/custom/Update/Range.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
 
@@ -31,6 +32,7 @@
   return list;
  }
 
+ let animationSpeed: number = 500;
  /*
   * The tree is represented as an array where the index of the array represents the node
   * and the value at that index represents the value of the node.
@@ -84,14 +86,17 @@
    if (counter >= maxIterations) {
     setTimeout(() => {
      marker.set(-1);
-    }, 500);
+    }, animationSpeed);
     clearInterval(intervalIdWithLimit); // Stop the loop
     // console.log("Loop stopped after " + maxIterations + " iterations.");
    }
   }
 
   // Start the loop
-  const intervalIdWithLimit = setInterval(loopFunctionWithLimit, 500);
+  const intervalIdWithLimit = setInterval(
+   loopFunctionWithLimit,
+   animationSpeed
+  );
  }
  function next() {
   marker.update((value: number) => {
@@ -129,6 +134,7 @@
    <!-- svelte-ignore missing-declaration -->
 
    <div class="flex space-x-2 flex-wrap justify-center">
+    <!-- Tree Traversal Buttons -->
     <FormControl>
      <Label>Traversals</Label>
      <Join classList="space-x-0.5">
@@ -145,15 +151,26 @@
      </Join>
     </FormControl>
 
+    <!-- Animation Speed Slider -->
+    <FormControl>
+     <Label>Animation Speed: {(100 / animationSpeed).toFixed(2)}s</Label>
+     <Range
+      min={100}
+      max={1000}
+      bind:value={animationSpeed}
+      step={100}
+      markings
+      color="range-purple"
+     />
+    </FormControl>
+
+    <!-- Misc Buttons -->
     <FormControl>
      <HiddenLabel />
      <Join classList="space-x-0.5">
       <Button on:click={createTree} color="primary">Randomize</Button>
       <Button color="secondary">Reorder</Button>
      </Join>
-    </FormControl>
-    <FormControl>
-     <HiddenLabel />
     </FormControl>
    </div>
   </div>
