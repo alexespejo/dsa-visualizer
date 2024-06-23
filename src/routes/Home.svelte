@@ -29,7 +29,7 @@
   title="Trees"
   description="Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees"
   icon={TR}
-  route="/trees/bst"
+  route="/trees/binary_tree"
  />
  <Card
   title="Linked Lists"

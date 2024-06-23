@@ -27,24 +27,14 @@
   <dialog id="my_modal_1" class="modal">
    <div class="modal-box">
     <h3 class="font-bold text-lg">Tree Visualizer Limitations</h3>
-    <p class="py-4">
-     Do to the implecations of the design implementation, all trees are limited
-     to <span class="font-bold text-warning">a height of 5</span>
-     or <span class="font-bold text-warning">31 nodes</span>.
-     <br />
-     As a result features such as
-     <span class="font-bold italic">
-      B-Trees, 2-3 Trees, and Red-Black Trees.
-     </span>
-     are not featured.
-     <br />
-     Additionally, you may run into some issues with
-     <span class="font-bold italic">AVL trees</span>
-     when they grow too tall
-     <span class="text-sm italic block">
-      We are current working on an alternative solution to this issue
-     </span>
+    <p class="py-4 space-y-2">
+     Do to some design flaws, all trees are limited to <span
+      class="font-bold text-warning">a height of 5</span
+     >
+     or <span class="font-bold text-warning">31 nodes</span>. As a result the
+     other tree features will not be available till later updates.
     </p>
+
     <div class="modal-action">
      <form method="dialog">
       <!-- if there is a button in form, it will close the modal -->
