@@ -52,4 +52,63 @@ function buildTree(tree: number[], treeHeight: number) {
  return res;
 }
 
-export default buildTree;
+function preorder(tree: number[]) {
+ let list: number[] = [];
+ function preorderHelper(index: number) {
+  if (index >= tree.length || tree[index] === -1) {
+   return;
+  }
+  list.push(index);
+  preorderHelper(2 * index + 1);
+  preorderHelper(2 * index + 2);
+ }
+ preorderHelper(0);
+ return list;
+}
+
+function postorder(tree: number[]) {
+ let list: number[] = [];
+ function postorder(index: number) {
+  if (index >= tree.length || tree[index] === -1) {
+   return;
+  }
+  postorder(2 * index + 1);
+  postorder(2 * index + 2);
+  list.push(index);
+ }
+ postorder(0);
+ return list;
+}
+
+function inorder(tree: number[]) {
+ let list: number[] = [];
+ function inorder(index: number) {
+  if (index >= tree.length || tree[index] === -1) {
+   return;
+  }
+  inorder(2 * index + 1);
+  list.push(index);
+  inorder(2 * index + 2);
+ }
+ inorder(0);
+ return list;
+}
+
+function levelorder(tree: number[]) {
+ let list: number[] = [];
+ let queue: number[] = [];
+ queue.push(0);
+ while (queue.length > 0) {
+  let index = queue.shift();
+  list.push(index);
+  if (2 * index + 1 < tree.length && tree[2 * index + 1] !== -1) {
+   queue.push(2 * index + 1);
+  }
+  if (2 * index + 2 < tree.length && tree[2 * index + 2] !== -1) {
+   queue.push(2 * index + 2);
+  }
+ }
+ return list;
+}
+
+export { buildTree, preorder, postorder, inorder, levelorder };

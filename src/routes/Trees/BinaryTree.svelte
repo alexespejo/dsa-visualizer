@@ -1,7 +1,13 @@
 <script lang="ts">
  import { onMount } from "svelte";
  import { marker } from "../../lib/stores/treeMarker";
- import buildTree from "../../lib/treeFunctions/treeHelpers";
+ import {
+  buildTree,
+  preorder,
+  postorder,
+  inorder,
+  levelorder,
+ } from "../../lib/treeFunctions/treeHelpers";
  import markerDisplay from "../../lib/treeFunctions/markerDisplay";
 
  import Button from "../../components/custom/Button.svelte";
@@ -25,39 +31,60 @@
   return list;
  }
 
+ /*
+  * The tree is represented as an array where the index of the array represents the node
+  * and the value at that index represents the value of the node.
+  * The left child of a node at index i is at index 2i + 1
+  * The right child of a node at index i is at index 2i + 2
+  * The parent of a node at index i is at index (i - 1) / 2
+  
+ */
  let aTree: number[] = [
   4, 44, 85, 84, 56, 25, 69, 69, 69, 38, 69, 69, 69, 27, 56, 69, 69, 69, 69, 69,
   69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
  ];
+
  function createTree() {
   aTree = buildTree(aTree, 4);
  }
- let traversal: number[] = [];
- //  let aTree: number[] = [7, 11, 2, 7, 1, 11, 9, 7, -1, -1, -1, -1, -1, -1, 9];
- function preorder() {
-  let list: number[] = [];
-  function preorderHelper(index: number) {
-   if (index >= aTree.length || aTree[index] === -1) {
-    return;
-   }
-   list.push(index);
-   preorderHelper(2 * index + 1);
-   preorderHelper(2 * index + 2);
-  }
-  preorderHelper(0);
-  traversal = list;
- }
 
- function animatPreorder() {
-  preorder();
+ // array storing the traversal order
+ let traversal: number[] = [];
+ let emptyTraversal: number[] = [];
+ let label: string;
+
+ function animate(type: number) {
+  switch (type) {
+   case 1:
+    label = "Pre-order:";
+    traversal = preorder(aTree);
+    break;
+   case 2:
+    label = "Post-order:";
+    traversal = postorder(aTree);
+    break;
+   case 3:
+    label = "In-order:";
+    traversal = inorder(aTree);
+    break;
+   case 4:
+    label = "Level-order:";
+    traversal = levelorder(aTree);
+    break;
+  }
+  emptyTraversal = Array(traversal.length).fill(null);
   // To stop the loop after a certain number of iterations, you can use a counter
   let counter = 0;
   const maxIterations = traversal.length; // for example, to stop after 5 iterations
 
   function loopFunctionWithLimit() {
    marker.set(traversal[counter]);
+   emptyTraversal[counter] = aTree[traversal[counter]];
    counter++;
    if (counter >= maxIterations) {
+    setTimeout(() => {
+     marker.set(-1);
+    }, 500);
     clearInterval(intervalIdWithLimit); // Stop the loop
     // console.log("Loop stopped after " + maxIterations + " iterations.");
    }
@@ -105,10 +132,16 @@
     <FormControl>
      <Label>Traversals</Label>
      <Join classList="space-x-0.5">
-      <Button color="btn-amber-outline">Pre-order</Button>
-      <Button color="btn-teal-outline">Post-order</Button>
-      <Button color="btn-purple-outline">Inorder</Button>
-      <Button color="btn-info">Level Order</Button>
+      <Button color="btn-amber-outline" on:click={() => animate(1)}
+       >Pre-order</Button
+      >
+      <Button color="btn-teal-outline" on:click={() => animate(2)}
+       >Post-order</Button
+      >
+      <Button color="btn-purple-outline" on:click={() => animate(3)}
+       >Inorder</Button
+      >
+      <Button color="btn-info" on:click={() => animate(4)}>Level Order</Button>
      </Join>
     </FormControl>
 
@@ -127,6 +160,17 @@
  </Controls>
 
  <Visualize>
+  <div class="text-base-content font-bold mt-5 space-x-1 flex w-1/3 max-w-full">
+   {#if label}
+    {label}
+   {/if}
+   <div class="space-x-0.5">
+    {#each emptyTraversal as node}
+     <span class={`${node ? "opacity-1" : "opacity-0"}`}>{node}</span>
+    {/each}
+   </div>
+  </div>
+
   <article class="binary-tree">
    <div>
     <span class={`${markerDisplay(nodeMarker, 0)}`}>{aTree[0]}</span>
