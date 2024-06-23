@@ -160,14 +160,21 @@
  </Controls>
 
  <Visualize>
-  <div class="text-base-content font-bold mt-5 space-x-1 flex w-1/3 max-w-full">
-   {#if label}
-    {label}
-   {/if}
+  <div
+   class={`text-base-content font-bold mt-5 space-x-1 flex w-1/2 items-center justify-center  ${!label ? "opacity-0" : "opacity-1"} text-primary`}
+  >
+   <h6 class="">{label}</h6>
    <div class="space-x-0.5">
-    {#each emptyTraversal as node}
-     <span class={`${node ? "opacity-1" : "opacity-0"}`}>{node}</span>
+    &#91;
+    {#each emptyTraversal as node, i}
+     <span class={`${node ? "opacity-1" : "opacity-0"}`}>
+      {node}
+      {#if i !== emptyTraversal.length - 1}
+       ,
+      {/if}
+     </span>
     {/each}
+    &#93;
    </div>
   </div>
 
