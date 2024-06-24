@@ -10,6 +10,7 @@
  import ArrayElementIndexed from "../../components/Array/ArrayElementIndexed.svelte";
 
  import Label from "../../components/custom/Inputs/Label.svelte";
+ import HiddenLabel from "../../components/custom/Inputs/HiddenLabel.svelte";
  import NumberInput from "../../components/custom/Inputs/NumberInput.svelte";
  import FormControl from "../../components/custom/FormControl.svelte";
  import SpecialButtons from "../../components/HashTableControls/SpecialButtons.svelte";
@@ -268,7 +269,8 @@
 
   <!-- Insert Button -->
   <FormControl>
-   <Label>Insert Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Insert Element</Label> -->
    <form on:submit|preventDefault={insert} class="join">
     <NumberInput color="primary" styles="join-item" bind:value={numToInsert} />
     <Button
@@ -282,7 +284,8 @@
 
   <!-- Delete Button -->
   <FormControl>
-   <Label>Delete Element</Label>
+   <HiddenLabel />
+   <!-- <Label>Delete Element</Label> -->
    <form on:submit|preventDefault={remove} class="join">
     <NumberInput
      color="secondary"
@@ -299,7 +302,8 @@
   </FormControl>
 
   <FormControl>
-   <Label>Misc</Label>
+   <!-- <Label>Misc</Label> -->
+   <HiddenLabel />
    <div class="join space-x-0.5">
     <SpecialButtons clear={clearTable} randomize={randomizeArray} />
    </div>

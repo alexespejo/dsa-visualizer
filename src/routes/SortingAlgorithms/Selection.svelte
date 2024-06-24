@@ -21,7 +21,7 @@
 
  //state
  let isArrayStyle: boolean = false;
- let animationMode: boolean = true;
+ let animationMode: boolean = false;
  let size: number = 10;
  let unsortedArr = [];
  let historyStack = [];
@@ -257,9 +257,8 @@
      <!-- Resize -->
      <FormControl>
       <Label
-       >Animation Speed: {animationSpeed / 1000}{animationSpeed / 1000 === 1
-        ? ".0"
-        : ""}s</Label
+       >Animation Speed: {animationSpeed / 1000}
+       {animationSpeed / 1000 === 1 ? ".0" : ""}s</Label
       >
       <Range
        min={100}

@@ -26,8 +26,7 @@
    }
    i++;
    if (i >= unSortNums.length) {
-    clearInterval(intervalIdWithLimit); // Stop the loop
-    // console.log("Loop stopped after " + maxIterations + " iterations.");
+    clearInterval(intervalIdWithLimit);
    }
   }
 

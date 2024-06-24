@@ -9,5 +9,5 @@
  type="checkbox"
  on:change
  bind:checked
- class={`toggle ${color} ${classList}`}
+ class={`toggle  ${color} ${classList}`}
 />

@@ -8,7 +8,7 @@
 </script>
 
 <button
- class={`btn btn-${color} ${color} btn-${size} ${styles} btn-outline btn-sm join-item ${classList}`}
+ class={`btn btn-${color} ${color} btn-${size} ${styles} btn-outline btn-sm join-item ${classList} min-w-fit max-w-fit`}
  on:click
  {disabled}
 >

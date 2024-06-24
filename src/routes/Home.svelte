@@ -29,7 +29,13 @@
   title="Trees"
   description="Binary-Search Trees, B-Trees, AVL Trees, Red-Black Trees"
   icon={TR}
-  route="/trees/bst"
+  route="/trees/binary_tree"
+ />
+ <Card
+  title="Linked Lists"
+  description="Singly Linked List, Doubly Linked List"
+  route="/linklist/singly"
+  icon={LL}
  />
  <Card
   title="Graph"
@@ -43,11 +49,5 @@
   title="Queues"
   icon={QU}
   description="Circular Queues, Priority Queues/Heaps"
- />
-
- <Card
-  title="Linked Lists"
-  description="Singly Linked List, Doubly Linked List"
-  icon={LL}
  />
 </div>
