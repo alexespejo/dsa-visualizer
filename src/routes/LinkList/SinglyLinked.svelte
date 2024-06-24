@@ -1,4 +1,5 @@
 <script lang="ts">
+ import { insertMarker } from "../../lib/stores/singlyLLMarker";
  import Layout from "../../layouts/Layout.svelte";
  import Controls from "../../components/custom/layout/Controls.svelte";
  import Visualize from "../../components/custom/layout/Visualize.svelte";
@@ -28,9 +29,11 @@
   function insertPos() {
    if (marker === indexToInsert) {
     let temp = [...list];
+    insertMarker.set(indexToInsert);
     temp.splice(indexToInsert, 0, numberToInsert);
     list = temp;
     clearInterval(interval);
+    marker = null;
     numberToInsert = null;
     return;
    }
@@ -45,8 +48,10 @@
   function insertBack() {
    if (marker === list.length) {
     list = [...list, numberToInsert];
+    insertMarker.set(list.length - 1);
     clearInterval(interval);
     numberToInsert = null;
+    marker = null;
     return;
    }
    4;
@@ -58,6 +63,7 @@
   }
   // insert to the front of the linkedlist
   function insertFront() {
+   insertMarker.set(0);
    list = [numberToInsert, ...list];
    numberToInsert = null;
   }
@@ -71,7 +77,7 @@
   } else if (insertionType === "Insert Position") {
    interval = setInterval(insertPos, 250);
   }
-  marker = null;
+  marker = 0;
  }
 
  function animateDelete() {
@@ -99,7 +105,7 @@
     marker = 0;
    }
   }
-  marker = null;
+
   const interval = setInterval(remove, 250);
  }
 
@@ -108,6 +114,11 @@
   list = [...prevList];
   prevList = temp;
  }
+
+ let nodeMarker: number;
+ const unsubscribe = insertMarker.subscribe((value: number) => {
+  nodeMarker = value;
+ });
 </script>
 
 <Layout dataStructure="LL">
@@ -184,9 +195,9 @@
    class="flex flex-wrap justify-center font-bold text-lg items-center mt-10 h-fit"
   >
    {#each list as item, index}
-    <div class="flex flex-col items-center justify-center">
+    <div class={`flex flex-col items-center justify-center`}>
      {#if index === marker}
-      <span class="text-info"> &darr; </span>
+      <span class="text-primary"> &darr; </span>
      {:else}
       &nbsp;
      {/if}
@@ -194,7 +205,9 @@
       {#if index === 0}
        head:
       {/if}
-      <div class="border-2 w-16 h-10 flex items-center justify-center ml-1">
+      <div
+       class={`border-2 w-16 h-10 flex items-center justify-center ml-1 ${index === nodeMarker ? "border-primary text-primary" : ""}`}
+      >
        <div class={`flex items-center`}>
         {item}
        </div>
