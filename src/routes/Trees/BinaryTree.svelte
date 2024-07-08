@@ -1,6 +1,6 @@
 <script lang="ts">
  import { onMount } from "svelte";
- import { marker } from "../../lib/stores/treeMarker";
+ import { marker, markerColor } from "../../lib/stores/treeMarker";
  import {
   buildTree,
   preorder,
@@ -55,25 +55,34 @@
  let emptyTraversal: number[] = [];
  let label: string;
 
+ // Binary Search animation color picker
+ let traversalAnimationColor = null;
+
  function animate(type: number) {
   switch (type) {
    case 1:
     label = "Pre-order:";
     traversal = preorder(aTree);
+    traversalAnimationColor = "text-amber-300 border-amber-300";
     break;
    case 2:
     label = "Post-order:";
+    traversalAnimationColor = "text-teal-300 border-teal-300";
     traversal = postorder(aTree);
     break;
    case 3:
     label = "In-order:";
+    traversalAnimationColor = "text-purple-300 border-purple-300";
     traversal = inorder(aTree);
     break;
    case 4:
     label = "Level-order:";
+    traversalAnimationColor = "text-info border-info";
     traversal = levelorder(aTree);
     break;
   }
+  // change the color of the node marker
+  markerColor.set(traversalAnimationColor);
   emptyTraversal = Array(traversal.length).fill(null);
   // To stop the loop after a certain number of iterations, you can use a counter
   let counter = 0;
@@ -98,28 +107,13 @@
    animationSpeed
   );
  }
- function next() {
-  marker.update((value: number) => {
-   for (let i = value + 1; i < aTree.length; i++) {
-    if (aTree[i] !== -1) {
-     return i;
-    }
-   }
-  });
- }
- function previous() {
-  marker.update((value: number) => {
-   for (let i = value - 1; i > 0; i -= 1) {
-    if (aTree[i] !== -1 || aTree[i] === aTree[value]) {
-     return i;
-    }
-   }
-  });
- }
 
  let nodeMarker: number;
- const unsubscribe = marker.subscribe((value: number) => {
+ marker.subscribe((value: number) => {
   nodeMarker = value;
+ });
+ markerColor.subscribe((value: string) => {
+  traversalAnimationColor = value;
  });
 
  onMount(() => {
@@ -153,7 +147,7 @@
 
     <!-- Animation Speed Slider -->
     <FormControl>
-     <Label>Animation Speed: {(100 / animationSpeed).toFixed(2)}s</Label>
+     <Label>Animation Speed: {animationSpeed / 1000}s</Label>
      <Range
       min={100}
       max={1000}
@@ -169,7 +163,6 @@
      <HiddenLabel />
      <Join classList="space-x-0.5">
       <Button on:click={createTree} color="primary">Randomize</Button>
-      <Button color="secondary">Reorder</Button>
      </Join>
     </FormControl>
    </div>
@@ -178,7 +171,7 @@
 
  <Visualize>
   <div
-   class={`text-base-content font-bold mt-5 space-x-1 flex w-1/2 items-center justify-center  ${!label ? "opacity-0" : "opacity-1"} text-primary`}
+   class={`text-base-content font-bold mt-5 space-x-1 flex w-1/2 items-center justify-center  ${!label ? "opacity-0" : "opacity-1"} ${traversalAnimationColor}`}
   >
    <h6 class="">{label}</h6>
    <div class="space-x-0.5">
