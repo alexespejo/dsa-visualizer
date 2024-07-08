@@ -3,4 +3,7 @@
 </script>
 
 <Link class="btn join-item" to="/linklist/singly">Singly Linked List</Link>
-<Link class="btn join-item" to="/linklist/doubly">Doubly Linked List</Link>
+<Link class="btn join-item btn-disabled" to="">Doubly Linked List</Link>
+<!-- <Link class="btn join-item" to="/linklist/doubly"
+ >Doubly Linked List</Link
+> -->
