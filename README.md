@@ -7,7 +7,6 @@
 - <a href="#built-with">Built With</a>
 - <a href="#frontend">Frontend</a>
 - <a href="#usage">Usage</a>
-- <a href="#coming-next">Coming Next</a>
 - <a href="#collaborators">Collaborators</a>
 
 <a id="Showcase"></a>
@@ -36,6 +35,7 @@ https://github.com/user-attachments/assets/5b527e2e-0659-4918-a471-79f8865063dc
 - **Double Hashing**: Illustrates how a secondary hash function can be used for collision resolution.
 
 ### Sorting Algorithms
+- **Bubble Sort**: Repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed.
 - **Selection Sort**: Visualizes the process of selecting the minimum element and swapping it with the current position.
 - **Insertion Sort**: Demonstrates how elements are inserted into their correct position in the sorted portion of the array.
 - **Bucket Sort**: Shows how elements are distributed into buckets and then sorted.
@@ -62,14 +62,6 @@ https://github.com/user-attachments/assets/5b527e2e-0659-4918-a471-79f8865063dc
 
 ## Usage
 The DSA Visualizer helps students understand data structures and algorithms by providing interactive visualizations. These visual aids make it easier to grasp complex concepts, see the effects of different operations, and enhance learning through engaging animations.
-
-<a id="coming-next"></a>
-
-## Coming Next
-- **Stacks**: Visualizations for stack operations and their use cases.
-- **Queues**: Illustrations for queue operations including enqueue and dequeue.
-- **Graphs**: Visualizations for various graph algorithms and representations.
-- **Additional Tree Algorithms**: More advanced tree algorithms and visualizations.
 
 <a id="collaborators"></a>
 

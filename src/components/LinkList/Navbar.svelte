@@ -23,14 +23,14 @@
   <h1
    class="text-xl sm:text-2xl lg:text-3xl font-bold lg:flex lg:items-center hidden relative"
   >
-   Link Lists
+   Linked Lists
   </h1>
  </div>
  <div class="navbar-center lg:flex-none lg:hidden">
-  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Link Lists</h1>
+  <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Linked Lists</h1>
  </div>
 
- <div class="navbar-end lg:w-fit">
+ <!-- <div class="navbar-end lg:w-fit">
   <DropdownMenue label="Trees"><LinkListRoutes /></DropdownMenue>
- </div>
+ </div> -->
 </div>
