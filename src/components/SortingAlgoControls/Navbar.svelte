@@ -28,8 +28,8 @@
   <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Sorting Algorithms</h1>
  </div>
  <div class="navbar-end lg:w-fit">
-  <DropdownMenue label="Sorting Algorithms"
-   ><SortingAlgoRouteLinks /></DropdownMenue
-  >
+  <DropdownMenue label="Sorting Algorithms">
+   <SortingAlgoRouteLinks />
+  </DropdownMenue>
  </div>
 </div>
