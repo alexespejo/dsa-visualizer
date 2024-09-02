@@ -8,6 +8,6 @@
 <Link class="btn join-item" to="/sorting_algo/bucket_sort">Bucket</Link>
 <Link class="btn join-item" to="/sorting_algo/radix_sort">Radix</Link>
 <!-- <Link class="btn join-item" to="/sorting_algo/merge_sort">Merge</Link> -->
-<Link class="btn join-item btn-disabled" to="/sorting_algo/quick_sort">
+<!-- <Link class="btn join-item btn-disabled" to="/sorting_algo/quick_sort">
  Quicksort
-</Link>
+</Link> -->

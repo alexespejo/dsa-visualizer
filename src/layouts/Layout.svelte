@@ -18,12 +18,12 @@
 <main class="px-2 2xl:px-64 relative flex-col flex items-center">
  <slot />
  {#if dataStructure === "TR"}
-  <button
+  <!-- <button
    class="badge badge-warning font-bold animate-pulse absolute top-1 right-1"
    on:click={() => my_modal_1.showModal()}
   >
    Limitations
-  </button>
+  </button> -->
   <dialog id="my_modal_1" class="modal">
    <div class="modal-box">
     <h3 class="font-bold text-lg">Tree Visualizer Limitations</h3>

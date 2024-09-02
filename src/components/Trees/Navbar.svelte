@@ -30,7 +30,7 @@
   <h1 class="text-xl sm:text-2xl lg:text-4xl font-bold">Trees</h1>
  </div>
 
- <div class="navbar-end lg:w-fit">
+ <!-- <div class="navbar-end lg:w-fit">
   <DropdownMenue label="Trees"><TreeRoutes /></DropdownMenue>
- </div>
+ </div> -->
 </div>
