@@ -13,7 +13,7 @@
 
 ## Showcase
 
-https://github.com/user-attachments/assets/5b527e2e-0659-4918-a471-79f8865063dc
+https://github.com/user-attachments/assets/6b3f1dca-6052-4b0b-91f6-f08a3c90343c
 
 <a id="built-with"></a>
 
