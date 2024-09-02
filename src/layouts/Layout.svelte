@@ -22,7 +22,7 @@
    class="badge badge-warning font-bold animate-pulse absolute top-1 right-1"
    on:click={() => my_modal_1.showModal()}
   >
-   limtations
+   Limitations
   </button>
   <dialog id="my_modal_1" class="modal">
    <div class="modal-box">
