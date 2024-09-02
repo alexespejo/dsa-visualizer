@@ -11,7 +11,7 @@
 </script>
 
 <div class="text-center p-4">
-    <h1 class="mt-28 text-3xl font-bold mb-4">Explore Our Interactive Data Structures Visualizer!</h1>
+    <h1 class="mt-24 text-3xl font-bold mb-4">Explore Our Interactive Data Structures Visualizer!</h1>
 
     <div
       class="flex flex-col sm:flex-row items-center justify-center flex-wrap space-x-2 space-y-2 p-3 lg:p-5"
